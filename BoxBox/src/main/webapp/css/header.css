@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+* {
+	
+	margin: 0px auto;
+	padding: 0;
+}
+
+#header {
+	width: 100%;
+	height: 100px;
+	background: rgba(255, 255, 255, 0.6);
+	
+}
+#headerLeft{
+	margin-left:20px;
+	float:left;
+	line-height: 80px;
+}
+#headerCenter{
+	font: 13px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: threeddarkshadow;
+	font-size: 45px;
+	margin-left: 45%;
+/* 	text-align: center; */
+	line-height: 80px;
+}
