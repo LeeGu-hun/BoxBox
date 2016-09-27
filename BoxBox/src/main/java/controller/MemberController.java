@@ -60,6 +60,7 @@ public class MemberController {
 			return "main";
 		}
 		try {
+			System.out.println(rr.getEmail()+"/"+rr.getName()+"/"+rr.getPassword()+"/"+rr.getType()+"/"+rr.getPhone());
 			memberRegisterService.regist(rr);
 			// AuthInfo authInfo = authService.authenticate(
 			// rr.getEmail(), rr.getPassword());

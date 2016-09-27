@@ -25,7 +25,8 @@ public class MemberRegisterService {
 			throw new AlreadyExistingMemberException(registerRequest.getEmail()+" 와 동일한 회원이 존재합니다.");
 		}
 		Member newMember = new Member(registerRequest.getEmail(), registerRequest.getName(),
-				registerRequest.getPassword(), registerRequest.getPhone(), registerRequest.getType());
+				registerRequest.getPassword(), registerRequest.getPhone(),Integer.parseInt(registerRequest.getType()));
+		System.out.println("Insert 시작");
 		daoMember.insert(newMember);
 	}
 }

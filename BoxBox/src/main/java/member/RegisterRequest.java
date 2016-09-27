@@ -5,14 +5,14 @@ public class RegisterRequest {
 	private String password;
 	private String confirmPassword;
 	private String name;
-	private Long phone;
-	private Long type;
+	private String phone;
+	private String type;
 
-	public Long getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Long type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -48,11 +48,11 @@ public class RegisterRequest {
 		this.name = name;
 	}
 
-	public Long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

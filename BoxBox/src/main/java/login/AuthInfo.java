@@ -1,31 +1,31 @@
 package login;
 
 public class AuthInfo {
-	private Long id;
+	private String id;
 	private String email;
 	private String name;
-	private Long type;
+	private int type;
 
-	public AuthInfo(Long id, String email, String name, Long type) {
+	public AuthInfo(String id, String email, String name, int type) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.type = type;
 	}
 
-	public Long getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(Long type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

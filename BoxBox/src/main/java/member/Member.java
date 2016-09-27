@@ -5,10 +5,12 @@ import java.util.Date;
 import exception.IdPasswordNotMatchingException;
 
 public class Member {
-	private Long id, phone, type;
+	private String id;
+	private String phone;
+	private int type;
 	private String email, name, password;
 
-	public Member(String email, String name, String password, Long phone, Long type) {
+	public Member(String email, String name, String password, String phone, int type) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -16,27 +18,27 @@ public class Member {
 		this.type = type;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public Long getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(Long type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

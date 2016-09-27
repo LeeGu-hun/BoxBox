@@ -29,8 +29,8 @@ public class DaoMember {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where id = ?", new RowMapper<Member>() {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getString("USER_EMAIL"), rs.getString("USER_NAME"),
-						rs.getString("PASSWORD"), rs.getLong("PHONE"), rs.getLong("USER_TYPE"));
-				member.setId(rs.getLong("USER_ID"));
+						rs.getString("PASSWORD"), rs.getString("PHONE"), rs.getInt("USER_TYPE"));
+				member.setId(rs.getString("USER_ID"));
 				return member;
 			}
 		}, memberId);
@@ -42,8 +42,8 @@ public class DaoMember {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where USER_EMAIL = ?", new RowMapper<Member>() {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getString("USER_EMAIL"), rs.getString("USER_NAME"),
-						rs.getString("PASSWORD"), rs.getLong("PHONE"), rs.getLong("USER_TYPE"));
-				member.setId(rs.getLong("USER_ID"));
+						rs.getString("PASSWORD"), rs.getString("PHONE"), rs.getInt("USER_TYPE"));
+				member.setId(rs.getString("USER_ID"));
 				return member;
 			}
 		}, memberEmail);
@@ -51,17 +51,32 @@ public class DaoMember {
 		return results.isEmpty() ? null : results.get(0);
 	}
 
+	// public void insert(final Member member) {
+	// KeyHolder keyHolder = new GeneratedKeyHolder();
+	// jdbcTemplate.update(new PreparedStatementCreator() {
+	// public PreparedStatement createPreparedStatement(Connection con) throws
+	// SQLException {
+	// PreparedStatement pstmt = con.prepareStatement("insert into ADMIN values
+	// (SEQ_ADMIN.nextval, ?, ?, ?)");
+	// return pstmt;
+	// }
+	// }, keyHolder);
+	// Number keyValue = keyHolder.getKey();
+	// member.setId(keyValue.longValue());
+	// }
+
 	public void insert(final Member member) {
-		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-				PreparedStatement pstmt = con
-						.prepareStatement("insert into ADMIN values (SEQ_ADMIN.nextval, 'admin@box.com', '관리자', '1')");
+				PreparedStatement pstmt = con.prepareStatement(
+						"insert into MEMBER (USER_ID, USER_EMAIL, USER_NAME, PASSWORD,USER_TYPE,PHONE) values (SEQ_BOX_USER.nextval,?, ?, ?,?,01012345678)");
+				pstmt.setString(1, member.getEmail());
+				pstmt.setString(2, member.getName());
+				pstmt.setString(3, member.getPassword());
+				pstmt.setInt(4, member.getType());
 				return pstmt;
 			}
-		}, keyHolder);
-		Number keyValue = keyHolder.getKey();
-		member.setId(keyValue.longValue());
+		});
 	}
 
 	public void update(Member member) {
@@ -69,20 +84,22 @@ public class DaoMember {
 				member.getPassword(), member.getEmail());
 	}
 
-//	public List<Member> selectAll() {
-//		System.out.print("----- selectAll ");
-//		int total = count();
-//		System.out.println("전체 데이터: " + total);
-//		List<Member> results = jdbcTemplate.query("select * from MEMBER", new RowMapper<Member>() {
-//			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-//				Member member = new Member(rs.getString("EMAIL"), rs.getString("PASSWORD"), rs.getString("NAME"),
-//						rs.getTimestamp("REGDATE"));
-//				member.setId(rs.getLong("ID"));
-//				return member;
-//			}
-//		});
-//		return results;
-//	}
+	// public List<Member> selectAll() {
+	// System.out.print("----- selectAll ");
+	// int total = count();
+	// System.out.println("전체 데이터: " + total);
+	// List<Member> results = jdbcTemplate.query("select * from MEMBER", new
+	// RowMapper<Member>() {
+	// public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+	// Member member = new Member(rs.getString("EMAIL"),
+	// rs.getString("PASSWORD"), rs.getString("NAME"),
+	// rs.getTimestamp("REGDATE"));
+	// member.setId(rs.getLong("ID"));
+	// return member;
+	// }
+	// });
+	// return results;
+	// }
 
 	public int count() {
 		Integer count = jdbcTemplate.queryForObject("select count(*) from MEMBER", Integer.class);
