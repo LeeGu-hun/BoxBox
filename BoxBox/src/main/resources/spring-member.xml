@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:tx="http://www.springframework.org/schema/tx" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx
@@ -21,6 +20,18 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="daoMember" class="dao.DaoMember">
+		<constructor-arg ref="dataSource" />
+	</bean>
 
+	<bean id="changePwdSvc" class="member.ChangePasswordService">
+		<constructor-arg ref="daoMember" />
+	</bean>
+	<bean id="authService" class="login.AuthService">
+		<property name="daoMember" ref="daoMember" />
+	</bean>
+	<bean id="memberRegSvc" class="member.MemberRegisterService">
+		<constructor-arg ref="daoMember" />
+	</bean>
 
 </beans>

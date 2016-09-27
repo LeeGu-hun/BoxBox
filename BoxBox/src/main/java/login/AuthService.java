@@ -7,20 +7,19 @@ import member.Member;
 
 public class AuthService {
 	private DaoMember daoMember;
-	
+
 	public void setDaoMember(DaoMember daoMember) {
 		this.daoMember = daoMember;
 	}
 
-	public AuthInfo authenticate(String email, String password){
+	public AuthInfo authenticate(String email, String password) {
 		Member member = daoMember.selectByEmail(email);
-		if(member == null){
+		if (member == null) {
 			throw new MemberNotFoundException();
 		}
-		if(!member.passwordMatchConfirm(password)){
+		if (!member.passwordMatchConfirm(password)) {
 			throw new IdPasswordNotMatchingException();
 		}
-		return new 
-			AuthInfo(member.getId(), member.getEmail(), member.getName());
+		return new AuthInfo(member.getId(), member.getEmail(), member.getName(), member.getType());
 	}
 }

@@ -69,20 +69,20 @@ public class DaoMember {
 				member.getPassword(), member.getEmail());
 	}
 
-	public List<Member> selectAll() {
-		System.out.print("----- selectAll ");
-		int total = count();
-		System.out.println("전체 데이터: " + total);
-		List<Member> results = jdbcTemplate.query("select * from MEMBER", new RowMapper<Member>() {
-			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Member member = new Member(rs.getString("EMAIL"), rs.getString("PASSWORD"), rs.getString("NAME"),
-						rs.getTimestamp("REGDATE"));
-				member.setId(rs.getLong("ID"));
-				return member;
-			}
-		});
-		return results;
-	}
+//	public List<Member> selectAll() {
+//		System.out.print("----- selectAll ");
+//		int total = count();
+//		System.out.println("전체 데이터: " + total);
+//		List<Member> results = jdbcTemplate.query("select * from MEMBER", new RowMapper<Member>() {
+//			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				Member member = new Member(rs.getString("EMAIL"), rs.getString("PASSWORD"), rs.getString("NAME"),
+//						rs.getTimestamp("REGDATE"));
+//				member.setId(rs.getLong("ID"));
+//				return member;
+//			}
+//		});
+//		return results;
+//	}
 
 	public int count() {
 		Integer count = jdbcTemplate.queryForObject("select count(*) from MEMBER", Integer.class);

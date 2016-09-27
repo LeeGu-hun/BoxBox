@@ -31,8 +31,7 @@ public class LoginController {
 		this.authService = authService;
 	}
 
-	public void setMemberRegisterService(
-			MemberRegisterService memberRegisterService) {
+	public void setMemberRegisterService(MemberRegisterService memberRegisterService) {
 		this.memberRegisterService = memberRegisterService;
 	}
 
@@ -56,8 +55,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String form(LoginCommand loginCommand,
-			@CookieValue(value = "REMEMBER", required = false) Cookie rCookie) {
+	public String form(LoginCommand loginCommand, @CookieValue(value = "REMEMBER", required = false) Cookie rCookie) {
 		if (rCookie != null) {
 			loginCommand.setEmail(rCookie.getValue());
 			loginCommand.setRememberEmail(true);
@@ -67,27 +65,27 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String form(LoginCommand loginCommand, Errors errors,
-//			BoardCommand boardCmd,
+			// BoardCommand boardCmd,
 			HttpSession session, HttpServletResponse response) {
 		new LoginCommandValidator().validate(loginCommand, errors);
 		if (errors.hasErrors()) {
+			System.out.println("로그인 에러");
 			return "dirMem/login";
 		}
 		try {
-			AuthInfo authInfo = authService.authenticate(
-					loginCommand.getEmail(), loginCommand.getPassword());
+			System.out.println("로그인 성공");
+			AuthInfo authInfo = authService.authenticate(loginCommand.getEmail(), loginCommand.getPassword());
 			session.setAttribute("authInfo", authInfo);
 
-			Cookie rememberCookie = new Cookie("REMEMBER",
-					loginCommand.getEmail());
-			rememberCookie.setPath("/");
-			if (loginCommand.isRememberEmail()) {
-				rememberCookie.setMaxAge(60 * 60 * 24 * 30);
-			} else {
-				rememberCookie.setMaxAge(0);
-			}
-			response.addCookie(rememberCookie);
-			return "redirect:/BoardList";
+//			Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getEmail());
+//			rememberCookie.setPath("/");
+//			if (loginCommand.isRememberEmail()) {
+//				rememberCookie.setMaxAge(60 * 60 * 24 * 30);
+//			} else {
+//				rememberCookie.setMaxAge(0);
+//			}
+//			response.addCookie(rememberCookie);
+			return "main";
 		} catch (MemberNotFoundException e) {
 			errors.reject("memberNotFound");
 			return "dirMem/login";
@@ -96,8 +94,9 @@ public class LoginController {
 			return "dirMem/login";
 		}
 	}
+
 	@RequestMapping("/logout")
-	public String form(HttpSession session){
+	public String form(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
