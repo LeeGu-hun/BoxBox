@@ -69,11 +69,12 @@ public class DaoMember {
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement pstmt = con.prepareStatement(
-						"insert into MEMBER (USER_ID, USER_EMAIL, USER_NAME, PASSWORD,USER_TYPE,PHONE) values (SEQ_BOX_USER.nextval,?, ?, ?,?,01012345678)");
+						"insert into MEMBER (USER_ID, USER_EMAIL, USER_NAME, PASSWORD,USER_TYPE,PHONE) values (SEQ_BOX_USER.nextval,?, ?, ?,?,?)");
 				pstmt.setString(1, member.getEmail());
 				pstmt.setString(2, member.getName());
 				pstmt.setString(3, member.getPassword());
 				pstmt.setInt(4, member.getType());
+				pstmt.setString(5, member.getPhone());
 				return pstmt;
 			}
 		});

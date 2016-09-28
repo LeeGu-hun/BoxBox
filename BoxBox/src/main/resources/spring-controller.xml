@@ -19,11 +19,12 @@
 	<bean id="daoMember" class="dao.DaoMember">
 		<constructor-arg ref="dataSource" />
 	</bean>
-	<bean id="changePwdSvc" class="member.ChangePasswordService">
+	<bean id="changePwdSvc" class="member.ChangeInfoService">
 		<constructor-arg ref="daoMember" />
 	</bean>
 
 	<bean id="memberRegSvc" class="member.MemberRegisterService">
 		<constructor-arg ref="daoMember" /> 
 	</bean>
+
 </beans>

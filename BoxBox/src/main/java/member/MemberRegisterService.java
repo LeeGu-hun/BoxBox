@@ -28,5 +28,6 @@ public class MemberRegisterService {
 				registerRequest.getPassword(), registerRequest.getPhone(),Integer.parseInt(registerRequest.getType()));
 		System.out.println("Insert 시작");
 		daoMember.insert(newMember);
+		System.out.println("Insert 완료");
 	}
 }

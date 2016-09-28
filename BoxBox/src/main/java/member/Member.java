@@ -66,10 +66,11 @@ public class Member {
 		this.password = password;
 	}
 
-	public void changePassword(String oldPassword, String newPassword) {
+	public void changePassword(String name, String oldPassword, String newPassword) {
 		if (!password.equals(oldPassword))
 			throw new IdPasswordNotMatchingException();
 		this.password = newPassword;
+		this.name = name;
 	}
 
 	public boolean passwordMatchConfirm(String password) {

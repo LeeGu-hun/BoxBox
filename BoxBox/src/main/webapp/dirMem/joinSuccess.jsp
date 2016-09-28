@@ -15,12 +15,11 @@
 		<div id="boxTable">
 			<div id="boxCell">
 				<span style="font-size: 17px; font-weight: bold;">
-					${memberName }님 DSbook에 오신 것을 환영합니다. </span>
+					${memberName }님 환영합니다. </span>
 				<div id="line"></div>
 				<div id="sNotice">
-					회원님의 계정이 만들어졌습니다. 이제 친구들과 쉽게 공유하고 연락할 수 있습니다.<br> 사용자 이름 또는
-					휴대폰 전화번호를 사용하여 로그인할 수 있습니다.<br> DSbook에 로그인하여 활동 시작하기.<br>
-					<a href="<c:url value='/member/changePassword'/>">[비밀번호 변경]</a> <a
+					회원님의 계정이 만들어졌습니다.<br> <a
+						href="<c:url value='/member/changeInfo'/>">[회원정보 변경]</a> <a
 						href="<c:url value='/logout'/>">[로그아웃]</a>
 					<form:form action="<%=request.getContextPath()%>">
 						<p style="text-align: right">

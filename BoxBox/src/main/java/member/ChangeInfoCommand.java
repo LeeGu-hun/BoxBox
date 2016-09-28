@@ -1,8 +1,19 @@
 package member;
 
-public class ChangePwdCommand {
+public class ChangeInfoCommand {
 	private String currentPassword;
 	private String newPassword;
+	private String name;
+
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getCurrentPassword() {
 		return currentPassword;

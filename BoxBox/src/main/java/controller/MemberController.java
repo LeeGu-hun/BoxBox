@@ -4,13 +4,11 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,10 +18,9 @@ import exception.IdPasswordNotMatchingException;
 import exception.MemberNotFoundException;
 import login.AuthInfo;
 import login.AuthService;
-import member.ChangePasswordService;
-import member.ChangePwdCommand;
-import member.ChangePwdCommandValidator;
-import member.Member;
+import member.ChangeInfoCommand;
+import member.ChangeInfoCommandValidator;
+import member.ChangeInfoService;
 import member.MemberRegisterService;
 import member.RegisterRequest;
 import member.RegisterRequestValidator;
@@ -33,10 +30,10 @@ import member.RegisterRequestValidator;
 public class MemberController {
 	private DaoMember daoMember;
 	private MemberRegisterService memberRegisterService;
-	private ChangePasswordService changePasswordService;
+	private ChangeInfoService changePasswordService;
 	private AuthService authService;
 
-	public void setChangePasswordService(ChangePasswordService changePasswordService) {
+	public void setChangePasswordService(ChangeInfoService changePasswordService) {
 		this.changePasswordService = changePasswordService;
 	}
 
@@ -60,7 +57,8 @@ public class MemberController {
 			return "main";
 		}
 		try {
-			System.out.println(rr.getEmail()+"/"+rr.getName()+"/"+rr.getPassword()+"/"+rr.getType()+"/"+rr.getPhone());
+			System.out.println(rr.getEmail() + "/" + rr.getName() + "/" + rr.getPassword() + "/" + rr.getType() + "/"
+					+ rr.getPhone());
 			memberRegisterService.regist(rr);
 			// AuthInfo authInfo = authService.authenticate(
 			// rr.getEmail(), rr.getPassword());
@@ -73,42 +71,43 @@ public class MemberController {
 		}
 	}
 
-	@RequestMapping("/detail/{id}")
-	public String detail(@PathVariable("id") Long memId, Model model) {
-		Member member = daoMember.selectById(memId);
-		if (member == null) {
-			throw new MemberNotFoundException();
-		}
-		model.addAttribute("member", member);
-		return "member/memberDetail";
+//	@RequestMapping("/detail/{id}")
+//	public String detail(@PathVariable("id") Long memId, Model model) {
+//		Member member = daoMember.selectById(memId);
+//		if (member == null) {
+//			throw new MemberNotFoundException();
+//		}
+//		model.addAttribute("member", member);
+//		return "member/memberDetail";
+//	}
+
+	@RequestMapping(value = "/changeInfo", method = RequestMethod.GET)
+	public String form(@ModelAttribute("command") HttpSession session) {
+		
+		return "dirMem/changeInfoForm";
 	}
 
-	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
-	public String form(@ModelAttribute("command") ChangePwdCommand pwdCmd) {
-		return "dirMem/changePwdForm";
-	}
-
-	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-	public String submit(@ModelAttribute("command") ChangePwdCommand pwdCmd, Errors errors, HttpSession session) {
-		new ChangePwdCommandValidator().validate(pwdCmd, errors);
+	@RequestMapping(value = "/changeInfo", method = RequestMethod.POST)
+	public String submit(@ModelAttribute("command") ChangeInfoCommand pwdCmd, Errors errors, HttpSession session) {
+		new ChangeInfoCommandValidator().validate(pwdCmd, errors);
 		if (errors.hasErrors()) {
-			return "dirMem/changePwdForm";
+			return "dirMem/changeInfoForm";
 		}
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
 		try {
-			changePasswordService.changePassword(authInfo.getEmail(), pwdCmd.getCurrentPassword(),
+			changePasswordService.changePassword(authInfo.getEmail(), pwdCmd.getName(), pwdCmd.getCurrentPassword(),
 					pwdCmd.getNewPassword());
-			return "dirMem/changedPwd";
+			return "dirMem/changedInfo";
 		} catch (IdPasswordNotMatchingException e) {
 			errors.rejectValue("currentPassword", "notMatching");
-			return "dirMem/changePwdForm";
+			return "dirMem/changeInfoForm";
 		}
 	}
 
-	@ExceptionHandler(TypeMismatchException.class)
-	public String handleTypeMismatchException(TypeMismatchException ex) {
-		return "member/invalidId";
-	}
+//	@ExceptionHandler(TypeMismatchException.class)
+//	public String handleTypeMismatchException(TypeMismatchException ex) {
+//		return "member/invalidId";
+//	}
 
 	@ExceptionHandler(MemberNotFoundException.class)
 	public String handleNotFoundException() throws IOException {
