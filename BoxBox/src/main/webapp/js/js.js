@@ -1,6 +1,7 @@
 
 function popup() {
-	$("#joinForm").dialog({
+	$("#join").css({display:true});
+	$("#join").dialog({
 		// closeOnEscape : false,
 		// open : function(event, ui) {
 		// $(".ui-dialog-titlebar-close", $(this).parent()).hide();
@@ -8,7 +9,7 @@ function popup() {
 		position : {
 			my : "center",
 			at : "top+205",
-			of : "#contents"
+//			of : 
 		},
 		draggable : false,
 		autoOpen : true,

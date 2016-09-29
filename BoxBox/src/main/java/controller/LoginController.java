@@ -45,13 +45,19 @@ public class LoginController {
 				memberRegisterService.regist(rr);
 				return "main";
 			} catch (AlreadyExistingMemberException ex) {
-				model.addAttribute("errMsg", "중복된 값입니다.");
+				model.addAttribute("errMsg", "이미 존재하는 회원입니다.");
 				errors.rejectValue("email", "duplicate");
 				return "main";
 			}
 		} else {
 			return "main";
 		}
+	}
+
+	@RequestMapping("/join")
+	public String join(RegisterRequest rr) {
+
+		return "dirMem/join1";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -69,7 +75,7 @@ public class LoginController {
 			HttpSession session, HttpServletResponse response) {
 		new LoginCommandValidator().validate(loginCommand, errors);
 		if (errors.hasErrors()) {
-			System.out.println("로그인 에러");
+			System.out.println("로그인 실패");
 			return "dirMem/login";
 		}
 		try {
@@ -77,14 +83,15 @@ public class LoginController {
 			AuthInfo authInfo = authService.authenticate(loginCommand.getEmail(), loginCommand.getPassword());
 			session.setAttribute("authInfo", authInfo);
 
-//			Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getEmail());
-//			rememberCookie.setPath("/");
-//			if (loginCommand.isRememberEmail()) {
-//				rememberCookie.setMaxAge(60 * 60 * 24 * 30);
-//			} else {
-//				rememberCookie.setMaxAge(0);
-//			}
-//			response.addCookie(rememberCookie);
+			// Cookie rememberCookie = new Cookie("REMEMBER",
+			// loginCommand.getEmail());
+			// rememberCookie.setPath("/");
+			// if (loginCommand.isRememberEmail()) {
+			// rememberCookie.setMaxAge(60 * 60 * 24 * 30);
+			// } else {
+			// rememberCookie.setMaxAge(0);
+			// }
+			// response.addCookie(rememberCookie);
 			return "main";
 		} catch (MemberNotFoundException e) {
 			errors.reject("memberNotFound");

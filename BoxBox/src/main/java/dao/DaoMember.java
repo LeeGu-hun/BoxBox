@@ -26,10 +26,10 @@ public class DaoMember {
 	}
 
 	public Member selectById(Long memberId) {
-		List<Member> results = jdbcTemplate.query("select * from MEMBER where id = ?", new RowMapper<Member>() {
+		List<Member> results = jdbcTemplate.query("select * from MEMBER where USER_ID = ?", new RowMapper<Member>() {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getString("USER_EMAIL"), rs.getString("USER_NAME"),
-						rs.getString("PASSWORD"), rs.getString("PHONE"), rs.getInt("USER_TYPE"));
+						rs.getString("PASSWORD"), rs.getString("USER_PHONE"), rs.getInt("USER_TYPE"));
 				member.setId(rs.getString("USER_ID"));
 				return member;
 			}
@@ -42,7 +42,7 @@ public class DaoMember {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where USER_EMAIL = ?", new RowMapper<Member>() {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getString("USER_EMAIL"), rs.getString("USER_NAME"),
-						rs.getString("PASSWORD"), rs.getString("PHONE"), rs.getInt("USER_TYPE"));
+						rs.getString("PASSWORD"), rs.getString("USER_PHONE"), rs.getInt("USER_TYPE"));
 				member.setId(rs.getString("USER_ID"));
 				return member;
 			}
@@ -69,7 +69,7 @@ public class DaoMember {
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement pstmt = con.prepareStatement(
-						"insert into MEMBER (USER_ID, USER_EMAIL, USER_NAME, PASSWORD,USER_TYPE,PHONE) values (SEQ_BOX_USER.nextval,?, ?, ?,?,?)");
+						"insert into MEMBER (USER_ID, USER_EMAIL, USER_NAME, PASSWORD,USER_TYPE,USER_PHONE) values (SEQ_MEMBER.nextval,?, ?, ?,?,?)");
 				pstmt.setString(1, member.getEmail());
 				pstmt.setString(2, member.getName());
 				pstmt.setString(3, member.getPassword());
