@@ -21,15 +21,25 @@
 
 <div class="login">
 	<h1>Login</h1>
-	<form method="post" action="login">
-		<input type="text" id="email" name="email" placeholder="Email" autofocus
-			required="required" /> <input type="password" name="password" id="password"
-			placeholder="Password" required="required" />
-		<button type="submit" class="btn btn-primary btn-block btn-large"
-			style="margin-bottom: 10px;">로그인</button>
-		<input type="button" class="btn btn-primary btn-block btn-large"
-			value="회원가입" onclick="location.href='<%=request.getContextPath()%>/join'">
-	</form>
+	<c:if test="${empty authInfo }">
+		<form method="post" action="login">
+			<c:if test="${empty cookie.REMEMBER.value}">
+				<input type="text" id="email" name="email" placeholder="Email" autofocus required="required" />
+				<input type="password" name="password" id="password" placeholder="Password" required="required" />
+				<label for="rememberEmail">E-mail 기억&nbsp;&nbsp;<input type="checkbox"	name="rememberEmail" id="rememberEmail" style="width: 15px;height: 15px;"/></label>
+				<button type="submit" class="btn btn-primary btn-block btn-large" style="margin-bottom: 5px;">로그인</button>
+				<input type="button" class="btn btn-primary btn-block btn-large" value="회원가입" onclick="location.href='<%=request.getContextPath()%>/join'">
+			</c:if>
+			
+			<c:if test="${!empty cookie.REMEMBER.value}">
+				<input type="text" id="email" name="email" placeholder="Email" autofocus required="required" value="${cookie.REMEMBER.value}" />
+				<input type="password" name="password" id="password" placeholder="Password" required="required" />
+				<label for="rememberEmail">E-mail 기억&nbsp;&nbsp;<input type="checkbox"	name="rememberEmail" id="rememberEmail" style="width: 15px;height: 15px;"/></label>
+				<button type="submit" class="btn btn-primary btn-block btn-large" style="margin-bottom: 5px;">로그인</button>
+				<input type="button" class="btn btn-primary btn-block btn-large" value="회원가입" onclick="location.href='<%=request.getContextPath()%>/join'">
+			</c:if>
+		</form>
+	</c:if>
 </div>
 
 
@@ -37,9 +47,9 @@
 
 <!-- 로그인 -->
 <!-- <div id="contents"> -->
-<%--   	<c:if test="${empty authInfo }">   --%>
-<%--   		<form action="login" method="post">   --%>
-<%--   			<c:if test="${empty cookie.REMEMBER.value}">   --%>
+<%-- 	<c:if test="${empty authInfo }"> --%>
+<%-- 		<form action="login" method="post"> --%>
+<%-- 			<c:if test="${empty cookie.REMEMBER.value}"> --%>
 <!-- 				<input type="text" name="email" id="email" placeholder="이메일을 입력하세요." -->
 <!-- 					autofocus required> -->
 <!-- 				<input type="password" name="password" id="password" -->
@@ -51,11 +61,11 @@
 <!-- 				</div> -->
 <!-- 				<input type="submit" value="로 그 인"> -->
 <!-- 				<input type="button" value="회 원 가 입" onclick="javascript:popup()"> -->
-<%--   			</c:if>   --%>
-<%--   			<c:if test="${!empty cookie.REMEMBER.value}">   --%>
+<%-- 			</c:if> --%>
+<%-- 			<c:if test="${!empty cookie.REMEMBER.value}"> --%>
 
 <!-- 				<input type="text" name="email" id="email" -->
-<%--   					value="${cookie.REMEMBER.value}" placeholder="이메일을 입력하세요."   --%>
+<%-- 					value="${cookie.REMEMBER.value}" placeholder="이메일을 입력하세요." --%>
 <!-- 					autofocus required> -->
 <!-- 				<input type="password" name="password" id="password" -->
 <!-- 					placeholder="비밀번호를 입력하세요." required> -->
@@ -66,28 +76,28 @@
 <!-- 				<input type="submit" value="로 그 인"> -->
 <!-- 				<input type="button" value="회 원 가 입" onclick="javascript:popup()"> -->
 
-<%--   			</c:if>   --%>
-<%--   		</form>   --%>
-<%--   	</c:if>   --%>
+<%-- 			</c:if> --%>
+<%-- 		</form> --%>
+<%-- 	</c:if> --%>
 
-<%--   	<form:form method="post" commandName="registerRequest"   --%>
-<%--   		action="member/regist">   --%>
+<%-- 	<form:form method="post" commandName="registerRequest" --%>
+<%-- 		action="member/regist"> --%>
 <!-- 		<h1>회 원 가 입</h1> -->
-<%--   		<form:input path="email" id="email" name="email" placeholder="이메일" />   --%>
-<%--   		<form:errors id="email" path="email" />   --%>
-<%--   		<form:input path="name" id="name" name="name" placeholder="이름" />   --%>
-<%--   		<form:errors path="name" id="name" />   --%>
-<%--   		<form:password path="password" id="password" name="password"   --%>
-<%--   			placeholder="비번" />   --%>
-<%--   		<form:errors path="password" id="password" />   --%>
-<%--   		<form:password path="confirmPassword" id="confirmPassword"   --%>
-<%--   			name="confirmPassword" placeholder="비번" />   --%>
-<%--   		<form:errors path="confirmPassword" id="confirmPassword" />   --%>
-<%--   		<form:input path="phone" id="phone" name="phone" placeholder="폰" />   --%>
-<%--   		<form:errors id="phone" path="phone" />   --%>
-<%--   		<form:input path="type" id="tpye" name="type" placeholder="타입" />   --%>
-<%--   		<form:errors path="type" id="type" />   --%>
+<%-- 		<form:input path="email" id="email" name="email" placeholder="이메일" /> --%>
+<%-- 		<form:errors id="email" path="email" /> --%>
+<%-- 		<form:input path="name" id="name" name="name" placeholder="이름" /> --%>
+<%-- 		<form:errors path="name" id="name" /> --%>
+<%-- 		<form:password path="password" id="password" name="password" --%>
+<%-- 			placeholder="비번" /> --%>
+<%-- 		<form:errors path="password" id="password" /> --%>
+<%-- 		<form:password path="confirmPassword" id="confirmPassword" --%>
+<%-- 			name="confirmPassword" placeholder="비번" /> --%>
+<%-- 		<form:errors path="confirmPassword" id="confirmPassword" /> --%>
+<%-- 		<form:input path="phone" id="phone" name="phone" placeholder="폰" /> --%>
+<%-- 		<form:errors id="phone" path="phone" /> --%>
+<%-- 		<form:input path="type" id="tpye" name="type" placeholder="타입" /> --%>
+<%-- 		<form:errors path="type" id="type" /> --%>
 
 <!-- 		<input type="submit" value=" 회 원 가 입 "> -->
-<%--   	</form:form>   --%>
+<%-- 	</form:form> --%>
 <!-- </div> -->

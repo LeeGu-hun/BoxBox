@@ -73,32 +73,34 @@ public class LoginController {
 	public String form(LoginCommand loginCommand, Errors errors,
 			// BoardCommand boardCmd,
 			HttpSession session, HttpServletResponse response) {
+		System.out.println("login 컨트롤러 접속");
 		new LoginCommandValidator().validate(loginCommand, errors);
 		if (errors.hasErrors()) {
-			System.out.println("로그인 실패");
-			return "dirMem/login";
+			System.out.println("에러발생");
+			return "dirMem/join";
 		}
 		try {
-			System.out.println("로그인 성공");
+			System.out.println("로그인 시도");
 			AuthInfo authInfo = authService.authenticate(loginCommand.getEmail(), loginCommand.getPassword());
 			session.setAttribute("authInfo", authInfo);
 
-			// Cookie rememberCookie = new Cookie("REMEMBER",
-			// loginCommand.getEmail());
-			// rememberCookie.setPath("/");
-			// if (loginCommand.isRememberEmail()) {
-			// rememberCookie.setMaxAge(60 * 60 * 24 * 30);
-			// } else {
-			// rememberCookie.setMaxAge(0);
-			// }
-			// response.addCookie(rememberCookie);
+			Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getEmail());
+			rememberCookie.setPath("/");
+			if (loginCommand.isRememberEmail()) {
+				rememberCookie.setMaxAge(60 * 5);
+			} else {
+				rememberCookie.setMaxAge(0);
+			}
+			response.addCookie(rememberCookie);
 			return "main";
 		} catch (MemberNotFoundException e) {
+			System.out.println("멤버못찾음");
 			errors.reject("memberNotFound");
-			return "dirMem/login";
+			return "dirMem/join";
 		} catch (IdPasswordNotMatchingException e) {
+			System.out.println("비밀번호 불일치");
 			errors.reject("idPasswordNotMatching");
-			return "dirMem/login";
+			return "dirMem/join";
 		}
 	}
 

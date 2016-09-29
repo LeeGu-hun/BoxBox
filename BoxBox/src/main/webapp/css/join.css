@@ -155,7 +155,7 @@ body {
 
 .login {
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	margin: -150px 0 0 -150px;
 	width: 300px;
@@ -168,9 +168,15 @@ body {
 	letter-spacing: 1px;
 	text-align: center;
 }
+.login h2 {
+	color: #fff;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	letter-spacing: 1px;
+	text-align: center;
+}
 .join {
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	margin: -150px 0 0 -150px;
 	width: 300px;
@@ -183,9 +189,16 @@ body {
 	letter-spacing: 1px;
 	text-align: center;
 }
-input {
-	width: 100%;
-	margin-bottom: 10px;
+label {
+	font-size: 15px;
+	color: white;
+	float: right;
+	margin-bottom: 5px;
+}
+
+input {	
+	width:100%;
+	margin-bottom: 7px;
 	background: rgba(0, 0, 0, 0.3);
 	border: none;
 	outline: none;

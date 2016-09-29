@@ -16,10 +16,14 @@
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/js.js"></script>
 
+<%-- 
+<form action="${pageContext.request.contextPath }/alterPassword">
+<c:set var="myContextPath" value="${pageContext.request.contextPath }"/>
 
-<div class="join">
+ --%>
+ <div class="join">
 	<form:form method="post" commandName="registerRequest"
-		action="member/regist">
+		action="${pageContext.request.contextPath }/member/regist">
 		<h1>회 원 가 입</h1>
 		<form:input path="email" id="email" name="email" placeholder="이메일" />
 		<form:errors id="email" path="email" />
