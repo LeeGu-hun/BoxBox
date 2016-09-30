@@ -22,11 +22,13 @@
 <div class="login">
 	<h1>Login</h1>
 	<c:if test="${empty authInfo }">
-		<form method="post" action="login">
+		<form:form commandName="loginCommand" method="post" action="login">
 			<c:if test="${empty cookie.REMEMBER.value}">
 				<input type="text" id="email" name="email" placeholder="Email" autofocus required="required" />
 				<input type="password" name="password" id="password" placeholder="Password" required="required" />
-				<label for="rememberEmail">E-mail 기억&nbsp;&nbsp;<input type="checkbox"	name="rememberEmail" id="rememberEmail" style="width: 15px;height: 15px;"/></label>
+				<label for="rememberEmail">E-mail 기억&nbsp;&nbsp;<input type="checkbox"	name="rememberEmail" id="rememberEmail" style="width: 15px;height: 15px;"/></label> 
+				<form:errors path="email" id="memberNotFound" name="memberNotFound" style="font-size:13px; color:white;"/>
+				<form:errors path="password" id="idPasswordNotMatching" name="idPasswordNotMatching" style="font-size:13px; color:white;"/>
 				<button type="submit" class="btn btn-primary btn-block btn-large" style="margin-bottom: 5px;">로그인</button>
 				<input type="button" class="btn btn-primary btn-block btn-large" value="회원가입" onclick="location.href='<%=request.getContextPath()%>/join'">
 			</c:if>
@@ -38,7 +40,7 @@
 				<button type="submit" class="btn btn-primary btn-block btn-large" style="margin-bottom: 5px;">로그인</button>
 				<input type="button" class="btn btn-primary btn-block btn-large" value="회원가입" onclick="location.href='<%=request.getContextPath()%>/join'">
 			</c:if>
-		</form>
+		</form:form>
 	</c:if>
 </div>
 

@@ -74,6 +74,6 @@ public class Member {
 	}
 
 	public boolean passwordMatchConfirm(String password) {
-		return (password.equals(password)) ? true : false;
+		return (password.equals(this.password)) ? true : false;
 	}
 }

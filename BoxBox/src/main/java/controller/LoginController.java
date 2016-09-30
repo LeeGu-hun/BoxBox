@@ -26,7 +26,7 @@ import member.RegisterRequestValidator;
 public class LoginController {
 	private AuthService authService;
 	private MemberRegisterService memberRegisterService;
-
+	private String failedLogin="아이디 비밀번호를 확인해 주세요.";
 	public void setAuthService(AuthService authService) {
 		this.authService = authService;
 	}
@@ -56,7 +56,7 @@ public class LoginController {
 
 	@RequestMapping("/join")
 	public String join(RegisterRequest rr) {
-
+		
 		return "dirMem/join1";
 	}
 
@@ -95,11 +95,11 @@ public class LoginController {
 			return "main";
 		} catch (MemberNotFoundException e) {
 			System.out.println("멤버못찾음");
-			errors.reject("memberNotFound");
+			errors.rejectValue("email","memberNotFound");
 			return "dirMem/join";
 		} catch (IdPasswordNotMatchingException e) {
 			System.out.println("비밀번호 불일치");
-			errors.reject("idPasswordNotMatching");
+			errors.rejectValue("password","idPasswordNotMatching");
 			return "dirMem/join";
 		}
 	}
