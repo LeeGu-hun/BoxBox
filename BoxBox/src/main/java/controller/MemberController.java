@@ -55,7 +55,7 @@ public class MemberController {
 		new RegisterRequestValidator().validate(rr, errors);
 		if (errors.hasErrors()) {
 			System.out.println("에러");
-			return "main";
+			return "dirMem/join1";
 		}
 		try {
 			System.out.println(rr.getEmail() + "/" + rr.getName() + "/" + rr.getPassword() + "/" + rr.getType() + "/"

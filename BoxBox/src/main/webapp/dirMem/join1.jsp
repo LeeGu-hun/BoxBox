@@ -21,31 +21,28 @@
 <c:set var="myContextPath" value="${pageContext.request.contextPath }"/>
 
  --%>
- <div class="join">
+
+<div class="join">
 	<form:form method="post" commandName="registerRequest"
 		action="${pageContext.request.contextPath }/member/regist">
 		<h1>회 원 가 입</h1>
 		<form:input path="email" id="email" name="email" placeholder="이메일" />
-		<form:errors id="email" path="email" />
+		<form:errors id="email" path="email" style="font-size:15px; color:white; "/>
 
-		<form:input path="name" id="name" name="name" placeholder="이름" />
-		<form:errors path="name" id="name" />
+		<form:input path="name" id="name" name="name" placeholder="이름" style="margin-top:7px;"/>
+		<form:errors path="name" id="name" style="font-size:15px; color:white; "/>
 
-		<form:password path="password" id="password" name="password"
-			placeholder="비밀번호" />
-		<form:errors path="password" id="password" />
-		<form:password path="confirmPassword" id="confirmPassword"
-			name="confirmPassword" placeholder="비밀번호 확인" />
-		<form:errors path="confirmPassword" id="confirmPassword" />
+		<form:password path="password" id="password" name="password" placeholder="비밀번호" style="margin-top:7px;"/>
+		<form:errors path="password" id="password" style="font-size:15px; color:white; "/>
+		<form:password path="confirmPassword" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" style="margin-top:7px;"/>
+		<form:errors path="confirmPassword" id="confirmPassword" style="font-size:15px; color:white; "/>
 
-		<form:input path="phone" id="phone" name="phone"
-			placeholder="휴대폰 번호 (-없이 입력)" />
-		<form:errors id="phone" path="phone" />
-
-		<form:input path="type" id="type" name="type" placeholder="타입" />
-		<form:errors path="type" id="type" />
-
-		<input class="btn btn-primary btn-block btn-large" type="submit"
-			value=" 회 원 가 입 ">
+		<form:input path="phone" id="phone" name="phone" placeholder="휴대폰 번호 (-없이 입력)" style="margin-top:7px;"/>
+		<form:errors id="phone" path="phone" style="font-size:15px; color:white; "/><br>
+		<div style="width: 100%;text-align: center;">
+			<b style="font-size:15px; color:white;">관리자 회원가입</b><form:radiobutton path="type" name="type" id="type" value="1" style="width: 15px;height: 15px;"/>
+			<b style="font-size:15px; color:white;">일반 회원가입</b><form:radiobutton path="type" name="type" id="type" value="2" style="width: 15px;height: 15px;" checked="checked"/>
+		</div> 
+		<input class="btn btn-primary btn-block btn-large" type="submit" value=" 회 원 가 입 " style="margin-top:7px;">
 	</form:form>
 </div>
