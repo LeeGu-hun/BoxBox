@@ -6,6 +6,7 @@
 
 	<bean class="controller.LoginController">
 		<property name="authService" ref="authService" />
+		<property name="placeService" ref="placeSvc"/>
 	</bean>
 	<bean class="controller.MemberController">
 		<property name="daoMember" ref="daoMember" />
@@ -24,7 +25,9 @@
 	</bean>
 
 	<bean id="memberRegSvc" class="member.MemberRegisterService">
-		<constructor-arg ref="daoMember" /> 
+		<constructor-arg ref="daoMember" />
 	</bean>
-
+	<bean id="placeSvc" class="place.PlaceService">
+		<constructor-arg ref="daoMember" />
+	</bean>
 </beans>

@@ -22,6 +22,10 @@ public class DaoMember {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	public DaoMember() {
+
+	}
+
 	public Member selectById(Long memberId) {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where USER_ID = ?", new RowMapper<Member>() {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -67,7 +71,7 @@ public class DaoMember {
 		jdbcTemplate.update("update MEMBER set USER_NAME = ?, PASSWORD = ? " + "where USER_EMAIL = ?", member.getName(),
 				member.getPassword(), member.getEmail());
 	}
-	
+
 	public int count() {
 		Integer count = jdbcTemplate.queryForObject("select count(*) from MEMBER", Integer.class);
 		return count;
@@ -76,14 +80,21 @@ public class DaoMember {
 	public void memberDelete(Member member) {
 		jdbcTemplate.update("delete from MEMBER where EMAIL = ?", member.getEmail());
 	}
-	public Place searchPlace(String city,String gu){
-		List<Place> results = jdbcTemplate.query("select * from PLACE NATURAL JOIN POST where POST.POST_CITY=? and POST.POST_GU=?", new RowMapper<Place>() {
-			public Place mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Place place = new Place(rs.getString("PLACE_ID"),rs.getString("POST_CITY"), );
-				return place;
-			}
-		},city,gu );
 
-		return results.isEmpty() ? null : results.get(0);
+	public List<Place> comboPlace() {
+		System.out.println("comboPlace 메서드 작동");
+		List<Place> results = jdbcTemplate.query("select*from place natural join post where post_id=post_id",
+				new RowMapper<Place>() {
+					public Place mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Place place = new Place(rs.getString("PLACE_ID"), rs.getString("POST_CITY"),
+								rs.getString("POST_GU"), rs.getString("POST_STREET"), rs.getString("PLACE_NAME"));
+						System.out.println(rs.getString("PLACE_ID") + "//" + rs.getString("POST_CITY") + "//"
+								+ rs.getString("POST_GU") + "//" + rs.getString("POST_STREET") + "//"
+								+ rs.getString("PLACE_NAME"));
+						return place;
+					}
+				});
+		return results;
+
 	}
 }

@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,12 +23,19 @@ import login.LoginCommandValidator;
 import member.MemberRegisterService;
 import member.RegisterRequest;
 import member.RegisterRequestValidator;
+import place.Place;
+import place.PlaceService;
 
 @Controller
 public class LoginController {
 	private AuthService authService;
 	private MemberRegisterService memberRegisterService;
-	private String failedLogin="아이디 비밀번호를 확인해 주세요.";
+	private PlaceService placeService;
+	
+	public void setPlaceService(PlaceService placeService) {
+		this.placeService = placeService;
+	}
+
 	public void setAuthService(AuthService authService) {
 		this.authService = authService;
 	}
@@ -56,7 +65,7 @@ public class LoginController {
 
 	@RequestMapping("/join")
 	public String join(RegisterRequest rr) {
-		
+
 		return "dirMem/join1";
 	}
 
@@ -70,7 +79,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String form(LoginCommand loginCommand, Errors errors,
+	public String form(LoginCommand loginCommand, Errors errors,Model model,
 			// BoardCommand boardCmd,
 			HttpSession session, HttpServletResponse response) {
 		System.out.println("login 컨트롤러 접속");
@@ -80,6 +89,9 @@ public class LoginController {
 			return "dirMem/join";
 		}
 		try {
+			System.out.println("콤보박스 세팅");
+			List<Place> place = placeService.comboPlace();
+			model.addAttribute("place", place);
 			System.out.println("로그인 시도");
 			AuthInfo authInfo = authService.authenticate(loginCommand.getEmail(), loginCommand.getPassword());
 			session.setAttribute("authInfo", authInfo);
@@ -95,11 +107,11 @@ public class LoginController {
 			return "main";
 		} catch (MemberNotFoundException e) {
 			System.out.println("멤버못찾음");
-			errors.rejectValue("email","memberNotFound");
+			errors.rejectValue("email", "memberNotFound");
 			return "dirMem/join";
 		} catch (IdPasswordNotMatchingException e) {
 			System.out.println("비밀번호 불일치");
-			errors.rejectValue("password","idPasswordNotMatching");
+			errors.rejectValue("password", "idPasswordNotMatching");
 			return "dirMem/join";
 		}
 	}

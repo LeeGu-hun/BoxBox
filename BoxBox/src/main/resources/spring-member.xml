@@ -12,7 +12,7 @@
 		destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="jdbcUrl"
-			value="jdbc:oracle:thin:@tlgus07081.iptime.org:1521:xe" />
+			value="jdbc:oracle:thin:@tlgus0708.iptime.org:1521:xe" />
 		<property name="user" value="box" />
 		<property name="password" value="1" />
 	</bean>
