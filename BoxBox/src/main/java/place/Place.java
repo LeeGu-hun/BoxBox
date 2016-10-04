@@ -1,14 +1,44 @@
 package place;
 
 public class Place {
-	private String id, city, gu, street, name;
+	private String id, city, gu, street, name, postId, dong;
 
-	public Place(String id, String city, String gu, String street, String name) {
+	public Place(String id, String city, String gu, String dong, String street, String name, String postId) {
 		this.id = id;
 		this.city = city;
 		this.gu = gu;
 		this.street = street;
 		this.name = name;
+		this.postId = postId;
+		this.dong = dong;
+	}
+
+	public Place(String postId, String city, String gu, String dong) {
+		this.city = city;
+		this.gu = gu;
+		this.postId = postId;
+		this.dong = dong;
+	}
+
+	public String getDong() {
+		return dong;
+	}
+
+	public void setDong(String dong) {
+		this.dong = dong;
+	}
+
+	public Place(String city, String gu) {
+		this.gu = gu;
+		this.city = city;
+	}
+
+	public String getPostId() {
+		return postId;
+	}
+
+	public void setPostId(String postId) {
+		this.postId = postId;
 	}
 
 	public String getName() {

@@ -16,7 +16,7 @@ import member.Member;
 import place.Place;
 
 public class DaoMember {
-	private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate=new JdbcTemplate();
 
 	public DaoMember(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -81,20 +81,55 @@ public class DaoMember {
 		jdbcTemplate.update("delete from MEMBER where EMAIL = ?", member.getEmail());
 	}
 
-	public List<Place> comboPlace() {
-		System.out.println("comboPlace 메서드 작동");
-		List<Place> results = jdbcTemplate.query("select*from place natural join post where post_id=post_id",
+	public List<Place> comboPost() {
+		System.out.println("comboPost 메서드 작동");
+		List<Place> results = jdbcTemplate.query(
+				"select distinct post_id,post_dong,post_gu,post_city from post natural join place order by post_gu",
 				new RowMapper<Place>() {
 					public Place mapRow(ResultSet rs, int rowNum) throws SQLException {
-						Place place = new Place(rs.getString("PLACE_ID"), rs.getString("POST_CITY"),
-								rs.getString("POST_GU"), rs.getString("POST_STREET"), rs.getString("PLACE_NAME"));
-						System.out.println(rs.getString("PLACE_ID") + "//" + rs.getString("POST_CITY") + "//"
-								+ rs.getString("POST_GU") + "//" + rs.getString("POST_STREET") + "//"
-								+ rs.getString("PLACE_NAME"));
+						Place place = new Place(rs.getString("POST_ID"), rs.getString("POST_CITY"),
+								rs.getString("POST_GU"), rs.getString("POST_DONG"));
 						return place;
 					}
 				});
 		return results;
 
 	}
+
+	public List<Place> comboPlace(String postId) {
+		System.out.println("comboPlace 메서드 작동");
+		List<Place> results = jdbcTemplate.query("select*from place natural join post where post_id=?",
+				new RowMapper<Place>() {
+					public Place mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Place place = new Place(rs.getString("PLACE_ID"), rs.getString("POST_CITY"),
+								rs.getString("POST_GU"), rs.getString("POST_DONG"), rs.getString("POST_STREET"),
+								rs.getString("PLACE_NAME"), rs.getString("POST_ID"));
+						System.out.println(rs.getString("PLACE_ID") + "//" + rs.getString("POST_CITY") + "//"
+								+ rs.getString("POST_GU") + "//" + rs.getString("POST_STREET") + "//"
+								+ rs.getString("PLACE_NAME"));
+						return place;
+					}
+				},postId);
+		return results;
+
+	}
+
+//	public List<Place> comboPost(String postGu) {
+//		System.out.println("comboPost 메서드 작동");
+//		List<Place> results = jdbcTemplate.query(
+//				"select*from place natural join post where post_id=post_id and post_gu=?", new RowMapper<Place>() {
+//					public Place mapRow(ResultSet rs, int rowNum) throws SQLException {
+//						Place place = new Place(rs.getString("PLACE_ID"), rs.getString("POST_CITY"),
+//								rs.getString("POST_GU"), rs.getString("POST_DONG"), rs.getString("POST_STREET"),
+//								rs.getString("PLACE_NAME"), rs.getString("POST_ID"));
+//						System.out.println(rs.getString("PLACE_ID") + "//" + rs.getString("POST_CITY") + "//"
+//								+ rs.getString("POST_GU") + "//" + rs.getString("POST_STREET") + "//"
+//								+ rs.getString("PLACE_NAME") + "//" + rs.getString("POST_ID"));
+//						return place;
+//					}
+//				}, postGu);
+//		return results;
+//
+//	}
+
 }

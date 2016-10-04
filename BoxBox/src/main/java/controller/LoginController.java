@@ -90,7 +90,9 @@ public class LoginController {
 		}
 		try {
 			System.out.println("콤보박스 세팅");
-			List<Place> place = placeService.comboPlace();
+//			List<Place> place = placeService.comboPlace();
+//			model.addAttribute("place", place);
+			List<Place> place = placeService.comboPost();
 			model.addAttribute("place", place);
 			System.out.println("로그인 시도");
 			AuthInfo authInfo = authService.authenticate(loginCommand.getEmail(), loginCommand.getPassword());
@@ -104,6 +106,7 @@ public class LoginController {
 				rememberCookie.setMaxAge(0);
 			}
 			response.addCookie(rememberCookie);
+			System.out.println("로그인");
 			return "main";
 		} catch (MemberNotFoundException e) {
 			System.out.println("멤버못찾음");

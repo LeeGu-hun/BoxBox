@@ -2,15 +2,11 @@ package place;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import dao.DaoMember;
 
 public class PlaceService {
 	private DaoMember daoMember;
 
-
-	
 
 	public PlaceService(DaoMember daoMember) {
 		super();
@@ -18,8 +14,16 @@ public class PlaceService {
 	}
 
 
-	public List<Place> comboPlace(){
-		List<Place> results = daoMember.comboPlace();
+	public List<Place> comboPlace(String postId){
+		List<Place> results = daoMember.comboPlace(postId);
+		return results;
+	}
+//	public List<Place> comboPost(String postId){
+//		List<Place> results = daoMember.comboPost(postId);
+//		return results;
+//	}
+	public List<Place> comboPost(){
+		List<Place> results = daoMember.comboPost();
 		return results;
 	}
 }
