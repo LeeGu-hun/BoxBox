@@ -18,10 +18,7 @@ public class PlaceService {
 		List<Place> results = daoMember.comboPlace(postId);
 		return results;
 	}
-//	public List<Place> comboPost(String postId){
-//		List<Place> results = daoMember.comboPost(postId);
-//		return results;
-//	}
+
 	public List<Place> comboPost(){
 		List<Place> results = daoMember.comboPost();
 		return results;

@@ -16,20 +16,6 @@
 	function postList() {
 		var selectedIndex = document.getElementById('post').selectedIndex;
 		var post = document.getElementById("post").options[selectedIndex].value;
-<%-- 		var selProd = "<%if (request.getAttribute("selProd") == null) { --%>
-// 				out.print("All");
-// 			} else {
-// 				out.print(request.getAttribute("selProd"));
-<%-- 			}%>"; --%>
-			
-// 		if (selCate == "" || selCate == "상품 종류를 선택하세요.") {
-// 			document.getElementById("price").value = "0";
-// 			document.getElementById("quantity").value = "";
-// 			document.getElementById("hap").value = "";
-// 			document.getElementById('selProd').options.length = 0;
-// 			return;
-// 		}
-		alert('ajax시작' + post);
 		$.ajax({
 			type : "POST",
 			url : "./boxUser/cmbList.jsp",
@@ -41,9 +27,9 @@
 		}
 	}
 </script>
-<title>Insert title here</title>
+<title>BoxBox</title>
 </head>
-<body>45562065
+<body>
 	<div class="main">
 		<h3>BoxBox와 함께 쉽고 편리하게 보관함과 물품을 대여해 보아요.</h3>
 		<select class="cmbRental" id="post" name="post" onchange="postList();">
@@ -54,25 +40,20 @@
 					<c:out value="${place.city}-${place.gu}-${place.dong}" />
 				</option>
 			</c:forEach>
-		</select>&nbsp; 
-		<select class="cmbRental" id="place" name="place">
-			<c:forEach var="place1" items="${requestScope.place1}">
-				<option value="<c:out value="${place1.postId}"/>">
-					<c:out value="${place1.name}" />
-				</option>
-			</c:forEach>
-		</select>&nbsp; 
-		<select class="cmbRental">
+		</select>&nbsp; <select class="cmbRental" id="place" name="place">
+			<option value="0" />지역을 선택하세요.
+			</option>
+		</select>&nbsp; <select class="cmbRental">
 			<optgroup label="대여물품 카테고리">
 				<option value=""></option>
 			</optgroup>
-		</select>&nbsp; 
-		<select class="cmbRental">
+		</select>&nbsp; <select class="cmbRental">
 			<optgroup label="대여물품 종류">
 				<option value=""></option>
 			</optgroup>
-		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-		<input type="button" class="btn btn-primary btn-block btn-large" value="대여가능 물품 검색" onclick="'"> <br> <br>
+		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="button"
+			class="btn btn-primary btn-block btn-large" value="대여가능 물품 검색"
+			onclick="'"> <br> <br>
 		<hr>
 		<h2>대여가능 물품 리스트</h2>
 		<table class="rentalDisplay">

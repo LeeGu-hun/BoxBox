@@ -13,7 +13,6 @@ public class DaoAjax extends DaoSet {
 		List list = new ArrayList();
 		Place place = null;
 		String sql = "select*from place natural join post where post_id=? ";
-
 		try {
 			conn = connDB();
 			pstmt = conn.prepareStatement(sql);

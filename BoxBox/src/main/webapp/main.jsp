@@ -10,7 +10,7 @@
 <title>BoxBox</title>
 </head>
 <body>
-	<c:if test="${empty authInfo }">
+	<c:if test="${authInfo!=0 ||authInfo!=1||authInfo!=2  }">
 		<%@include file="/dirMem/join.jsp"%>
 	</c:if>
 	<c:if test="${ authInfo.type==0}">

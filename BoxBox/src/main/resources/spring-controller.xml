@@ -8,9 +8,6 @@
 		<property name="authService" ref="authService" />
 		<property name="placeService" ref="placeSvc" />
 	</bean>
-	<bean class="controller.CmbController">
-		<property name="placeService" ref="placeSvc" />
-	</bean>
 	<bean class="controller.MemberController">
 		<property name="daoMember" ref="daoMember" />
 		<property name="authService" ref="authService" />
