@@ -4,18 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
-<html>
-<head>
-<head>
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><spring:message code="change.pwd.title" /></title>
-
-</head>
-<body>
-
-
 	<p>
 		<spring:message code="change.pwd.done" />
 	</p>
@@ -24,6 +13,3 @@
 		</a>
 
 	</p>
-
-</body>
-</html>

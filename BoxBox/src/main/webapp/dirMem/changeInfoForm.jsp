@@ -35,7 +35,8 @@
 			<form:errors path="newPassword"
 				style="color: white; font-size:13px; " />
 			<input class="btn btn-primary btn-block btn-large" type="submit"
-				value="<spring:message code="change.btn" /> " style="margin-top:5px;"/>
+				value="<spring:message code="change.btn" /> "
+				style="margin-top: 5px;" />
 		</form:form>
 	</div>
 </body>
