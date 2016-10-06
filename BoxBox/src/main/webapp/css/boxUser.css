@@ -156,9 +156,9 @@ body {
 .main {
 	position: absolute;
 	top: 40%;
-	left: 25%;
-	margin: -150px 0 0 -150px;
-	width: 1250px;
+/* 	left: ; */
+	margin: -150px 0 0 10%;
+	width: 80%;
 	height: 300px;
 	text-align: center;
 }

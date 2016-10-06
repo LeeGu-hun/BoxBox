@@ -31,7 +31,8 @@
 		out.print("<td id='col4'>" + rentalSearch.getModel() + "</td>");
 		out.print("<td id='col5'>" + rentalSearch.getInfo() + "</td>");
 		out.print("<td id='col6'>" + rentalSearch.getFee() + "</td>");
-		out.print("<td id='col7'>" +"<img src="+request.getRealPath("/")+"images/" +rentalSearch.getPhoto()+"/></td>");
+		System.out.println(rentalSearch.getPhoto());
+		out.print("<td id='col7'>" +"<image src="+request.getContextPath()+"/images/"+rentalSearch.getPhoto()+" /></td>");
 		out.print("</td></tr>");
 	}
 %>
