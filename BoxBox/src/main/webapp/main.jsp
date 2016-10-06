@@ -10,16 +10,14 @@
 <title>BoxBox</title>
 </head>
 <body>
-	<c:if test="${authInfo.type!=0 || authInfo.type!=1 || authInfo.type!=2  }">
+	<c:if test="${ empty authInfo}">
 		<%@include file="/dirMem/join.jsp"%>
 	</c:if>
-	<c:if test="${ authInfo.type==0 || authInfo.type==1}">
+	<c:if test="${ authInfo.type==1}">
 		<%@include file="/admin/adminMain.jsp"%>
 	</c:if>
-	<c:if test="${ authInfo.type==2}">
+	<c:if test="${authInfo.type==2}">
 		<%@include file="/boxUser/userMain.jsp"%>
 	</c:if>
 </body>
 </html>
-
-

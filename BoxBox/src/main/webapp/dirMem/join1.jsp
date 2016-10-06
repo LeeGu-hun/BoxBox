@@ -19,7 +19,6 @@
 <%-- 
 <form action="${pageContext.request.contextPath }/alterPassword">
 <c:set var="myContextPath" value="${pageContext.request.contextPath }"/>
-
  --%>
 
 <div class="join">

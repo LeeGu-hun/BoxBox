@@ -16,7 +16,7 @@
 		var post = document.getElementById("post").options[selectedIndex].value;
 		$.ajax({
 			type : "POST",
-			url : "./boxUser/cmbList.jsp",
+			url : "./boxUser/cmbPost.jsp",
 			data : "post=" + post,
 			success : result
 		});
@@ -24,6 +24,33 @@
 			$("#place").html(msg);
 		}
 	}
+	function rentalList() {
+		var selectedIndex = document.getElementById('place').selectedIndex;
+		var place = document.getElementById("place").options[selectedIndex].text;
+		$.ajax({
+			type : "POST",
+			url : "./boxUser/userSearch.jsp",
+			data : "place=" + place,
+			success : result1
+		});
+		function result1(msg) {
+			$("#row").html(msg);
+		}
+	}
+	function infoList() {
+		var selectedIndex = document.getElementById('cmbRental').selectedIndex;
+		var cmbRental = document.getElementById("cmbRental").options[selectedIndex].text;
+		$.ajax({
+			type : "POST",
+			url : "./boxUser/cmbInfo.jsp",
+			data : "cmbRental=" + cmbRental,
+			success : result2
+		});
+		function result2(msg) {
+			$("#cmbInfo").html(msg);
+		}
+	}
+	
 </script>
 <div class="main">
 	<h3>BoxBox와 함께 쉽고 편리하게 보관함과 물품을 대여해 보아요.</h3>
@@ -38,17 +65,19 @@
 	</select>&nbsp; <select class="cmbRental" id="place" name="place">
 		<option value="0" />지역을 선택하세요.
 		</option>
-	</select>&nbsp; <select class="cmbRental">
-		<optgroup label="대여물품 카테고리">
-			<option value=""></option>
-		</optgroup>
-	</select>&nbsp; <select class="cmbRental">
-		<optgroup label="대여물품 종류">
-			<option value=""></option>
-		</optgroup>
-	</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="button"
+	</select>&nbsp; 
+	
+<!-- 	<select class="cmbRental" id="cmbRental" name="cmbRental" onchange="infoList();"> -->
+<!-- 		<option value="0" />대여물품 카테고리를 선택하세요. -->
+<!-- 		</option> -->
+<!-- 	</select>&nbsp; <select class="cmbRental" id ="cmbInfo" name="cmbInfo" > -->
+<!-- 		<option value="0" />대여물품을 선택하세요. -->
+<!-- 		</option> -->
+<!-- 	</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -->
+	
+	<input type="button"
 		class="btn btn-primary btn-block btn-large" value="대여가능 물품 검색"
-		onclick="'"> <br> <br>
+		onclick="javascript:rentalList();"> <br> <br>
 	<hr>
 	<h2>대여가능 물품 리스트</h2>
 	<table class="rentalDisplay">
@@ -58,18 +87,13 @@
 			<td id="col3">카테고리</td>
 			<td id="col4">종류</td>
 			<td id="col5">설명</td>
-			<td id="col6">사진</td>
-			<td id="col7">대여금액(시간당)</td>
+			<td id="col6">대여금액(시간당)</td>
+			<td id="col7">사진</td>
 		</tr>
-		<tr id="row">
-			<td id="col1">.</td>
-			<td id="col2">.</td>
-			<td id="col3">.</td>
-			<td id="col4">.</td>
-			<td id="col5">.</td>
-			<td id="col6">.</td>
-			<td id="col7">.</td>
-		</tr>
+		
+	</table>
+	<table class="rentalDisplay" id ="row" >
+		
 	</table>
 </div>
 user페이지
