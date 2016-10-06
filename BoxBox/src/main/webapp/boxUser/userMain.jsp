@@ -36,6 +36,12 @@
 		function result1(msg) {
 			$("#row").html(msg);
 		}
+// 		var h = $('#rowDiv').height();
+// 		if(h>=400){
+// 			$("#rowDiv").css({"overflow-y":"scroll"});
+// 		}
+		
+		
 	}
 	function infoList() {
 		var selectedIndex = document.getElementById('cmbRental').selectedIndex;
@@ -49,6 +55,7 @@
 		function result2(msg) {
 			$("#cmbInfo").html(msg);
 		}
+		
 	}
 	
 </script>
@@ -80,19 +87,12 @@
 		onclick="javascript:rentalList();"> <br> <br>
 	<hr>
 	<h2>대여가능 물품 리스트</h2>
-	<table class="rentalDisplay">
-		<tr id="head">
-			<td id="col1">지역</td>
-			<td id="col2">대여관리소</td>
-			<td id="col3">카테고리</td>
-			<td id="col4">종류</td>
-			<td id="col5">설명</td>
-			<td id="col6">대여금액(시간당)</td>
-			<td id="col7">사진</td>
-		</tr>
+	<div id="rowDiv" style="height:400px; overflow-y: auto; ">
+	<table class="rentalDisplay" id="row">
 		
 	</table>
-	<table class="rentalDisplay" id ="row" >
+	</div>
+
 		
 	</table>
 </div>
