@@ -59,6 +59,7 @@
 			<td id="col4">종류</td>
 			<td id="col5">설명</td>
 			<td id="col6">사진</td>
+			<td id="col7">대여금액(시간당)</td>
 		</tr>
 		<tr id="row">
 			<td id="col1">.</td>
@@ -67,6 +68,7 @@
 			<td id="col4">.</td>
 			<td id="col5">.</td>
 			<td id="col6">.</td>
+			<td id="col7">.</td>
 		</tr>
 	</table>
 </div>
