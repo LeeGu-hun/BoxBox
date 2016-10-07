@@ -155,7 +155,7 @@ body {
 
 .main {
 	position: absolute;
-	top: 40%;
+	top: 30%;
 /* 	left: ; */
 	margin: -150px 0 0 10%;
 	width: 80%;
@@ -170,7 +170,7 @@ body {
 	text-align: center;
 }
 
-.cmbRental {	
+.cmbRental, .rentalDisplay{	
 	width:20%;
 	margin-bottom: 7px;
 	background: rgba(0, 0, 0, 0.3);
@@ -205,17 +205,18 @@ body {
 }
 
 #head {
-	background-color: #333333;
-	color: white;
+	background-color: white;
+	color: #333333;
 	font-weight: bold;	
+	height:30px;
 }
 
-#row {
-	background-color: #cccccc;
-	color: black;
+#rentalRow {
+/* 	background-color: #cccccc; */
+	color: white;
 }
 
-#row:hover {
+#rentalRow:hover {
 	background-color: #4a77d4;
 	color: white;
 }
@@ -229,9 +230,12 @@ body {
 }
 
 #col4, col6 {
-	width: 15%;
+	width: 10%;
 }
 
 #col5 {
 	width: 20%;
+}
+#col8{
+	width: 10%;
 }

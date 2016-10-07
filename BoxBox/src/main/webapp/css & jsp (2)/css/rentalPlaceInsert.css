@@ -46,7 +46,7 @@
 }
 
 .btn-large {
-	padding: 9px 14px;
+	padding: 9px 16px;
 	font-size: 15px;
 	line-height: normal;
 	-webkit-border-radius: 5px;
@@ -101,7 +101,7 @@
 }
 
 .btn-block {
-	width: 30%;
+	width: 98%;
 	display: inline-block;
 }
 
@@ -153,59 +153,17 @@ body {
 		endColorstr='#092756', GradientType=1);
 }
 
-.headerUser {
-	position: relative;
-	width: 99%;
-	height: 100px;
-	display: block;	
-}
-
-.headerUser .logo {
-	position: relative;
-	width: 20%;
-	height: 100px;
+.rentalPlaceInsert {
+	position: absolute;
+	top: 35%;
+	left: 40%;
+	margin: -150px 0 0 -150px;
+	width: 700px;
+	height: 300px;
 	text-align: center;
-	float: left;
-	display: block;
-	background-color: white;
 }
 
-.headerUser .menuUser {
-	position: relative;
-	width: 60%;
-	height: 100px;
-	text-align: center;
-	float: left;
-	display: block;
-	background-color: yellow;
-}
-
-.headerUser .menuUser li {
-	width: 25%;
-	height: 200px;
-	list-style: none;
-	float: left;
-}
-
-.headerUser .menuUser li:firstchild {
-	border-radius: 10px 0 0 10px;	
-}
-
-.headerUser .menuUser li:lastchild {
-	border-radius: 0 10px 10px 0;
-}
-
-.headerUser .userName {
-	position: relative;
-	width: 20%;
-	height: 100px;
-	text-align: center;
-	float: left;
-	display: block;
-	background-color: blue;
-}
-
-.main h2, .main h3 {
+.rentalPlaceInsert h2, .rentalPlaceInsert h3 {
 	color: #fff;
 	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	letter-spacing: 1px;
@@ -213,7 +171,7 @@ body {
 }
 
 .cmbRental {	
-	width:20%;
+	width:20.5%;
 	margin-bottom: 7px;
 	background: rgba(0, 0, 0, 0.3);
 	border: none;
@@ -238,42 +196,32 @@ body {
 		rgba(255, 255, 255, 0.2);
 }
 
-.rentalDisplay {
-	text-align: center;
-	font-size: 15px;
-	border-color: white;
-	border: thin;
-	width: 100%;  
+input {
+	width: 100%;
+	margin-bottom: 10px;
+	background: rgba(0, 0, 0, 0.3);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px
+		rgba(255, 255, 255, 0.2);
+	-webkit-transition: box-shadow .5s ease;
+	-moz-transition: box-shadow .5s ease;
+	-o-transition: box-shadow .5s ease;
+	-ms-transition: box-shadow .5s ease;
+	transition: box-shadow .5s ease;
 }
 
-#head {
-	background-color: #333333;
+input:focus {
+	box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px
+		rgba(255, 255, 255, 0.2);
+}
+
+#address {
 	color: white;
-	font-weight: bold;	
-}
-
-#row {
-	background-color: #cccccc;
-	color: black;
-}
-
-#row:hover {
-	background-color: #4a77d4;
-	color: white;
-}
-
-#col1, #col3 {
-	width: 10%;
-}
-
-#col2 {
-	width: 20%;	
-}
-
-#col4, col6 {
-	width: 15%;
-}
-
-#col5 {
-	width: 30%;
 }

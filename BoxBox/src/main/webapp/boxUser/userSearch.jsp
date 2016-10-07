@@ -21,10 +21,11 @@
 	out.print("<td id='col5'>설명</td>");
 	out.print("<td id='col6'>대여금액(시간당)</td>");
 	out.print("<td id='col7'>사진</td>");
+	out.print("<td id='col8'>결제</td>");
 	out.print("</tr>");
 	for (int i = 0; i < place.size(); i++) {
 		RentalSearch rentalSearch = (RentalSearch) place.get(i);
-		out.print("<tr>");
+		out.print("<tr id='rentalRow'>");
 		out.print("<td id='col1'>" + rentalSearch.getGu() + "</td>");
 		out.print("<td id='col2'>" + rentalSearch.getPlace() + "</td>");
 		out.print("<td id='col3'>" + rentalSearch.getCate() + "</td>");
@@ -33,6 +34,7 @@
 		out.print("<td id='col6'>" + rentalSearch.getFee() + "</td>");
 		System.out.println(rentalSearch.getPhoto());
 		out.print("<td id='col7'>" +"<image src="+request.getContextPath()+"/images/"+rentalSearch.getPhoto()+" /></td>");
+		out.print("<td id='col8'><a href='<c:url value='/payment'><input type='button' id='btn' value='결제' /></a></td>");
 		out.print("</td></tr>");
 	}
 %>

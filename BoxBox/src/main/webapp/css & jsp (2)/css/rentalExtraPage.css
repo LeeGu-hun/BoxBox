@@ -153,7 +153,7 @@ body {
 		endColorstr='#092756', GradientType=1);
 }
 
-.rentalPlaceUpdate {
+.rentalExtraPage {
 	position: absolute;
 	top: 35%;
 	left: 45%;
@@ -163,7 +163,7 @@ body {
 	text-align: center;
 }
 
-.rentalPlaceUpdate h2, .rentalPlaceUpdate h3 {
+.rentalExtraPage h2, .rentalExtraPage h3 {
 	color: #fff;
 	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	letter-spacing: 1px;
@@ -171,7 +171,7 @@ body {
 }
 
 .cmbRental {	
-	width:100%;
+	width:20.5%;
 	margin-bottom: 7px;
 	background: rgba(0, 0, 0, 0.3);
 	border: none;
@@ -222,30 +222,18 @@ input:focus {
 		rgba(255, 255, 255, 0.2);
 }
 
-.addressDisplay {
-	text-align: center;
-	font-size: 15px;
-	border-color: white;
-	border: thin;
-	width: 100%;	
-	display: inline-block;  
-}
-
-#col1 {
-	width: 25%;
-}
-
-#col2 {
-	width: 75%;
-}
-
-#head {
-	background-color: #333333;
+#extra {
 	color: white;
-	font-weight: bold;	
 }
 
-#row {
-	background-color: #cccccc;
-	color: black;
+#place, #item {
+	width: 85%;
+}
+
+#endTime, #extraPay {
+	width: 80%;
+}
+
+#extraResult {
+	width: 100%;
 }
