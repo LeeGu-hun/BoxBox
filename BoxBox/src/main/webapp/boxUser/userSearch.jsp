@@ -32,9 +32,10 @@
 		out.print("<td id='col4'>" + rentalSearch.getModel() + "</td>");
 		out.print("<td id='col5'>" + rentalSearch.getInfo() + "</td>");
 		out.print("<td id='col6'>" + rentalSearch.getFee() + "</td>");
-		System.out.println(rentalSearch.getPhoto());
 		out.print("<td id='col7'>" +"<image src="+request.getContextPath()+"/images/"+rentalSearch.getPhoto()+" /></td>");
-		out.print("<td id='col8'><a href='<c:url value='/payment'><input type='button' id='btn' value='결제' /></a></td>");
+		out.print("<td id='col8'>"+"<a href='"+request.getContextPath()+"/payment'><input type='button' id='btn' value='결제' /></a>");
 		out.print("</td></tr>");
+		System.out.println(rentalSearch.getPlaceId());
+		out.print("<input type='hidden' id='placeId' name='placeId' value='"+rentalSearch.getPlaceId()+"'/>");
 	}
 %>

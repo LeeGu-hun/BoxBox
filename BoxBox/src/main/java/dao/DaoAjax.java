@@ -128,7 +128,7 @@ public class DaoAjax extends DaoSet {
 	public List rentalSearch(String placeName) {
 		List list = new ArrayList();
 		RentalSearch rentalSearch = null;
-		String sql = "select p.post_gu,pl.place_name,i.rental_category,i.rental_model,i.rental_info,i.rental_fee,i.model_photo "
+		String sql = "select r.rental_id,p.post_gu,pl.place_name,i.rental_category,i.rental_model,i.rental_info,i.rental_fee,i.model_photo "
 				+ "from rental_item i,place pl, post p ,rental r "
 				+ "where  p.POST_ID=pl.POST_ID and pl.PLACE_ID=r.PLACE_ID and r.RENTAL_ITEM_ID=i.RENTAL_ITEM_ID and pl.PLACE_NAME=?";
 		try {
@@ -144,7 +144,7 @@ public class DaoAjax extends DaoSet {
 			// rs.getString("POST_ID"));
 			// }
 			while (rs.next()) {
-				rentalSearch = new RentalSearch(rs.getString("POST_GU"), rs.getString("PLACE_NAME"),
+				rentalSearch = new RentalSearch(rs.getString("RENTAL_ID"),rs.getString("POST_GU"), rs.getString("PLACE_NAME"),
 						rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"), rs.getString("RENTAL_INFO"),
 						rs.getString("RENTAL_FEE"), rs.getString("MODEL_PHOTO"));
 				list.add(rentalSearch);

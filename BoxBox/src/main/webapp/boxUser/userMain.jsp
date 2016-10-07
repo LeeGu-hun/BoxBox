@@ -20,8 +20,10 @@
 	<hr>
 	<h2>대여가능 물품 리스트</h2>
 	<div id="rowDiv" style="height: 400px; overflow-y: auto;">
-		<table class="rentalDisplay" id="row">
-		</table>
+		<form:form >
+			<table class="rentalDisplay" id="row">
+			</table>
+		</form:form>
 	</div>
 
 </div>

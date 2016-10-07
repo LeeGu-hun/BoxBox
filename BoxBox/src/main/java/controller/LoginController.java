@@ -47,6 +47,9 @@ public class LoginController {
 	@RequestMapping("/")
 	public String homepage2(RegisterRequest rr, Errors errors, Model model) {
 		if (rr.getEmail() != null && !rr.getEmail().equals("")) {
+			System.out.println("콤보박스 세팅");
+			List<Place> place = placeService.comboPost();
+			model.addAttribute("place", place);
 			new RegisterRequestValidator().validate(rr, errors);
 			if (errors.hasErrors())
 				return "main";
@@ -62,7 +65,10 @@ public class LoginController {
 			return "main";
 		}
 	}
-
+	@RequestMapping("/payment")
+	public String payment(){
+		return "boxUser/rentalOrder";
+	}
 	@RequestMapping("/join")
 	public String join(RegisterRequest rr) {
 
@@ -89,9 +95,9 @@ public class LoginController {
 			return "dirMem/join";
 		}
 		try {
-			System.out.println("콤보박스 세팅");
 //			List<Place> place = placeService.comboPlace();
 //			model.addAttribute("place", place);
+			System.out.println("콤보박스 세팅");
 			List<Place> place = placeService.comboPost();
 			model.addAttribute("place", place);
 			System.out.println("로그인 시도");

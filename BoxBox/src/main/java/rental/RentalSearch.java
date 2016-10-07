@@ -1,10 +1,12 @@
 package rental;
 
 public class RentalSearch {
-	private String gu, place, cate, model, info, fee, photo;
+	private String placeId, gu, place, cate, model, info, fee, photo;
 
-	public RentalSearch(String gu, String place, String cate, String model, String info, String fee, String photo) {
+	public RentalSearch(String placeId, String gu, String place, String cate, String model, String info, String fee,
+			String photo) {
 		super();
+		this.placeId = placeId;
 		this.gu = gu;
 		this.place = place;
 		this.cate = cate;
@@ -12,6 +14,14 @@ public class RentalSearch {
 		this.info = info;
 		this.fee = fee;
 		this.photo = photo;
+	}
+
+	public String getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
 	}
 
 	public String getGu() {
