@@ -1,8 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +27,7 @@ import member.RegisterRequest;
 import member.RegisterRequestValidator;
 import place.Place;
 import place.PlaceService;
+import rental.RentalSearch;
 
 @Controller
 public class LoginController {
@@ -65,8 +68,14 @@ public class LoginController {
 			return "main";
 		}
 	}
-	@RequestMapping("/payment")
-	public String payment(){
+	@RequestMapping(value="/payment" ,method=RequestMethod.GET)
+	public String payment(Model model,HttpServletRequest request,HttpSession session){
+		String placeName=request.getParameter("pname");
+		System.out.println(placeName);
+		RentalSearch  rentalSearch= placeService.rentalSearch(placeName);
+		model.addAttribute("RentalSearch",rentalSearch);
+		System.out.println(rentalSearch.getGu());
+
 		return "boxUser/rentalOrder";
 	}
 	@RequestMapping("/join")

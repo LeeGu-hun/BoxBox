@@ -9,7 +9,7 @@ import rental.Rental;
 import rental.RentalSearch;
 
 public class DaoAjax extends DaoSet {
-
+	
 	public List comboPlace(String postId) {
 		List list = new ArrayList();
 		Place place = null;

@@ -14,13 +14,31 @@ import org.springframework.jdbc.core.RowMapper;
 
 import member.Member;
 import place.Place;
+import rental.RentalSearch;
 
 public class DaoMember {
-	private JdbcTemplate jdbcTemplate=new JdbcTemplate();
+	private JdbcTemplate jdbcTemplate = new JdbcTemplate();
 
 	public DaoMember(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+
+	public RentalSearch rentalSearch(String rentalId) {
+		String sql = "select r.rental_id,p.post_gu,pl.place_name,i.rental_category,i.rental_model,i.rental_info,i.rental_fee,i.model_photo "
+				+ "from rental_item i,place pl, post p ,rental r "
+				+ "where  p.POST_ID=pl.POST_ID and pl.PLACE_ID=r.PLACE_ID and r.RENTAL_ITEM_ID=i.RENTAL_ITEM_ID and r.RENTAL_ID=?";
+		List<RentalSearch> results = jdbcTemplate.query(sql, new RowMapper<RentalSearch>() {
+			public RentalSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
+				RentalSearch RentalSearch = new RentalSearch(rs.getString("RENTAL_ID"), rs.getString("POST_GU"),
+						rs.getString("PLACE_NAME"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),
+						rs.getString("RENTAL_INFO"), rs.getString("RENTAL_FEE"), rs.getString("MODEL_PHOTO"));
+				return RentalSearch;
+			}
+		}, rentalId);
+
+		return results.isEmpty() ? null : results.get(0);
+	}
+
 	public Member selectById(Long memberId) {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where USER_ID = ?", new RowMapper<Member>() {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -104,7 +122,7 @@ public class DaoMember {
 								+ rs.getString("PLACE_NAME"));
 						return place;
 					}
-				},postId);
+				}, postId);
 		return results;
 
 	}

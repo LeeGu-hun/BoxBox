@@ -93,7 +93,6 @@
 		rgba(0, 0, 0, 0.5);
 }
 
-
 .btn-primary:hover, .btn-primary:active, .btn-primary.active,
 	.btn-primary.disabled, .btn-primary[disabled] {
 	filter: none;
@@ -144,7 +143,8 @@
 	*margin-left: .3em;
 }
 
-.btnAdd:hover, .btnAdd:active, .btnAdd.active, .btnAdd.disabled, .btnAdd[disabled] {
+.btnAdd:hover, .btnAdd:active, .btnAdd.active, .btnAdd.disabled, .btnAdd[disabled]
+	{
 	background-color: #e6e6e6;
 }
 
@@ -196,7 +196,6 @@
 		rgba(0, 0, 0, 0.5);
 }
 
-
 .btnAdd-primary:hover, .btnAdd-primary:active, .btnAdd-primary.active,
 	.btn-primary.disabled, .btn-primary[disabled] {
 	filter: none;
@@ -204,7 +203,7 @@
 }
 
 .btnAdd-block {
-	width: 50%;
+	width: 100%;
 	display: inline-block;
 }
 
@@ -247,7 +246,8 @@
 	*margin-left: .3em;
 }
 
-.btnDel:hover, .btnDel:active, .btnDel.active, .btnDel.disabled, .btnDel[disabled] {
+.btnDel:hover, .btnDel:active, .btnDel.active, .btnDel.disabled, .btnDel[disabled]
+	{
 	background-color: #e6e6e6;
 }
 
@@ -299,7 +299,6 @@
 		rgba(0, 0, 0, 0.5);
 }
 
-
 .btnDel-primary:hover, .btnAdd-primary:active, .btnAdd-primary.active,
 	.btn-primary.disabled, .btn-primary[disabled] {
 	filter: none;
@@ -307,7 +306,7 @@
 }
 
 .btnDel-block {
-	width: 50%;
+	width: 100%;
 	display: inline-block;
 }
 
@@ -363,15 +362,15 @@ body {
 		endColorstr='#092756', GradientType=1);
 }
 
-.rentalOrder {
-	position: absolute;
-	top: 40%;
-	left: 25%;
-	margin: -150px 0 0 -150px;
-	width: 1250px;
+#rentalOrder {
+	/* 	position: absolute; */
+	/* 	top: 10%; */
+	/* 	left: 20%; */
+	margin: 0 0 0 5%;
+	width: 90%;
 	height: 300px;
 	text-align: center;
-	color: white;	
+	color: white;
 }
 
 .rentalOrder h2, .rentalOrder h3 {
@@ -381,8 +380,8 @@ body {
 	text-align: center;
 }
 
-.cmbRental {	
-	width:20%;
+.cmbRental {
+	width: 20%;
 	margin-bottom: 7px;
 	background: rgba(0, 0, 0, 0.3);
 	border: none;
@@ -401,7 +400,6 @@ body {
 	-ms-transition: box-shadow .5s ease;
 	transition: box-shadow .5s ease;
 }
-
 
 input {
 	width: 20%;
@@ -460,27 +458,27 @@ input:focus, #userEmail:focus {
 	font-size: 15px;
 	border-color: white;
 	border: thin;
-	width: 100%;  
+	width: 100%;
 }
 
 #compBox {
 	width: 47%;
 	text-align: left;
-	vertical-align: middle;	
+	vertical-align: middle;
 }
 
 #btnBox {
-	width: 3%;	
+	width: 3%;
 }
 
 #nullSpace {
-	width: 1%;	
+	width: 1%;
 }
 
 #addList {
 	width: 49%;
 	vertical-align: top;
-	text-align: center;	
+	text-align: center;
 }
 
 .rentalDisplay {
@@ -494,7 +492,7 @@ input:focus, #userEmail:focus {
 #head {
 	background-color: #333333;
 	color: white;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 #row {
@@ -507,43 +505,42 @@ input:focus, #userEmail:focus {
 	color: white;
 }
 
-#col1, #col3, #col6 {
+#col1 {
+	width: 5%;
+}
+
+#col2 {
 	width: 10%;
 }
 
-#col2, #col4, #col7 {
-	width: 14%;
+#col3 {
+	width: 10%;
 }
 
-
-#col5 {
-	width: 20%;
-}
-
-#col8 {
-	width: 8%;
-}
-
-#col9 {
-	width: 10%;	
-}
-
-#col10 {
-	width: 14%;	
-}
-
-#col11 {
-	width: 24%;	
-}
-
-#col12, #col13 {
+#col4 {
 	width: 15%;
 }
 
-#col14 {
-	width: 14%;
+#col5 {
+	width: 10%;
 }
 
-#col15 {
-	width: 8%; 
+#col6 {
+	width: 10%;
+}
+
+#col7 {
+	width: 17%;
+}
+
+#col8 {
+	width: 10%;
+}
+
+#col9 {
+	width: 10%;
+}
+
+#col10 {
+	width: 3%;
 }
