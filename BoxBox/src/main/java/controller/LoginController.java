@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -28,6 +27,7 @@ import member.RegisterRequestValidator;
 import place.Place;
 import place.PlaceService;
 import rental.RentalSearch;
+import rental.TimeSearch;
 
 @Controller
 public class LoginController {
@@ -68,6 +68,18 @@ public class LoginController {
 			return "main";
 		}
 	}
+//	@RequestMapping(value="/payment1" ,method=RequestMethod.POST)
+//	public String payment1(Model model,HttpServletRequest request,HttpSession session){
+//		String rentalId=request.getParameter("rentalId");
+//		String orderDate = request.getParameter("orderDate");
+//		String orderDate1 = request.getParameter("orderDate1");
+//		String startTime = request.getParameter("startTime");
+//		String endTime = request.getParameter("endTime");
+//		System.out.println(rentalId+"/"+orderDate+"/"+orderDate1+"/"+startTime+"/"+endTime);
+//		TimeSearch timeSearch = placeService.timeSearch(rentalId, startTime, endTime, orderDate, orderDate1);
+//		model.addAttribute("TimeSearch",timeSearch);
+//		return "boxUser/rentalOrder";
+//	}
 	@RequestMapping(value="/payment" ,method=RequestMethod.GET)
 	public String payment(Model model,HttpServletRequest request,HttpSession session){
 		String placeName=request.getParameter("pname");

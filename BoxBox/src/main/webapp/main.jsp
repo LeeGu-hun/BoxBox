@@ -14,6 +14,7 @@
 	type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
+	
 	function postList() {
 		var selectedIndex = document.getElementById('post').selectedIndex;
 		var post = document.getElementById("post").options[selectedIndex].value;

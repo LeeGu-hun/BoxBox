@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.net.SyslogAppender;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,6 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import member.Member;
 import place.Place;
 import rental.RentalSearch;
+import rental.TimeSearch;
 
 public class DaoMember {
 	private JdbcTemplate jdbcTemplate = new JdbcTemplate();
@@ -22,6 +24,31 @@ public class DaoMember {
 	public DaoMember(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+
+//	public TimeSearch timeSearch(String rentalId, String startTime, String endTime, String orderDate,
+//			String orderDate1) {
+//		System.out.println("TimeSearch 접속");
+//		String sql = "select r.RENTAL_ID,pl.PLACE_NAME,o.ORDER_DATE, to_char(o.start_time, 'YYYY/MM/DD HH24')||' ~ '||to_char(o.end_time, 'YYYY/MM/DD HH24') AS ORDER_TIME,i.RENTAL_CATEGORY,i.RENTAL_MODEL,i.RENTAL_INFO,i.MODEL_PHOTO,i.RENTAL_FEE "
+//				+ "from RENTAL_ORDER o ,RENTAL_ITEM i,RENTAL r,PLACE pl,POST p "
+//				+ "where o.RENTAL_ID=r.RENTAL_ID and r.PLACE_ID=pl.PLACE_ID and pl.POST_ID=p.POST_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID and to_char(o.start_time, 'HH24')>?"
+//				+ " and to_char(o.end_time, 'HH24')<=? and o.START_TIME> TO_DATE('" + orderDate
+//				+ "') and o.end_TIME<= TO_DATE('" + orderDate1 + "') and r.RENTAL_ID=?";
+//		List<TimeSearch> results = jdbcTemplate.query(sql, new RowMapper<TimeSearch>() {
+//			public TimeSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				TimeSearch timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),
+//						rs.getString("ORDER_DATE"), rs.getString("ORDER_TIME"), rs.getString("RENTAL_CATEGORY"),
+//						rs.getString("RENTAL_MODEL"), rs.getString("RENTAL_INFO"), rs.getString("MODEL_PHOTO"),
+//						rs.getString("RENTAL_FEE"));
+//				System.out.println("쿼리저장 완료");
+//				System.out.println(rs.getString("RENTAL_ID") + rs.getString("PLACE_NAME") + rs.getString("ORDER_DATE")
+//						+ rs.getString("ORDER_TIME") + rs.getString("RENTAL_CATEGORY") + rs.getString("RENTAL_MODEL")
+//						+ rs.getString("RENTAL_INFO") + rs.getString("MODEL_PHOTO") + rs.getString("RENTAL_FEE") + "흠");
+//				return timeSearch;
+//			}
+//		}, startTime, endTime, rentalId);
+//
+//		return results.isEmpty() ? null : results.get(0);
+//	}
 
 	public RentalSearch rentalSearch(String rentalId) {
 		String sql = "select r.rental_id,p.post_gu,pl.place_name,i.rental_category,i.rental_model,i.rental_info,i.rental_fee,i.model_photo "
