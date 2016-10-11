@@ -1,21 +1,7 @@
 package rental;
 
 public class TimeSearch {
-	private String rentalId,placeName,orderDate,orderTime,cate,model,info,photo,fee;
-	
-	public TimeSearch(String rentalId, String placeName, String orderDate, String orderTime, String cate, String model,
-			String info, String photo, String fee) {
-		super();
-		this.rentalId = rentalId;
-		this.placeName = placeName;
-		this.orderDate = orderDate;
-		this.orderTime = orderTime;
-		this.cate = cate;
-		this.model = model;
-		this.info = info;
-		this.photo = photo;
-		this.fee = fee;
-	}
+	private String rentalId,placeName,orderDate,cate,model,info,photo,fee,rentalFull,startTime,endTime;
 
 	public String getRentalId() {
 		return rentalId;
@@ -41,13 +27,6 @@ public class TimeSearch {
 		this.orderDate = orderDate;
 	}
 
-	public String getOrderTime() {
-		return orderTime;
-	}
-
-	public void setOrderTime(String orderTime) {
-		this.orderTime = orderTime;
-	}
 
 	public String getCate() {
 		return cate;
@@ -88,5 +67,46 @@ public class TimeSearch {
 	public void setFee(String fee) {
 		this.fee = fee;
 	}
+
+	public String getRentalFull() {
+		return rentalFull;
+	}
+
+	public void setRentalFull(String rentalFull) {
+		this.rentalFull = rentalFull;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public TimeSearch(String rentalId, String placeName, String orderDate, String cate, String model,
+			String info, String photo, String fee, String rentalFull, String startTime, String endTime) {
+		super();
+		this.rentalId = rentalId;
+		this.placeName = placeName;
+		this.orderDate = orderDate;
+		this.cate = cate;
+		this.model = model;
+		this.info = info;
+		this.photo = photo;
+		this.fee = fee;
+		this.rentalFull = rentalFull;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+	
 	
 }
