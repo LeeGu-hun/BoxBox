@@ -14,9 +14,43 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
 	type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+	crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"
+	integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
+	crossorigin="anonymous"></script>
 <script>
-function timeSearch() {
 
+
+
+function timeLook() {
+	var hstartTime=document.getElementById('hstartTime').value;
+	var hendTime=document.getElementById('hendTime').value;
+	alert(hstartTime+hendTime);
+	var rentalFull = document.getElementById('rentalFull').value;
+	var rentalId = document.getElementById('rentalId').value;
+	var startSelectedIndex = document.getElementById('startTime').selectedIndex;
+	var startTime= document.getElementById('startTime').options[startSelectedIndex].value;
+	var endSelectedIndex = document.getElementById('endTime').selectedIndex;
+	var endTime= document.getElementById('endTime').options[endSelectedIndex].value;
+	var orderDate = document.getElementById('orderDate').value;
+	var orderDate1 = document.getElementById('orderDate1').value;
+	$.ajax({
+		type : "POST",
+		url : "./boxUser/popup.jsp",
+		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime+"&orderDate="+orderDate+"&orderDate1="+orderDate1+"&rentalFull"+rentalFull,
+		success : result4
+		});
+	function result4(msg) {
+		$('#popupDiv').css('display','');
+		$('#popupDiv').show;
+		$('#popupDiv').dialog;
+		$('#popupTbl').html(msg);
+	}
+}
+function timeSearch() {
+	var rentalFull = document.getElementById('rentalFull').value;
 	var rentalId = document.getElementById('rentalId').value;
 	var startSelectedIndex = document.getElementById('startTime').selectedIndex;
 	var startTime= document.getElementById("startTime").options[startSelectedIndex].value;
@@ -27,7 +61,7 @@ function timeSearch() {
 	$.ajax({
 		type : "POST",
 		url : "./boxUser/rentalSearch.jsp",
-		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime+"&orderDate="+orderDate+"&orderDate1="+orderDate1,
+		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime+"&orderDate="+orderDate+"&orderDate1="+orderDate1+"&rentalFull"+rentalFull,
 		success : result3
 	});
 	function result3(msg) {
@@ -38,12 +72,16 @@ function timeSearch() {
 <div id="header">
 	<%@include file="/include/header.jsp"%>
 </div>
-<div class="rentalOrder" id="rentalOrder" style="height: 78%;">
+<div class="rentalOrder" id="rentalOrder"
+	style="height: 78%; overflow-y: auto;">
 	<h2>대여가능물품 조회</h2>
 	<table id="rentalItemDisplay">
 		<tr>
 			<%-- 			<form method="post" action="${pageContext.request.contextPath }/payment1"> --%>
-			<input type="hidden" id="rentalId" name="rentalId" value="${RentalSearch.placeId }" />
+			<input type="hidden" id="rentalId" name="rentalId"
+				value="${RentalSearch.placeId }" />
+			<input type="hidden" id="rentalFull" name="rentalFull"
+				value="${RentalSearch.rentalFull }" />
 			<td id="compBox">대여상품&nbsp; :&nbsp; <input type="text"
 				class="cmbRental" id="gu" name="gu" value="${RentalSearch.gu }"
 				disabled="disabled" />&nbsp; <input type="text" class="cmbRental"
@@ -69,7 +107,7 @@ function timeSearch() {
 			</select>
 			</td>
 			<td id="btnBox"><input type="submit" id="btnDisplay"
-				class="btn btn-primary btn-block btn-large" value="예약 불가능한 시간 조회"
+				class="btn btn-primary btn-block btn-large" value="예약 시간 조회"
 				onclick="javascript:timeSearch();" /></td>
 			<%-- 			</form> --%>
 		</tr>
@@ -79,36 +117,17 @@ function timeSearch() {
 				<hr> <br>
 				<h2>조회결과</h2>
 				<table class="rentalDisplay" id="rentalSearch" name="rentalSearch">
-<!-- 					<tr id="head"> -->
-<!-- 						<td id="col1">대여물품코드</td> -->
-<!-- 						<td id="col2">대여관리소</td> -->
-<!-- 						<td id="col3">대여날짜</td> -->
-<!-- 						<td id="col4">대여시간</td> -->
-<!-- 						<td id="col5">상품카테고리</td> -->
-<!-- 						<td id="col6">상품유형</td> -->
-<!-- 						<td id="col7">상품설명</td> -->
-<!-- 						<td id="col8">사진</td> -->
-<!-- 						<td id="col9">대여금액(시간당)</td> -->
-<!-- 						<td id="col10">추가</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr id="rowSearch" name="rowSearch"> -->
-						<%-- 						<td id="col1">${TimeSearch.rentalId }</td> --%>
-						<%-- 						<td id="col2">${TimeSearch.place }</td> --%>
-						<%-- 						<td id="col3">${TimeSearch.orderDate }</td> --%>
-						<%-- 						<td id="col4">${TimeSearch.orderTime }</td> --%>
-						<%-- 						<td id="col5">${TimeSearch.cate }</td> --%>
-						<%-- 						<td id="col6">${TimeSearch.model }</td> --%>
-						<%-- 						<td id="col7">${TimeSearch.info }</td> --%>
-						<%-- 						<td id="col8"><img src="${TimeSearch.photo }"/></td> --%>
-						<%-- 						<td id="col9">${TimeSearch.fee }</td> --%>
-<!-- 						<td id="col10"><input type="button" id="btnAdd" -->
-<!-- 							class="btnAdd btnAdd-primary btnAdd-block btnAdd-large" -->
-<!-- 							value="추가" onclick="'"></td> -->
-<!-- 					</tr> -->
+
 				</table> <br>
+				<div id='popupDiv' name='popupDiv' style="display: none;">
+					<table id='popupTbl' name='popupTbl'>
+
+					</table>
+				</div>
 			</td>
 		</tr>
 	</table>
+
 	<hr>
 	<br>
 	<h2>주문내역 확인</h2>
