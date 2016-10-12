@@ -1,7 +1,15 @@
 package rental;
 
 public class TimeSearch {
-	private String rentalId,placeName,orderDate,cate,model,info,photo,fee,rentalFull,startTime,endTime;
+	private String rentalId,placeName,orderDate,cate,model,info,photo,fee,rentalFull,startTime,endTime,gu;
+
+	public String getGu() {
+		return gu;
+	}
+
+	public void setGu(String gu) {
+		this.gu = gu;
+	}
 
 	public String getRentalId() {
 		return rentalId;
@@ -93,7 +101,7 @@ public class TimeSearch {
 	}
 
 	public TimeSearch(String rentalId, String placeName, String orderDate, String cate, String model,
-			String info, String photo, String fee, String rentalFull, String startTime, String endTime) {
+			String info, String photo, String fee, String rentalFull, String startTime, String endTime,String gu) {
 		super();
 		this.rentalId = rentalId;
 		this.placeName = placeName;
@@ -106,6 +114,7 @@ public class TimeSearch {
 		this.rentalFull = rentalFull;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.gu=gu;
 	}
 	
 	

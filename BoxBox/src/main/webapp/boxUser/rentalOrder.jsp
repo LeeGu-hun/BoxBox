@@ -77,32 +77,19 @@ function timeSearch() {
 		<tr>
 			<%-- 			<form method="post" action="${pageContext.request.contextPath }/payment1"> --%>
 			<input type="hidden" id="rentalId" name="rentalId"
-				value="${RentalSearch.placeId }" />
+				value="${TimeSearch.rentalId }" />
 			<input type="hidden" id="rentalFull" name="rentalFull"
-				value="${RentalSearch.rentalFull }" />
+				value="${TimeSearch.rentalFull }" />
 			<td id="compBox">대여상품&nbsp; :&nbsp; <input type="text"
-				class="cmbRental" id="gu" name="gu" value="${RentalSearch.gu }"
+				class="cmbRental" id="gu" name="gu" value="${TimeSearch.gu }"
 				disabled="disabled" />&nbsp; <input type="text" class="cmbRental"
-				id="placeName" name="placeName" value="${RentalSearch.place }"
+				id="placeName" name="placeName" value="${TimeSearch.placeName }"
 				disabled="disabled" />&nbsp; <input type="text" class="cmbRental"
-				id="cate" name="cate" value="${RentalSearch.cate }"
+				id="cate" name="cate" value="${TimeSearch.cate }"
 				disabled="disabled" />&nbsp; <input type="text" class="cmbRental"
-				id="model" name="model" value="${RentalSearch.model }"
-				disabled="disabled" />&nbsp;&nbsp;&nbsp; <br> 대여시간&nbsp; :
-				&nbsp;<input type="date" id="orderDate" name="orderDate" />&nbsp; <select
-				class="cmbRental" id="startTime" name="startTime">
-					<option value="start">시작 시간</option>
-					<c:forEach var="i" begin="0" end="23">
-						<option value="${i }">${i }</option>
-					</c:forEach>
-			</select>&nbsp; <input type="date" id="orderDate1" name="orderDate1" />&nbsp;
-				<select class="cmbRental" id="endTime" name="endTime">
-					<option value="end">종료 시간</option>
-					<c:forEach var="i" begin="1" end="24">
-						<option value="${i }">${i }</option>
-					</c:forEach>
-					
-			</select>
+				id="model" name="model" value="${TimeSearch.model }"
+				disabled="disabled" />&nbsp;&nbsp;&nbsp; <br>
+
 			</td>
 			<td id="btnBox"><input type="submit" id="btnDisplay"
 				class="btn btn-primary btn-block btn-large" value="예약 시간 조회"
@@ -117,13 +104,32 @@ function timeSearch() {
 				<div id='popupDiv' name='popupDiv' style="display: none;">
 					<table id='popupTbl' name='popupTbl'>
 
+						<tr>
+							대여시간&nbsp; : &nbsp;
+							<input type="date" id="orderDate" name="orderDate" />&nbsp;
+							<select class="cmbRental" id="startTime" name="startTime">
+								<option value="start">시작 시간</option>
+								<c:forEach var="i" begin="0" end="23">
+									<option value="${i }">${i }</option>
+								</c:forEach>
+							</select>&nbsp;
+							<input type="date" id="orderDate1" name="orderDate1" />&nbsp;
+							<select class="cmbRental" id="endTime" name="endTime">
+								<option value="end">종료 시간</option>
+								<c:forEach var="i" begin="1" end="24">
+									<option value="${i }">${i }</option>
+								</c:forEach>
+
+							</select>
+						</tr>
 					</table>
 				</div>
 				<table class="rentalDisplay" id="rentalSearch" name="rentalSearch">
 
-				</table> <br>				
+				</table> <br>
 			</td>
 		</tr>
+
 	</table>
 
 	<hr>

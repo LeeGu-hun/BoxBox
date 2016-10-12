@@ -20,7 +20,7 @@
 	System.out.println(
 			rentalId + "/" + startTime + "/" + endTime + "/" + orderDate + "/" + orderDate1 + "/" + rentalFull);
 	List timeSearch = new ArrayList();
-	timeSearch = daoAjax.timeSearch(rentalFull, rentalId, startTime, endTime, orderDate, orderDate1);
+	timeSearch = daoAjax.timeSearch( rentalId);
 	out.print("<tr id='head'>");
 	out.print("<td id='sub1'>렌탈아이디</td>");
 	out.print("<td id='sub2'>대여관리소</td>");
@@ -40,8 +40,8 @@
 		out.print("<tr id='row'>");
 		out.print("<td id='col1'>" + timeSearch1.getRentalId() + "</td>");
 		out.print("<td id='col2'>" + timeSearch1.getPlaceName() + "</td>");
-		out.print("<td id='col3'>" + timeSearch1.getOrderDate() + "</td>");
-		out.print("<td id='col4'>" + timeSearch1.getStartTime().split(" ")[1] + "~" + timeSearch1.getEndTime().split(" ")[1] + "</td>");
+		out.print("<td id='col3'>" + timeSearch1.getStartTime().split(" ")[0] + "</td>");
+		out.print("<td id='col4'>" + timeSearch1.getStartTime().split(" ")[1] + "~" + timeSearch1.getEndTime().split(" ")[1].split(":")[0] + "</td>");
 		out.print("<td id='col5'>" + timeSearch1.getCate() + "</td>");
 		out.print("<td id='col6'>" + timeSearch1.getModel() + "</td>");
 		out.print("<td id='col7'>" + timeSearch1.getInfo() + "</td>");

@@ -11,27 +11,22 @@ import rental.TimeSearch;
 
 public class DaoAjax extends DaoSet {
 
-	public List timeSearch(String rentalFull, String rentalId, String startTime, String endTime, String orderDate,
-			String orderDate1) {
+	public List timeSearch(String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
-		String sql = "select r.rental_id, pl.place_name, to_char(ro.order_date, 'YYYY/MM/DD') as order_date"
-				+ ", to_char(ro.start_time, 'YYYY/MM/DD HH24') as start_time, to_char(ro.end_time, 'YYYY/MM/DD HH24') as end_time"
-				+ ", ri.rental_category, ri.rental_model, ri.rental_info, ri.model_photo, ri.rental_fee,RO.RENTAL_FULL "
-				+ "from rental_order ro, rental_item ri, rental r, place pl, post po where ro.rental_id = r.rental_id and r.place_id = pl.place_id "
-				+ "and pl.post_id = po.post_id and ri.rental_item_id = r.rental_item_id and r.rental_id = ? "
-				+ "and sysdate < '"+ orderDate + "' and sysdate < '" + orderDate1 + "' "
-				+ "and to_date('" + orderDate+ "', 'YY/MM/DD HH24') + ?/24 <= start_time "
-				+ "and to_date('" + orderDate1+ "', 'YY/MM/DD HH24') + ?/24 >= end_time "
-				+ "order by ro.start_time";
+		String sql = "select r.RENTAL_ID,p.post_gu,pl.PLACE_NAME , to_char(o.order_date, 'YYYY/MM/DD') as order_date, "
+				+ "to_char(o.start_time, 'YYYY/MM/DD HH24') as start_time, to_char(o.end_time+1/(24*60*60), 'YYYY/MM/DD HH24:MI') as end_time, "
+				+ "i.rental_category, i.rental_model, i.rental_info, i.model_photo, i.rental_fee,O.RENTAL_FULL "
+				+ "from place pl,post p,rental r, rental_item i, rental_order o	"
+				+ "where pl.PLACE_ID=r.PLACE_ID and p.POST_ID=pl.POST_ID "
+				+ "and r.RENTAL_ID=o.RENTAL_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID "
+				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-1 order by pl.PLACE_ID,r.RENTAL_ID,o.start_time";
 		try {
 			conn = connDB();
 			System.out.println("db연결");
 			pstmt = conn.prepareStatement(sql);
 			System.out.println("sql 입력");
 			pstmt.setString(1, rentalId);
-			pstmt.setInt(2, Integer.parseInt(startTime));
-			pstmt.setInt(3, Integer.parseInt(endTime));
 			rs = pstmt.executeQuery();
 			// if (rs.next()) {
 			// place = new Place(rs.getString("PLACE_ID"),
@@ -44,7 +39,7 @@ public class DaoAjax extends DaoSet {
 				timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),
 						rs.getString("ORDER_DATE"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),
 						rs.getString("RENTAL_INFO"), rs.getString("MODEL_PHOTO"), rs.getString("RENTAL_FEE"),
-						rentalFull, rs.getString("START_TIME"), rs.getString("END_TIME"));
+						rs.getString("RENTAL_FULL"), rs.getString("START_TIME"), rs.getString("END_TIME"),rs.getString("post_gu"));
 				list.add(timeSearch);
 				System.out.println("완료");
 			}

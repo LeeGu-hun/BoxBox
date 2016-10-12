@@ -14,6 +14,7 @@
 	List place = new ArrayList();
 	place = daoAjax.rentalSearch(placeName);
 	out.print("<tr id='head'>");
+	out.print("<td id='col0'>렌탈번호</td>");
 	out.print("<td id='col1'>지역</td>");
 	out.print("<td id='col2'>대여관리소</td>");
 	out.print("<td id='col3'>카테고리</td>");
@@ -26,6 +27,7 @@
 	for (int i = 0; i < place.size(); i++) {
 		RentalSearch rentalSearch = (RentalSearch) place.get(i);
 		out.print("<tr id='rentalRow'>");
+		out.print("<td id='col0'>" + rentalSearch.getPlaceId() + "</td>");
 		out.print("<td id='col1'>" + rentalSearch.getGu() + "</td>");
 		out.print("<td id='col2'>" + rentalSearch.getPlace() + "</td>");
 		out.print("<td id='col3'>" + rentalSearch.getCate() + "</td>");

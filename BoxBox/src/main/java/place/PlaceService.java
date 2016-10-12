@@ -3,7 +3,6 @@ package place;
 import java.util.List;
 
 import dao.DaoMember;
-import rental.RentalSearch;
 import rental.TimeSearch;
 
 public class PlaceService {
@@ -24,8 +23,8 @@ public class PlaceService {
 		return results;
 	}
 
-	public RentalSearch rentalSearch(String placeName) {
-		RentalSearch results = daoMember.rentalSearch(placeName);
+	public TimeSearch timeSearch(String rentalId) {
+		TimeSearch results = daoMember.timeSearch(rentalId);
 		return results;
 	}
 

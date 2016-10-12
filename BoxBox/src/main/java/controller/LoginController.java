@@ -26,7 +26,6 @@ import member.RegisterRequest;
 import member.RegisterRequestValidator;
 import place.Place;
 import place.PlaceService;
-import rental.RentalSearch;
 import rental.TimeSearch;
 
 @Controller
@@ -84,9 +83,8 @@ public class LoginController {
 	public String payment(Model model,HttpServletRequest request,HttpSession session){
 		String placeName=request.getParameter("pname");
 		System.out.println(placeName);
-		RentalSearch  rentalSearch= placeService.rentalSearch(placeName);
-		model.addAttribute("RentalSearch",rentalSearch);
-		System.out.println(rentalSearch.getGu());
+		TimeSearch  timeSearch= placeService.timeSearch(placeName);
+		model.addAttribute("TimeSearch",timeSearch);
 
 		return "boxUser/rentalOrder";
 	}

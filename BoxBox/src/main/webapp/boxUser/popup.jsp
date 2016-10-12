@@ -21,7 +21,7 @@
 	System.out.println(
 			rentalId + "/" + startTime + "/" + endTime + "/" + orderDate + "/" + orderDate1 + "/" + rentalFull);
 	List timeSearch = new ArrayList();
-	timeSearch = daoAjax.timeSearch(rentalFull, rentalId, startTime, endTime, orderDate, orderDate1);
+	timeSearch = daoAjax.timeSearch(rentalId);
 
 	out.print("<tr>");
 	out.print("<td class='time' colspan='24'>예약된 시간 </td>");
@@ -44,9 +44,16 @@
 	for (int i = 0; i < timeSearch.size(); i++) {
 		String style = "style='background:white;'";
 		TimeSearch timeSearch1 = (TimeSearch) timeSearch.get(i);
+		System.out.println(timeSearch1.getStartTime());
+		System.out.println(timeSearch1.getEndTime().split(" ")[1].split(":")[0]);
 		int start = Integer.parseInt(timeSearch1.getStartTime().split(" ")[1]);
-		int end = Integer.parseInt(timeSearch1.getEndTime().split(" ")[1]);
+		int end = Integer.parseInt(timeSearch1.getEndTime().split(" ")[1].split(":")[0]);
 		out.print("<tr>");
+		if(start==end){
+			for (int j = 0; j < start; j++) {
+				out.print("<td class='time' id='time" + j + "' name='time" + j + "'>예약가능</td>");
+			}
+		}
 		if (start < end) {
 			for (int j = 0; j < start; j++) {
 				out.print("<td class='time' id='time" + j + "' name='time" + j + "'>예약가능</td>");

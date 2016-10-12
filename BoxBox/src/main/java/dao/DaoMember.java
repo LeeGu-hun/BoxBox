@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.net.SyslogAppender;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,41 +24,61 @@ public class DaoMember {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-//	public TimeSearch timeSearch(String rentalId, String startTime, String endTime, String orderDate,
-//			String orderDate1) {
-//		System.out.println("TimeSearch 접속");
-//		String sql = "select r.RENTAL_ID,pl.PLACE_NAME,o.ORDER_DATE, to_char(o.start_time, 'YYYY/MM/DD HH24')||' ~ '||to_char(o.end_time, 'YYYY/MM/DD HH24') AS ORDER_TIME,i.RENTAL_CATEGORY,i.RENTAL_MODEL,i.RENTAL_INFO,i.MODEL_PHOTO,i.RENTAL_FEE "
-//				+ "from RENTAL_ORDER o ,RENTAL_ITEM i,RENTAL r,PLACE pl,POST p "
-//				+ "where o.RENTAL_ID=r.RENTAL_ID and r.PLACE_ID=pl.PLACE_ID and pl.POST_ID=p.POST_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID and to_char(o.start_time, 'HH24')>?"
-//				+ " and to_char(o.end_time, 'HH24')<=? and o.START_TIME> TO_DATE('" + orderDate
-//				+ "') and o.end_TIME<= TO_DATE('" + orderDate1 + "') and r.RENTAL_ID=?";
-//		List<TimeSearch> results = jdbcTemplate.query(sql, new RowMapper<TimeSearch>() {
-//			public TimeSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
-//				TimeSearch timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),
-//						rs.getString("ORDER_DATE"), rs.getString("ORDER_TIME"), rs.getString("RENTAL_CATEGORY"),
-//						rs.getString("RENTAL_MODEL"), rs.getString("RENTAL_INFO"), rs.getString("MODEL_PHOTO"),
-//						rs.getString("RENTAL_FEE"));
-//				System.out.println("쿼리저장 완료");
-//				System.out.println(rs.getString("RENTAL_ID") + rs.getString("PLACE_NAME") + rs.getString("ORDER_DATE")
-//						+ rs.getString("ORDER_TIME") + rs.getString("RENTAL_CATEGORY") + rs.getString("RENTAL_MODEL")
-//						+ rs.getString("RENTAL_INFO") + rs.getString("MODEL_PHOTO") + rs.getString("RENTAL_FEE") + "흠");
-//				return timeSearch;
-//			}
-//		}, startTime, endTime, rentalId);
-//
-//		return results.isEmpty() ? null : results.get(0);
-//	}
+	// public TimeSearch timeSearch(String rentalId, String startTime, String
+	// endTime, String orderDate,
+	// String orderDate1) {
+	// System.out.println("TimeSearch 접속");
+	// String sql = "select r.RENTAL_ID,pl.PLACE_NAME,o.ORDER_DATE,
+	// to_char(o.start_time, 'YYYY/MM/DD HH24')||' ~ '||to_char(o.end_time,
+	// 'YYYY/MM/DD HH24') AS
+	// ORDER_TIME,i.RENTAL_CATEGORY,i.RENTAL_MODEL,i.RENTAL_INFO,i.MODEL_PHOTO,i.RENTAL_FEE
+	// "
+	// + "from RENTAL_ORDER o ,RENTAL_ITEM i,RENTAL r,PLACE pl,POST p "
+	// + "where o.RENTAL_ID=r.RENTAL_ID and r.PLACE_ID=pl.PLACE_ID and
+	// pl.POST_ID=p.POST_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID and
+	// to_char(o.start_time, 'HH24')>?"
+	// + " and to_char(o.end_time, 'HH24')<=? and o.START_TIME> TO_DATE('" +
+	// orderDate
+	// + "') and o.end_TIME<= TO_DATE('" + orderDate1 + "') and r.RENTAL_ID=?";
+	// List<TimeSearch> results = jdbcTemplate.query(sql, new
+	// RowMapper<TimeSearch>() {
+	// public TimeSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
+	// TimeSearch timeSearch = new TimeSearch(rs.getString("RENTAL_ID"),
+	// rs.getString("PLACE_NAME"),
+	// rs.getString("ORDER_DATE"), rs.getString("ORDER_TIME"),
+	// rs.getString("RENTAL_CATEGORY"),
+	// rs.getString("RENTAL_MODEL"), rs.getString("RENTAL_INFO"),
+	// rs.getString("MODEL_PHOTO"),
+	// rs.getString("RENTAL_FEE"));
+	// System.out.println("쿼리저장 완료");
+	// System.out.println(rs.getString("RENTAL_ID") + rs.getString("PLACE_NAME")
+	// + rs.getString("ORDER_DATE")
+	// + rs.getString("ORDER_TIME") + rs.getString("RENTAL_CATEGORY") +
+	// rs.getString("RENTAL_MODEL")
+	// + rs.getString("RENTAL_INFO") + rs.getString("MODEL_PHOTO") +
+	// rs.getString("RENTAL_FEE") + "흠");
+	// return timeSearch;
+	// }
+	// }, startTime, endTime, rentalId);
+	//
+	// return results.isEmpty() ? null : results.get(0);
+	// }
 
-	public RentalSearch rentalSearch(String rentalId) {
-		String sql = "select r.rental_id,p.post_gu,pl.place_name,i.rental_category,i.rental_model,i.rental_info,i.rental_fee,i.model_photo "
-				+ "from rental_item i,place pl, post p ,rental r "
-				+ "where  p.POST_ID=pl.POST_ID and pl.PLACE_ID=r.PLACE_ID and r.RENTAL_ITEM_ID=i.RENTAL_ITEM_ID and r.RENTAL_ID=?";
-		List<RentalSearch> results = jdbcTemplate.query(sql, new RowMapper<RentalSearch>() {
-			public RentalSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
-				RentalSearch RentalSearch = new RentalSearch(rs.getString("RENTAL_ID"), rs.getString("POST_GU"),
-						rs.getString("PLACE_NAME"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),
-						rs.getString("RENTAL_INFO"), rs.getString("RENTAL_FEE"), rs.getString("MODEL_PHOTO"));
-				return RentalSearch;
+	public TimeSearch timeSearch(String rentalId) {
+		String sql = "select r.RENTAL_ID,p.post_gu,pl.PLACE_NAME , to_char(o.order_date, 'YYYY/MM/DD') as order_date, "
+				+ "to_char(o.start_time, 'YYYY/MM/DD HH24') as start_time, to_char(o.end_time+1/(24*60*60), 'YYYY/MM/DD HH24:MI') as end_time, "
+				+ "i.rental_category, i.rental_model, i.rental_info, i.model_photo, i.rental_fee,O.RENTAL_FULL "
+				+ "from place pl,post p,rental r, rental_item i, rental_order o	"
+				+ "where pl.PLACE_ID=r.PLACE_ID and p.POST_ID=pl.POST_ID "
+				+ "and r.RENTAL_ID=o.RENTAL_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID "
+				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-1 order by pl.PLACE_ID,r.RENTAL_ID";
+		List<TimeSearch> results = jdbcTemplate.query(sql, new RowMapper<TimeSearch>() {
+			public TimeSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
+				TimeSearch timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),
+						rs.getString("ORDER_DATE"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),
+						rs.getString("RENTAL_INFO"), rs.getString("MODEL_PHOTO"), rs.getString("RENTAL_FEE"),
+						rs.getString("RENTAL_FULL"), rs.getString("START_TIME"), rs.getString("END_TIME"),rs.getString("POST_GU"));
+				return timeSearch;
 			}
 		}, rentalId);
 
