@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel = "stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/adminMain.css" />
-<title>BoxBox 관리자 페이지</title>
+<title>BOXBOX 관리자 페이지</title>
 </head>
 <body>
 <%-- 	admin페이지
