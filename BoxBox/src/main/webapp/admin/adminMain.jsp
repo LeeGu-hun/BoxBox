@@ -21,7 +21,10 @@
 		</table>
 	</div> --%>
 <div class = "adminMain">
-	<h1>BoxBox 관리자 페이지입니다.</h1>
+	<span>
+		BOXBOX 관리자 페이지입니다.		
+	</span>	
+	<h1>상단의 메뉴를 이용하여 관리자 페이지를 이용하실 수 있습니다.</h1>
 </div>
 </body>
 </html>

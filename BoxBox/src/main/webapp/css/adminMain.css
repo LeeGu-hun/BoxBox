@@ -52,7 +52,7 @@ body {
 
 .adminMain {
 	position: absolute;
-	top: 60%;
+	top: 55%;
 	left: 32%;
 	margin: -150px 0 0 -150px;
 	width: 1000px;
@@ -65,4 +65,13 @@ body {
 	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	letter-spacing: 1px;
 	text-align: center;
+}
+
+.adminMain span {
+	color: #fff;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	letter-spacing: 1px;
+	text-align: center;
+	font-size: 70px;
+	font-weight: bold;	 
 }
