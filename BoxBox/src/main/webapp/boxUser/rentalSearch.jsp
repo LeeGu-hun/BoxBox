@@ -22,16 +22,16 @@
 	List timeSearch = new ArrayList();
 	timeSearch = daoAjax.timeSearch(rentalFull, rentalId, startTime, endTime, orderDate, orderDate1);
 	out.print("<tr id='head'>");
-	out.print("<td id='col1'>렌탈아이디</td>");
-	out.print("<td id='col2'>대여관리소</td>");
-	out.print("<td id='col3'>주문날짜</td>");
-	out.print("<td id='col4'>예약시간</td>");
-	out.print("<td id='col5'>카테고리</td>");
-	out.print("<td id='col6'>상품종류</td>");
-	out.print("<td id='col7'>상품설명</td>");
-	out.print("<td id='col8'>사진</td>");
-	out.print("<td id='col9'>가격(시간당)</td>");
-	out.print("<td id='col10'>결제</td>");
+	out.print("<td id='sub1'>렌탈아이디</td>");
+	out.print("<td id='sub2'>대여관리소</td>");
+	out.print("<td id='sub3'>주문날짜</td>");
+	out.print("<td id='sub4'>예약된시간</td>");
+	out.print("<td id='sub5'>카테고리</td>");
+	out.print("<td id='sub6'>상품종류</td>");
+	out.print("<td id='sub7'>상품설명</td>");
+	out.print("<td id='sub8'>사진</td>");
+	out.print("<td id='sub9'>가격(시간당)</td>");
+	out.print("<td id='sub10'>결제</td>");
 	out.print("</tr>");
 	for (int i = 0; i < timeSearch.size(); i++) {
 	
@@ -49,11 +49,13 @@
 				+ timeSearch1.getPhoto() + " /></td>");
 		out.print("<td id='col9'>" + timeSearch1.getFee() + "</td>");
 		out.print(
-				"<td id='col10'><input type='button' id='btnAdd' class='btnAdd btnAdd-primary btnAdd-block btnAdd-large' value='예약' onclick='javascript:timeLook();' /></a></td>");
+				"<td id='col10'><input type='button' id='btnAdd' class='btnAdd btnAdd-primary btnAdd-block btnAdd-large' value='예약' onclick='' /></a></td>");
 		out.print("<input type='hidden' id='hstartTime' name='hstartTime' value='"+timeSearch1.getStartTime() +"'>");
-		out.print("<input type='hidden' id='hendTime' name='hendTime' value='"+timeSearch1.getEndTime() +"'>");
+		out.print("<input type='hidden' id='hendTime' name='hendTime' value='"+timeSearch1.getEndTime() +"'></tr>");
 		out.print("</tr>");
 		
+	
 		System.out.println(timeSearch1.getRentalId() + "/" + timeSearch1.getPlaceName());
 	}
+		out.print("<tr><td colspan='10'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' value='비어있는 시간 조회'	onclick='javascript:timeLook();' /></td></tr>");
 %>

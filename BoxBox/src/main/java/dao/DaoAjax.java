@@ -19,7 +19,7 @@ public class DaoAjax extends DaoSet {
 				+ ", to_char(ro.start_time, 'YYYY/MM/DD HH24') as start_time, to_char(ro.end_time, 'YYYY/MM/DD HH24') as end_time"
 				+ ", ri.rental_category, ri.rental_model, ri.rental_info, ri.model_photo, ri.rental_fee,RO.RENTAL_FULL "
 				+ "from rental_order ro, rental_item ri, rental r, place pl, post po where ro.rental_id = r.rental_id and r.place_id = pl.place_id "
-				+ "and pl.post_id = po.post_id and ri.rental_item_id = r.rental_item_id and ro.rental_full = 1 and r.rental_id = ? "
+				+ "and pl.post_id = po.post_id and ri.rental_item_id = r.rental_item_id and r.rental_id = ? "
 				+ "and sysdate < '"+ orderDate + "' and sysdate < '" + orderDate1 + "' "
 				+ "and to_date('" + orderDate+ "', 'YY/MM/DD HH24') + ?/24 <= start_time "
 				+ "and to_date('" + orderDate1+ "', 'YY/MM/DD HH24') + ?/24 >= end_time "

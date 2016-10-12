@@ -27,7 +27,6 @@
 function timeLook() {
 	var hstartTime=document.getElementById('hstartTime').value;
 	var hendTime=document.getElementById('hendTime').value;
-	alert(hstartTime+hendTime);
 	var rentalFull = document.getElementById('rentalFull').value;
 	var rentalId = document.getElementById('rentalId').value;
 	var startSelectedIndex = document.getElementById('startTime').selectedIndex;
@@ -45,7 +44,6 @@ function timeLook() {
 	function result4(msg) {
 		$('#popupDiv').css('display','');
 		$('#popupDiv').show;
-		$('#popupDiv').dialog;
 		$('#popupTbl').html(msg);
 	}
 }
@@ -100,10 +98,10 @@ function timeSearch() {
 			</select>&nbsp; <input type="date" id="orderDate1" name="orderDate1" />&nbsp;
 				<select class="cmbRental" id="endTime" name="endTime">
 					<option value="end">종료 시간</option>
-					<c:forEach var="i" begin="1" end="23">
+					<c:forEach var="i" begin="1" end="24">
 						<option value="${i }">${i }</option>
 					</c:forEach>
-					<option value="0">24</option>
+					
 			</select>
 			</td>
 			<td id="btnBox"><input type="submit" id="btnDisplay"
@@ -116,14 +114,14 @@ function timeSearch() {
 			<td colspan=2>
 				<hr> <br>
 				<h2>조회결과</h2>
-				<table class="rentalDisplay" id="rentalSearch" name="rentalSearch">
-
-				</table> <br>
 				<div id='popupDiv' name='popupDiv' style="display: none;">
 					<table id='popupTbl' name='popupTbl'>
 
 					</table>
 				</div>
+				<table class="rentalDisplay" id="rentalSearch" name="rentalSearch">
+
+				</table> <br>				
 			</td>
 		</tr>
 	</table>

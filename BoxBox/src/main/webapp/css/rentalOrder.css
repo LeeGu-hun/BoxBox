@@ -3,7 +3,8 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 .time{
 	width: 70px;
-	height: 50px;
+	height: 70px;
+	font-size:13px;
 	border-style: solid;
 }
 .btn {
@@ -509,42 +510,42 @@ input:focus, #userEmail:focus {
 	color: white;
 }
 
-#col1 {
+#col1 ,#sub1{
 	width: 5%;
 }
 
-#col2 {
+#col2 ,#sub2{
 	width: 10%;
 }
 
-#col3 {
+#col3 ,#sub3{
 	width: 10%;
 }
 
-#col4 {
+#col4 ,#sub4{
 	width: 15%;
 }
 
-#col5 {
+#col5 ,#sub5{
 	width: 10%;
 }
 
-#col6 {
+#col6 ,#sub6{
 	width: 10%;
 }
 
-#col7 {
+#col7 ,#sub7{
 	width: 17%;
 }
 
-#col8 {
+#col8 ,#sub8{
 	width: 10%;
 }
 
-#col9 {
+#col9 ,#sub9{
 	width: 10%;
 }
 
-#col10 {
+#col10 ,#sub10{
 	width: 3%;
 }
