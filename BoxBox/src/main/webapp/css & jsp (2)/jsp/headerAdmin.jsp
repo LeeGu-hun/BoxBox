@@ -18,17 +18,20 @@
 	<div class="menuAdmin">
 		<ul>
 			<li onClick="location.href='rentalPlaceDisplay.jsp'">
-				관리소 목록 추가/변경/삭제
+				관리소관리
+			</li>
+			<li onClick="location.href='rentalDisplay.jsp'">
+				대여관리
 			</li>
 			<li onClick="location.href='rentalItemDisplay.jsp'">
-				렌탈 목록 추가/변경/삭제
-			</li>
-			<li onClick="location.href='profit.jsp'">
-				사업수익 현황
+				물품관리
 			</li>
 			<li onClick="location.href='memberDisplay.jsp'">
-				회원조회
+				회원관리
 			</li>
+			<li onClick="location.href='profit.jsp'">
+				매출현황
+			</li>			
 		</ul>
 	</div>
 	<div class="adminName">

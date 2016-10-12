@@ -11,7 +11,7 @@
 <title>BoxBox</title>
 </head>
 <div class="profit">
-	<h2>사업수익 현황</h2>
+	<h2>매출현황</h2>
 	<table id="select">
 		<tr>
 			<td id="compBox">
