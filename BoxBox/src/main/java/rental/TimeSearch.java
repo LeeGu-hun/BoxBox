@@ -1,6 +1,11 @@
 package rental;
 
 public class TimeSearch {
+	public TimeSearch(String rentalFull) {
+		super();
+		this.rentalFull = rentalFull;
+	}
+
 	private String rentalId,placeName,orderDate,cate,model,info,photo,fee,rentalFull,startTime,endTime,gu;
 
 	public String getGu() {
