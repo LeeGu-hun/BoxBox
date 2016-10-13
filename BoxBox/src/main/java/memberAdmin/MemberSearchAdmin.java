@@ -1,12 +1,12 @@
 package memberAdmin;
 
-public class MemberAdmin {
+public class MemberSearchAdmin {
 	private String id;
 	private String phone;
 	private int type, amount;	
 	private String email, name, password;
 	
-	public MemberAdmin(String id, String phone, int type, int amount, String email, String name, String password) {
+	public MemberSearchAdmin(String id, String phone, int type, int amount, String email, String name, String password) {
 		super();
 		this.id = id;
 		this.phone = phone;

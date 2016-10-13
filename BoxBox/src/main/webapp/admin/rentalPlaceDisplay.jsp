@@ -11,7 +11,7 @@
 <title>BoxBox</title>
 </head>
 <div class="rentalPlaceDisplay">
-	<h2>관리소 관리 페이지</h2>
+	<h2>관리소관리 페이지</h2>
 	<select class="cmbRental">
 		<optgroup label="지역">
 			<option value=""></option>
