@@ -35,8 +35,10 @@
 		</ul>
 	</div>
 	<div class="adminName">
-		관리자님 환영합니다.<br>
-		<input type="button" class="btn btn-large btn-primary btn-block" value="로그아웃" />
+		${authInfo.name }님 환영합니다.<br> 
+			<a href="<c:url value='/member/changeInfo'/>"><input type="button" id="btn" value="회원정보변경" /></a>
+			<a href="<c:url value='/logout'/>"><input type="button" id="btn" value="로그아웃" /></a>
+		<!-- <input type="button" class="btn btn-large btn-primary btn-block" value="로그아웃" /> -->
 	</div>
 </div>
 </body>

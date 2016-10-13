@@ -1,13 +1,17 @@
 @CHARSET "UTF-8";
 #footer {
-	background:rgba(255,255,255,0.6);
+	/* background:rgba(255,255,255,0.6); */
 	width:100%;
 	height: 100px;
-	color: threeddarkshadow;
 	text-align: center;
+	font-size: 15px;
 }
 
-#footerDiv {	
-/* 	margin: 0px auto; */
-	padding-top:40px;
+#footerDiv span {
+	color: threeddarkshadow;
 }
+
+#footerDiv span span{
+	color: white;
+}
+

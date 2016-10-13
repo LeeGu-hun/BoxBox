@@ -26,7 +26,7 @@
 		});
 		function result(msg) {
 			$("#place").html(msg);
-		}
+		}		
 	}
 	function rentalList() {
 		var selectedIndex = document.getElementById('place').selectedIndex;
