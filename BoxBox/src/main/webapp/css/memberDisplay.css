@@ -101,7 +101,7 @@
 }
 
 .btn-block {
-	width: 80%;
+	width: 15%;
 	display: inline-block;
 }
 
@@ -156,9 +156,9 @@ body {
 .memberDisplay {
 	position: absolute;
 	top: 40%;
-	left: 30%;
+	left: 35%;
 	margin: -150px 0 0 -150px;
-	width: 1050px;
+	width: 900px;
 	height: 300px;
 	text-align: center;
 }
@@ -235,7 +235,7 @@ body {
 }
 
 #userPhone {
-	width: 22%;
+	width: 30%;
 	margin-bottom: 10px;
 	background: rgba(0, 0, 0, 0.3);
 	border: none;
@@ -302,11 +302,18 @@ input:focus {
 	color: black;
 }
 
-
-#col1 {
-	width: 32%;
+#col2 {
+	width: 20%;
 }
 
-#col2, #col3, #col4, #col5 {
-	width: 17%;
+#col3 {
+	width: 30%;
+}
+
+#col1 {
+	width: 30%;
+}
+
+#col4 {
+	width: 20%;	
 }

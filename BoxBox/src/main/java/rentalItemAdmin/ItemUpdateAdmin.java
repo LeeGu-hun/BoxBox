@@ -1,10 +1,10 @@
 package rentalItemAdmin;
 
-public class ItemItemUpdateAdmin {
+public class ItemUpdateAdmin {
 	private String itemId, cate, model, info, photo;
 	private int fee;
 
-	public ItemItemUpdateAdmin(String itemId, String cate, String model, String info, String photo, int fee) {
+	public ItemUpdateAdmin(String itemId, String cate, String model, String info, String photo, int fee) {
 		super();
 		this.itemId = itemId;
 		this.cate = cate;

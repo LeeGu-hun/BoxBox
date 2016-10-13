@@ -14,39 +14,27 @@
 	<h2>사용자 검색</h2>
 	<table id="select">
 		<tr>
-			<td id="compBox">
-				<input type="text" id="userEmail" placeholder="사용자 e-mail" />
-				<input type="text" id="userName" placeholder="사용자 성명" />
-				<input type="text" id="userPhone" placeholder="사용자 휴대폰번호" />
-				<select class="cmbRental">
-					<optgroup label="사용자 유형">
-						<option label="일반 사용자">2</option>
-						<option label="관리자">1</option>
-					</optgroup>
-				</select>				  			
-			</td>
-			<td id="btnBox">
+			<td id="compBox" style="text-align: center">
+				<input type="text" id="userPhone" placeholder="사용자 휴대폰번호" />&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btn btn-primary btn-block btn-large"
-					value="사용자 조회" onclick="'">			
-			</td>
+					value="사용자 조회" onclick="'">				  			
+			</td>			
 		</tr>
 	</table>
 	<hr>
 	<h2>사용자 조회결과</h2>	
 	<table class="profitDisplay">
 		<tr id="head">
-			<td id="col1">e-mail</td>
 			<td id="col2">성명</td>			 
 			<td id="col3">휴대폰번호</td>
-			<td id="col4">유형</td>
-			<td id="col5">총 결제금액</td>			
+			<td id="col1">e-mail</td>
+			<td id="col4">비밀번호</td>						
 		</tr>
 		<tr id="row">
-			<td id="col1">.</td>
 			<td id="col2">.</td>
 			<td id="col3">.</td>
-			<td id="col4">.</td>
-			<td id="col5">.</td>			
+			<td id="col1">.</td>	
+			<td id="col4">.</td>		
 		</tr>		
 	</table>
 	<!-- 로그인페이지 가기 --> 

@@ -1,25 +1,15 @@
 package rentalItemAdmin;
 
 public class ItemSearchAdmin {
-	private String itemId, cate, model, info, photo;
-	private int fee;
-
-	public ItemSearchAdmin(String itemId, String cate, String model, String info, String photo, int fee) {
+	private String cate, model, info, fee, photo;	
+	
+	public ItemSearchAdmin(String cate, String model, String info, String fee, String photo) {
 		super();
-		this.itemId = itemId;
 		this.cate = cate;
 		this.model = model;
 		this.info = info;
 		this.photo = photo;
 		this.fee = fee;
-	}
-
-	public String getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
 	}
 
 	public String getCate() {
@@ -54,12 +44,12 @@ public class ItemSearchAdmin {
 		this.photo = photo;
 	}
 
-	public int getFee() {
+	public String getFee() {
 		return fee;
 	}
 
-	public void setFee(int fee) {
+	public void setFee(String fee) {
 		this.fee = fee;
-	}
+	}	
 
 }
