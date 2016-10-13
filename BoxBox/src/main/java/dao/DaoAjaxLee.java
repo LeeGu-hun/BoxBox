@@ -10,9 +10,45 @@ import rental.Rental;
 import rental.RentalSearch;
 import rental.TimeSearch;
 
-public class DaoAjax extends DaoSet {
+public class DaoAjaxLee extends DaoSet {
+	
+	public List memberSearch(String phone) {
+		List list = new ArrayList();
+		MemberSearchAdmin memberSearchAdmin = null;
+		String sql = "select user_name, user_phone, user_email, password "
+					+ "from member where user_phone = ? and user_type = 2 ";
+		try {
+			conn = connDB();
+			System.out.println("db연결");
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("sql 입력");
+			pstmt.setString(1, phone);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				memberSearchAdmin = new MemberSearchAdmin(rs.getString("user_name"), rs.getString("user_phone"),
+										rs.getString("user_email"), rs.getString("password"));
+				list.add(memberSearchAdmin);
+				System.out.println("완료");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
 
-	public List timeSearch(String rentalId) {
+	/*public List timeSearch(String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
 		String sql = "select r.RENTAL_ID,p.post_gu,pl.PLACE_NAME , to_char(o.order_date, 'YYYY/MM/DD') as order_date, "
@@ -215,6 +251,5 @@ public class DaoAjax extends DaoSet {
 			}
 		}
 		return list;
-	}
-
+	}*/
 }

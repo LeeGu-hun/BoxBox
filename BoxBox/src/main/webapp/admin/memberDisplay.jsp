@@ -9,6 +9,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BoxBox</title>
+<script>
+	function memberSearchAdmin() {
+		var userPhone = document.getElementById("userPhone");
+		$.ajax({
+			type : "POST",
+			url : "./admin/memberSearchButton.jsp",
+			data : "phone=" + phone,
+			success : result
+		});
+		function result(msg) {
+			$("#row").html(msg);
+		}
+	}
+</script>
 </head>
 <div class="memberDisplay">
 	<h2>사용자 검색</h2>
@@ -17,7 +31,7 @@
 			<td id="compBox" style="text-align: center">
 				<input type="text" id="userPhone" placeholder="사용자 휴대폰번호" />&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btn btn-primary btn-block btn-large"
-					value="사용자 조회" onclick="'">				  			
+					value="사용자 조회" onclick="javascrip:memberSearchAdmin()">				  			
 			</td>			
 		</tr>
 	</table>
