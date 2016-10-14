@@ -26,7 +26,7 @@ import member.RegisterRequest;
 import member.RegisterRequestValidator;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/admin")
 public class AdminController {
 	private DaoMemberAdmin daoMemberAdmin;
 	private MemberRegisterService memberRegisterService;

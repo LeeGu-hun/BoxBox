@@ -92,7 +92,7 @@ function addReserve() {
 	});
 	function result5(msg) {
 		$("#addList").html(msg);
-		$("#popupDiv").css({display:'none'});
+		$("#popupDiv").css('display','none');
 		
 	}
 }
