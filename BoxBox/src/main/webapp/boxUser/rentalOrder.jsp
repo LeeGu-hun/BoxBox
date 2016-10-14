@@ -20,9 +20,18 @@
 <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"
 	integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
-
+function reserve() {
+	$(function() {
+		
+	    $( "#dialog" ).dialog({
+	    	modal:true,
+	    	width:500,
+	    	height:100
+	    });
+	  } );
+}
 
 function timeLook() {
 	var hstartTime=document.getElementById('hstartTime').value;
@@ -33,12 +42,11 @@ function timeLook() {
 	var startTime= document.getElementById('startTime').options[startSelectedIndex].value;
 	var endSelectedIndex = document.getElementById('endTime').selectedIndex;
 	var endTime= document.getElementById('endTime').options[endSelectedIndex].value;
-	var orderDate = document.getElementById('orderDate').value;
-	var orderDate1 = document.getElementById('orderDate1').value;
+
 	$.ajax({
 		type : "POST",
 		url : "./boxUser/popup.jsp",
-		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime+"&orderDate="+orderDate+"&orderDate1="+orderDate1+"&rentalFull"+rentalFull,
+		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime+"&rentalFull"+rentalFull,
 		success : result4
 		});
 	function result4(msg) {
@@ -54,16 +62,36 @@ function timeSearch() {
 	var startTime= document.getElementById("startTime").options[startSelectedIndex].value;
 	var endSelectedIndex = document.getElementById('endTime').selectedIndex;
 	var endTime= document.getElementById("endTime").options[endSelectedIndex].value;
-	var orderDate = document.getElementById('orderDate').value;
-	var orderDate1 = document.getElementById('orderDate1').value;
+
 	$.ajax({
 		type : "POST",
 		url : "./boxUser/rentalSearch.jsp",
-		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime+"&orderDate="+orderDate+"&orderDate1="+orderDate1+"&rentalFull"+rentalFull,
+		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime+"&rentalFull"+rentalFull,
 		success : result3
 	});
 	function result3(msg) {
 		$("#rentalSearch").html(msg);
+	}
+}
+
+function addReserve() {
+	var hstartTime=document.getElementById('hstartTime').value;
+	var hendTime=document.getElementById('hendTime').value;
+	var rentalId = document.getElementById('rentalId').value;
+	var startSelectedIndex = document.getElementById('startTime').selectedIndex;
+	var startTime= document.getElementById("startTime").options[startSelectedIndex].value;
+	var endSelectedIndex = document.getElementById('endTime').selectedIndex;
+	var endTime= document.getElementById("endTime").options[endSelectedIndex].value;
+
+	
+	$.ajax({
+		type : "POST",
+		url : "./boxUser/addReserve.jsp",
+		data : "rentalId=" + rentalId+"&startTime="+startTime+"&endTime="+endTime,
+		success : result5
+	});
+	function result5(msg) {
+		$("#addList").html(msg);
 	}
 }
 </script>
@@ -104,24 +132,7 @@ function timeSearch() {
 				<div id='popupDiv' name='popupDiv' style="display: none;">
 					<table id='popupTbl' name='popupTbl'>
 
-						<tr>
-							대여시간&nbsp; : &nbsp;
-							<input type="date" id="orderDate" name="orderDate" />&nbsp;
-							<select class="cmbRental" id="startTime" name="startTime">
-								<option value="start">시작 시간</option>
-								<c:forEach var="i" begin="0" end="23">
-									<option value="${i }">${i }</option>
-								</c:forEach>
-							</select>&nbsp;
-							<input type="date" id="orderDate1" name="orderDate1" />&nbsp;
-							<select class="cmbRental" id="endTime" name="endTime">
-								<option value="end">종료 시간</option>
-								<c:forEach var="i" begin="1" end="24">
-									<option value="${i }">${i }</option>
-								</c:forEach>
 
-							</select>
-						</tr>
 					</table>
 				</div>
 				<table class="rentalDisplay" id="rentalSearch" name="rentalSearch">
@@ -135,27 +146,8 @@ function timeSearch() {
 	<hr>
 	<br>
 	<h2>주문내역 확인</h2>
-	<table class="addList">
-		<tr id="head">
-			<td id="col11">대여물품코드</td>
-			<td id="col12">대여관리소</td>
-			<td id="col13">상품설명</td>
-			<td id="col14">대여시작</td>
-			<td id="col15">대여종료</td>
-			<td id="col16">대여금액</td>
-			<td id="col17">취소</td>
-		</tr>
-		<tr id="row">
-			<td id="col11">.</td>
-			<td id="col12">.</td>
-			<td id="col13">.</td>
-			<td id="col14">.</td>
-			<td id="col15">.</td>
-			<td id="col16">.</td>
-			<td id="col17"><input type="button" id="btnDel"
-				class="btnDel btnDel-primary btnDel-block btnDel-large" value="취소"
-				onclick="'"></td>
-		</tr>
+	<table class="addList" id='addList' name='addList'>
+
 	</table>
 	<br>
 	<hr>
@@ -163,6 +155,27 @@ function timeSearch() {
 	<br> <input type="button" id="btnPay"
 		class="btn btn-primary btn-block btn-large" value="결제하기" onclick="'" />
 </div>
+<div id="dialog" class="rentalDisplay1" style="display: none;">
+			대여시간&nbsp; : &nbsp;
+			<select class="cmbRental" id="startTime" name="startTime">
+				<option value="start">시작 시간</option>
+				<c:forEach var="i" begin="0" end="23">
+					<c:if test="${i<10 }"><option value="0${i }">0${i }</option></c:if>
+					<c:if test="${i>=10 }"><option value="${i }">${i }</option></c:if>
+				</c:forEach>
+			</select>&nbsp;
+			<select class="cmbRental" id="endTime" name="endTime">
+				<option value="end">종료 시간</option>
+				<c:forEach var="i" begin="1" end="24">
+					<c:if test="${i<10 }"><option value="0${i }">0${i }</option></c:if>
+					<c:if test="${i>=10 }"><option value="${i }">${i }</option></c:if>
+				</c:forEach>
+			</select>
+			<input type="button" class="btn btn-primary btn-block btn-large" value="추가하기" onclick="javascript:addReserve();" />
+			<input type="button" class="btn btn-primary btn-block btn-large" value="알람" onclick="javascript:alert();" />
+			
+</div>
+
 <div>
 	<%@include file="/include/footer.jsp"%>
 </div>

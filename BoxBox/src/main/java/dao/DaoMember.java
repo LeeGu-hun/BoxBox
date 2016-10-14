@@ -71,7 +71,7 @@ public class DaoMember {
 				+ "from place pl,post p,rental r, rental_item i, rental_order o	"
 				+ "where pl.PLACE_ID=r.PLACE_ID and p.POST_ID=pl.POST_ID "
 				+ "and r.RENTAL_ID=o.RENTAL_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID "
-				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-1 order by pl.PLACE_ID,r.RENTAL_ID";
+				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-5 order by pl.PLACE_ID,r.RENTAL_ID";
 		List<TimeSearch> results = jdbcTemplate.query(sql, new RowMapper<TimeSearch>() {
 			public TimeSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
 				TimeSearch timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),

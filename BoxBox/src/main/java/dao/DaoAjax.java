@@ -11,7 +11,53 @@ import rental.RentalSearch;
 import rental.TimeSearch;
 
 public class DaoAjax extends DaoSet {
-
+	public List fullEmpty(String start,String end,String rentalId) {
+		List list = new ArrayList();
+		TimeSearch timeSearch = null;
+		String sql = "select rental_full from  rental_order "
+				+ "where RENTAL_FULL=1 and to_char(start_time,'HH24')>=? and to_char(end_time,'HH24')<=? and rental_id = ?";
+		try {
+			conn = connDB();
+			System.out.println("db연결");
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("sql 입력");
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+			pstmt.setString(3, rentalId);
+			rs = pstmt.executeQuery();
+			// if (rs.next()) {
+			// place = new Place(rs.getString("PLACE_ID"),
+			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
+			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
+			// rs.getString("PLACE_NAME"),
+			// rs.getString("POST_ID"));
+			// }
+			if(!rs.next()){
+				timeSearch = new TimeSearch("0");
+				list.add(timeSearch);
+				System.out.println("완료");
+			}
+			while (rs.next()) {
+				timeSearch = new TimeSearch(rs.getString("RENTAL_FULL"));
+				list.add(timeSearch);
+				System.out.println("완료");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 	public List timeSearch(String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
@@ -21,7 +67,7 @@ public class DaoAjax extends DaoSet {
 				+ "from place pl,post p,rental r, rental_item i, rental_order o	"
 				+ "where pl.PLACE_ID=r.PLACE_ID and p.POST_ID=pl.POST_ID "
 				+ "and r.RENTAL_ID=o.RENTAL_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID "
-				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-1 order by pl.PLACE_ID,r.RENTAL_ID,o.start_time";
+				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-5 order by pl.PLACE_ID,r.RENTAL_ID,o.start_time";
 		try {
 			conn = connDB();
 			System.out.println("db연결");

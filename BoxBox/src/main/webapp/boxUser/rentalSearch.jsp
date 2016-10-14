@@ -9,7 +9,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <%
-	System.out.println("pupup ajax작동");
+	System.out.println("rentalSearch ajax작동");
+	
 	DaoAjax daoAjax = new DaoAjax();
 	String rentalFull = request.getParameter("rentalFull");
 	String rentalId = request.getParameter("rentalId");
@@ -31,11 +32,10 @@
 	out.print("<td id='sub7'>상품설명</td>");
 	out.print("<td id='sub8'>사진</td>");
 	out.print("<td id='sub9'>가격(시간당)</td>");
-	out.print("<td id='sub10'>결제</td>");
+	
 	out.print("</tr>");
 	for (int i = 0; i < timeSearch.size(); i++) {
 	
-		
 		TimeSearch timeSearch1 = (TimeSearch) timeSearch.get(i);
 		out.print("<tr id='row'>");
 		out.print("<td id='col1'>" + timeSearch1.getRentalId() + "</td>");
@@ -48,14 +48,15 @@
 		out.print("<td id='col8'>" + "<image src=" + request.getContextPath() + "/images/"
 				+ timeSearch1.getPhoto() + " /></td>");
 		out.print("<td id='col9'>" + timeSearch1.getFee() + "</td>");
-		out.print(
-				"<td id='col10'><input type='button' id='btnAdd' class='btnAdd btnAdd-primary btnAdd-block btnAdd-large' value='예약' onclick='' /></a></td>");
-		out.print("<input type='hidden' id='hstartTime' name='hstartTime' value='"+timeSearch1.getStartTime() +"'>");
-		out.print("<input type='hidden' id='hendTime' name='hendTime' value='"+timeSearch1.getEndTime() +"'></tr>");
+	
+		out.print("<input type='hidden' id='hstartTime' name='hstartTime' value='"+timeSearch1.getStartTime().split(" ")[0] +"'>");
+		out.print("<input type='hidden' id='hendTime' name='hendTime' value='"+timeSearch1.getEndTime().split(" ")[1] +"'></tr>");
 		out.print("</tr>");
 		
 	
 		System.out.println(timeSearch1.getRentalId() + "/" + timeSearch1.getPlaceName());
 	}
-		out.print("<tr><td colspan='10'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' value='비어있는 시간 조회'	onclick='javascript:timeLook();' /></td></tr>");
+	out.print(
+			"<tr><td colspan='5'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' value='예약' onclick='javascript:reserve();' /></a></td>");	
+	out.print("<td colspan='4'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' value='비어있는 시간 조회'	onclick='javascript:timeLook();' /></td></tr>");
 %>

@@ -489,6 +489,11 @@ input:focus, #userEmail:focus {
 .rentalDisplay {
 	width: 100%;
 }
+.rentalDisplay1 {
+	width: 700px;
+	height:100px;
+	background: white;
+}
 
 .addList {
 	width: 100%;
