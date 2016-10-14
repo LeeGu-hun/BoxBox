@@ -23,7 +23,7 @@
 			<li onClick="location.href='rentalCancel.jsp'">
 				예약한 렌탈 취소
 			</li>
- 			<li onClick="location.href='rentalReturnExtra.jsp'">
+			<li onClick="location.href='rentalReturnExtra.jsp'">
 				사용 중인 렌탈 반납/연장
 			</li>
 			<li onClick="location.href='changeInfoForm.jsp'">
