@@ -14,7 +14,6 @@
 	type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
-	
 	function postList() {
 		var selectedIndex = document.getElementById('post').selectedIndex;
 		var post = document.getElementById("post").options[selectedIndex].value;
@@ -26,7 +25,7 @@
 		});
 		function result(msg) {
 			$("#place").html(msg);
-		}		
+		}
 	}
 	function rentalList() {
 		var selectedIndex = document.getElementById('place').selectedIndex;
@@ -44,7 +43,14 @@
 </script>
 <!DOCTYPE html>
 <div id="header">
-	<%@include file="/include/header.jsp"%>
+	<c:if test="${!empty authInfo}">
+		<c:if test="${ authInfo.type==1}">
+			<%@include file="/admin/headerAdmin.jsp"%>
+		</c:if>
+		<c:if test="${authInfo.type==2}">
+			<%@include file="/include/header.jsp"%>
+		</c:if>
+	</c:if>
 </div>
 <div style="height: 78%;">
 	<c:if test="${ empty authInfo}">
