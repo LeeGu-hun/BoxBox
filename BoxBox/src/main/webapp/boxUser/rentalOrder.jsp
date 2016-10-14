@@ -92,6 +92,8 @@ function addReserve() {
 	});
 	function result5(msg) {
 		$("#addList").html(msg);
+		$("#popupDiv").css({display:'none'});
+		
 	}
 }
 </script>
@@ -146,9 +148,11 @@ function addReserve() {
 	<hr>
 	<br>
 	<h2>주문내역 확인</h2>
-	<table class="addList" id='addList' name='addList'>
+	<div>
+		<table class="rentalOrder" id='addList' name='addList'>
 
-	</table>
+		</table>
+	</div>
 	<br>
 	<hr>
 	<br> 총 대여금액&nbsp;&nbsp;&nbsp; <input type="text" disabled /> <br>

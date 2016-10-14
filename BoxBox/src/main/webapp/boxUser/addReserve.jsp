@@ -17,10 +17,10 @@
 	String rentalId = request.getParameter("rentalId");
 	String startTime = request.getParameter("startTime");
 	String endTime = request.getParameter("endTime");
-	System.out.println(rentalId + "//" + startTime + endTime);
+	System.out.println(rentalId + "//" + startTime+"//" + endTime);
 	List timeSearch = new ArrayList();
 	timeSearch = daoAjax.fullEmpty(startTime, endTime, rentalId);
-
+	System.out.println("fullEmpty 완료"+timeSearch.size());
 	boolean full = false;
 	for (int i = 0; i < timeSearch.size(); i++) {
 
@@ -75,15 +75,15 @@
 			System.out.println(timeSearch1.getRentalId() + "/" + timeSearch1.getPlaceName());
 		}
 		out.print("<tr id='row'>");
-		out.print("<td id='col1'>"+id+"</td>");
-		out.print("<td id='col2'>"+name+"</td>");
-		out.print("<td id='col3'>"+orderDate+"</td>");
-		out.print("<td id='col4'>"+orderTime+"</td>");
-		out.print("<td id='col5'>"+cate+"</td>");
-		out.print("<td id='col6'>"+model+"</td>");
-		out.print("<td id='col7'>"+info+"</td>");
-		out.print("<td id='col8'>"+photo+"</td>");
-		out.print("<td id='col9'>"+fee+"</td>");
+		out.print("<td id='col1' name='col1'>"+id+"</td>");
+		out.print("<td id='col2' name='col2'>"+name+"</td>");
+		out.print("<td id='col3' name='col3'>"+orderDate+"</td>");
+		out.print("<td id='col4' name='col4'>"+orderTime+"</td>");
+		out.print("<td id='col5' name='col5'>"+cate+"</td>");
+		out.print("<td id='col6' name='col6'>"+model+"</td>");
+		out.print("<td id='col7' name='col7'>"+info+"</td>");
+		out.print("<td id='col8' name='col8'>"+"<img src='"+request.getContextPath()+"/images/"+photo+"'></td>");
+		out.print("<td id='col9' name='col9'>"+fee+"</td>");
 		out.print("</tr>");
 	}
 	if (full == false) {
