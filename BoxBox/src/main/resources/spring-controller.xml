@@ -8,6 +8,12 @@
 		<property name="authService" ref="authService" />
 		<property name="placeService" ref="placeSvc" />
 	</bean>
+	<bean class="controller.AdminController">
+		<property name="daoMemberAdmin" ref="daoMemberAdmin" />
+		<property name="authService" ref="authService" />
+		<property name="changePasswordService" ref="changePwdSvc" />
+		<property name="memberRegisterService" ref="memberRegSvc" />
+	</bean>
 	<bean class="controller.MemberController">
 		<property name="daoMember" ref="daoMember" />
 		<property name="authService" ref="authService" />

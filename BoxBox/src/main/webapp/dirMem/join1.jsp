@@ -21,6 +21,7 @@
 <c:set var="myContextPath" value="${pageContext.request.contextPath }"/>
  --%>
 
+
 <div class="join">
 	<form:form method="post" commandName="registerRequest"
 		action="${pageContext.request.contextPath }/member/regist">
