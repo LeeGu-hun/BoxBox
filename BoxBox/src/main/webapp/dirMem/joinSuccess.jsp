@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<div id="header">
+	<%@include file="/include/header.jsp"%>
+</div>
 
 
 <title>회원가입 완료창</title>
@@ -34,3 +37,6 @@
 	</div>
 </body>
 </html>
+<div>
+	<%@include file="/include/footer.jsp"%>
+</div>
