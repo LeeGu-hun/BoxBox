@@ -49,29 +49,6 @@ public class AdminController {
 		this.authService = authService;
 	}
 
-	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String handleStep3(RegisterRequest rr, Errors errors, Model model, HttpSession session) {
-		System.out.println("리퀘스트 매핑 /regist post");
-		new RegisterRequestValidator().validate(rr, errors);
-		if (errors.hasErrors()) {
-			System.out.println("에러");
-			return "dirMem/join1";
-		}
-		try {
-			System.out.println(rr.getEmail() + "/" + rr.getName() + "/" + rr.getPassword() + "/" + rr.getType() + "/"
-					+ rr.getPhone());
-			memberRegisterService.regist(rr);
-			AuthInfo authInfo = authService.authenticate(rr.getEmail(), rr.getPassword());
-			session.setAttribute("authInfo", authInfo);
-			model.addAttribute("memberName", rr.getName());
-
-			return "dirMem/joinSuccess";
-		} catch (AlreadyExistingMemberException ex) {
-			System.out.println("메일 중복");
-			errors.rejectValue("email", "duplicate");
-			return "dirMem/join1";
-		}
-	}
 
 	// @RequestMapping("/detail/{id}")
 	// public String detail(@PathVariable("id") Long memId, Model model) {
