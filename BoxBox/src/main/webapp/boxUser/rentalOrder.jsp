@@ -92,8 +92,6 @@ function addReserve() {
 	});
 	function result5(msg) {
 		$("#addList").html(msg);
-		$('#popupDiv').css('display','none');
-		$('#popupDiv').close;
 		
 	}
 }

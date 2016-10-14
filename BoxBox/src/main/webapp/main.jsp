@@ -46,7 +46,7 @@
 	<c:if test="${ authInfo.type==1}">
 		<%@include file="/admin/headerAdmin.jsp"%>
 	</c:if>
-	<c:if test="${authInfo.type==2}">
+	<c:if test="${authInfo.type==2 || authInfo.type!=1}">
 		<%@include file="/include/header.jsp"%>
 	</c:if>
 </div>
