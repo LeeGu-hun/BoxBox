@@ -111,7 +111,7 @@ public class LoginController {
 		new LoginCommandValidator().validate(loginCommand, errors);
 		if (errors.hasErrors()) {
 			System.out.println("에러발생");
-			return "dirMem/join";
+			return "main";
 		}
 		try {
 //			List<Place> place = placeService.comboPlace();
@@ -136,11 +136,11 @@ public class LoginController {
 		} catch (MemberNotFoundException e) {
 			System.out.println("멤버못찾음");
 			errors.rejectValue("email", "memberNotFound");
-			return "dirMem/join";
+			return "main";
 		} catch (IdPasswordNotMatchingException e) {
 			System.out.println("비밀번호 불일치");
 			errors.rejectValue("password", "idPasswordNotMatching");
-			return "dirMem/join";
+			return "main";
 		}
 	}
 
