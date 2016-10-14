@@ -37,6 +37,6 @@
 		<constructor-arg ref="daoMember" />
 	</bean>
 	<bean id="daoMemberAdmin" class="dao.DaoMemberAdmin">
-		<constructor-arg ref="daoMemberAdmin" />
+		<constructor-arg ref="dataSource" />
 	</bean>
 </beans>
