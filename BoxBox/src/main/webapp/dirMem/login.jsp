@@ -11,9 +11,6 @@
 
 </head>
 <body>
-<div id="header">
-	<%@include file="/include/header.jsp"%>
-</div>
 
 	아이디 패스워드 불일치 또는 존재하지 않는 회원 다시 로그인 시도하는 페이지
 	<div id="boxCell">
@@ -45,6 +42,3 @@
 	</div>
 </body>
 </html>
-<div>
-	<%@include file="/include/footer.jsp"%>
-</div>

@@ -20,9 +20,7 @@
 <form action="${pageContext.request.contextPath }/alterPassword">
 <c:set var="myContextPath" value="${pageContext.request.contextPath }"/>
  --%>
-<div id="header">
-	<%@include file="/include/header.jsp"%>
-</div>
+
 
 <div class="join">
 	<form:form method="post" commandName="registerRequest"
@@ -47,7 +45,4 @@
 		</div> 
 		<input class="btn btn-primary btn-block btn-large" type="submit" value=" 회 원 가 입 " style="margin-top:7px;">
 	</form:form>
-</div>
-<div>
-	<%@include file="/include/footer.jsp"%>
 </div>
