@@ -166,13 +166,13 @@ function addReserve() {
 			</select>&nbsp;
 			<select class="cmbRental" id="endTime" name="endTime">
 				<option value="end">종료 시간</option>
-				<c:forEach var="i" begin="1" end="24">
+				<c:forEach var="i" begin="1" end="23">
 					<c:if test="${i<10 }"><option value="0${i }">0${i }</option></c:if>
 					<c:if test="${i>=10 }"><option value="${i }">${i }</option></c:if>
 				</c:forEach>
+					<option value="0">24</option>
 			</select>
 			<input type="button" class="btn btn-primary btn-block btn-large" value="추가하기" onclick="javascript:addReserve();" />
-			<input type="button" class="btn btn-primary btn-block btn-large" value="알람" onclick="javascript:alert();" />
 			
 </div>
 

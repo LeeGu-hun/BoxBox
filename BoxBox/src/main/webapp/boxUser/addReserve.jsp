@@ -9,7 +9,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <%
-	System.out.println("pupup ajax작동");
+	System.out.println("addReserve ajax작동");
 
 	DaoAjax daoAjax = new DaoAjax();
 	String placeName = request.getParameter("placeName");
@@ -38,6 +38,15 @@
 	}
 	if (full == true) {
 		timeSearch = daoAjax.timeSearch(rentalId);
+		String id="";
+		String name="";
+		String orderDate="";
+		String orderTime="";
+		String cate="";
+		String model="";
+		String info="";
+		String photo="";
+		String fee="";
 		out.print("<tr id='head'>");
 		out.print("<td id='sub1'>렌탈아이디</td>");
 		out.print("<td id='sub2'>대여관리소</td>");
@@ -48,31 +57,37 @@
 		out.print("<td id='sub7'>상품설명</td>");
 		out.print("<td id='sub8'>사진</td>");
 		out.print("<td id='sub9'>가격(시간당)</td>");
-
 		out.print("</tr>");
+		
 		for (int i = 0; i < timeSearch.size(); i++) {
 
 			TimeSearch timeSearch1 = (TimeSearch) timeSearch.get(i);
-			out.print("<tr id='row'>");
-			out.print("<td id='col1'>" + timeSearch1.getRentalId() + "</td>");
-			out.print("<td id='col2'>" + timeSearch1.getPlaceName() + "</td>");
-			out.print("<td id='col3'>" + startTime + "</td>");
-			out.print("<td id='col4'>" + timeSearch1.getStartTime().split(" ")[1] + "~"
-					+ timeSearch1.getEndTime().split(" ")[1].split(":")[0] + "</td>");
-			out.print("<td id='col5'>" + timeSearch1.getCate() + "</td>");
-			out.print("<td id='col6'>" + timeSearch1.getModel() + "</td>");
-			out.print("<td id='col7'>" + timeSearch1.getInfo() + "</td>");
-			out.print("<td id='col8'>" + "<image src=" + request.getContextPath() + "/images/"
-					+ timeSearch1.getPhoto() + " /></td>");
-			out.print("<td id='col9'>" + timeSearch1.getFee() + "</td>");
-
-			out.print("<input type='hidden' id='hstartTime' name='hstartTime' value='"
-					+ timeSearch1.getStartTime().split(" ")[0] + "'>");
-			out.print("<input type='hidden' id='hendTime' name='hendTime' value='"
-					+ timeSearch1.getEndTime().split(" ")[1] + "'></tr>");
-			out.print("</tr>");
+			id=timeSearch1.getRentalId();
+			name=timeSearch1.getPlaceName();
+			orderDate=timeSearch1.getOrderDate();
+			orderTime=startTime+"~"+endTime;
+			cate=timeSearch1.getCate();
+			model=timeSearch1.getModel();
+			info=timeSearch1.getInfo();
+			photo=timeSearch1.getPhoto();
+			fee=timeSearch1.getFee();
 
 			System.out.println(timeSearch1.getRentalId() + "/" + timeSearch1.getPlaceName());
 		}
+		out.print("<tr id='row'>");
+		out.print("<td id='col1'>"+id+"</td>");
+		out.print("<td id='col2'>"+name+"</td>");
+		out.print("<td id='col3'>"+orderDate+"</td>");
+		out.print("<td id='col4'>"+orderTime+"</td>");
+		out.print("<td id='col5'>"+cate+"</td>");
+		out.print("<td id='col6'>"+model+"</td>");
+		out.print("<td id='col7'>"+info+"</td>");
+		out.print("<td id='col8'>"+photo+"</td>");
+		out.print("<td id='col9'>"+fee+"</td>");
+		out.print("</tr>");
+	}
+	if (full == false) {
+		out.print("<h1>이 시간에는 예약이 불가능합니다.</h1>");
+	
 	}
 %>
