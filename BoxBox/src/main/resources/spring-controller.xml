@@ -36,4 +36,7 @@
 	<bean id="placeSvc" class="place.PlaceService">
 		<constructor-arg ref="daoMember" />
 	</bean>
+	<bean id="daoMemberAdmin" class="dao.DaoMemberAdmin">
+		<constructor-arg ref="daoMemberAdmin" />
+	</bean>
 </beans>
