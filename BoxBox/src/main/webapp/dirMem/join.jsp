@@ -16,9 +16,6 @@
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/js.js"></script>
 
-<div id="header">
-	<%@include file="/include/header.jsp"%>
-</div>
 
 
 <div class="login">
@@ -46,7 +43,4 @@
 			</c:if>
 		</form:form>
 	</c:if>
-</div>
-<div>
-	<%@include file="/include/footer.jsp"%>
 </div>
