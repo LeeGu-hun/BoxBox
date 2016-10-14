@@ -11,7 +11,7 @@ import rental.RentalSearch;
 import rental.TimeSearch;
 
 public class DaoAjax extends DaoSet {
-	public List fullEmpty(String start,String end,String rentalId) {
+	public List fullEmpty(String start, String end, String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
 		String sql = "select rental_full from rental_order where to_char(start_time,'HH24')>=? and to_char(end_time,'HH24')<=? and rental_id = ?";
@@ -31,11 +31,11 @@ public class DaoAjax extends DaoSet {
 			// rs.getString("PLACE_NAME"),
 			// rs.getString("POST_ID"));
 			// }
-//			if(!rs.next()){
-//				timeSearch = new TimeSearch("0");
-//				list.add(timeSearch);
-//				System.out.println("완료");
-//			}
+			// if(!rs.next()){
+			// timeSearch = new TimeSearch("0");
+			// list.add(timeSearch);
+			// System.out.println("완료");
+			// }
 			while (rs.next()) {
 				timeSearch = new TimeSearch(rs.getString("RENTAL_FULL"));
 				list.add(timeSearch);
@@ -57,6 +57,7 @@ public class DaoAjax extends DaoSet {
 		}
 		return list;
 	}
+
 	public List timeSearch(String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
@@ -85,7 +86,8 @@ public class DaoAjax extends DaoSet {
 				timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),
 						rs.getString("ORDER_DATE"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),
 						rs.getString("RENTAL_INFO"), rs.getString("MODEL_PHOTO"), rs.getString("RENTAL_FEE"),
-						rs.getString("RENTAL_FULL"), rs.getString("START_TIME"), rs.getString("END_TIME"),rs.getString("post_gu"));
+						rs.getString("RENTAL_FULL"), rs.getString("START_TIME"), rs.getString("END_TIME"),
+						rs.getString("post_gu"));
 				list.add(timeSearch);
 				System.out.println("완료");
 			}

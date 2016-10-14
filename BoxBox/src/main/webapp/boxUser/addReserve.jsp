@@ -36,7 +36,11 @@
 			System.out.println("예약 가능함");
 		}
 	}
-	if (full == true) {
+	if(timeSearch.size()==0){
+		full = true;
+	}
+	int time1=0;
+	if (full == true || timeSearch.size()==0) {
 		timeSearch = daoAjax.timeSearch(rentalId);
 		String id="";
 		String name="";
@@ -74,6 +78,8 @@
 
 			System.out.println(timeSearch1.getRentalId() + "/" + timeSearch1.getPlaceName());
 		}
+		int time=0;
+		int fee1=0;
 		out.print("<tr id='row'>");
 		out.print("<td id='col1' name='col1'>"+id+"</td>");
 		out.print("<td id='col2' name='col2'>"+name+"</td>");
@@ -83,11 +89,19 @@
 		out.print("<td id='col6' name='col6'>"+model+"</td>");
 		out.print("<td id='col7' name='col7'>"+info+"</td>");
 		out.print("<td id='col8' name='col8'>"+"<img src='"+request.getContextPath()+"/images/"+photo+"'></td>");
-		out.print("<td id='col9' name='col9'>"+fee+"</td>");
-		out.print("</tr>");
+		out.print("<td id='col9' name='col9'>"+fee+"</td></tr>");
+		time=Integer.parseInt(orderTime.split("~")[1])-Integer.parseInt(orderTime.split("~")[0]);
+		fee1=Integer.parseInt(fee);
+		int total = time*fee1;		
+		System.out.println("토탈 : "+total+"시간 : "+time+"비용 : "+fee1);
+		System.out.println((Integer.parseInt(orderTime.split("~")[1])-Integer.parseInt(orderTime.split("~")[0])));
+		out.print("<input type='hidden' id='total' name='total' value='"+total+"' disabled />");
+		out.print("<input type='hidden' id='full' name='full' value='"+full+"' disabled />");
+		time1=time;
 	}
-	if (full == false) {
+	if (full == false ) {
 		out.print("<h1>이 시간에는 예약이 불가능합니다.</h1>");
+		out.print("<input type='hidden' id='full' name='full' value='"+full+"' disabled />");
 	
 	}
 %>

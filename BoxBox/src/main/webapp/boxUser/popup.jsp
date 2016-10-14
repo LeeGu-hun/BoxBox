@@ -40,7 +40,7 @@
 		}
 	}
 	out.print("</tr>");
-	System.out.print("for문진입");
+	System.out.println("for문진입"+timeSearch.size());
 	for (int i = 0; i < timeSearch.size(); i++) {
 		String style = "style='background:white;'";
 		TimeSearch timeSearch1 = (TimeSearch) timeSearch.get(i);
@@ -48,6 +48,9 @@
 		System.out.println(timeSearch1.getEndTime().split(" ")[1].split(":")[0]);
 		int start = Integer.parseInt(timeSearch1.getStartTime().split(" ")[1]);
 		int end = Integer.parseInt(timeSearch1.getEndTime().split(" ")[1].split(":")[0]);
+		if(timeSearch.size()==1 && start==00 && end == 00){
+			out.print("<tr><td class='time' colspan='24'>예약이 비어있습니다.</td></tr>");
+		}
 		out.print("<tr>");
 		if(start==end){
 			for (int j = 0; j < start; j++) {

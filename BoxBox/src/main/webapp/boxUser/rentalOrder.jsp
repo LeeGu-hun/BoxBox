@@ -82,7 +82,9 @@ function addReserve() {
 	var startTime= document.getElementById("startTime").options[startSelectedIndex].value;
 	var endSelectedIndex = document.getElementById('endTime').selectedIndex;
 	var endTime= document.getElementById("endTime").options[endSelectedIndex].value;
-
+	if(startTime==endTime){
+		alert("동일한 시간으로 예약할 수 없습니다.");
+	}else{
 	
 	$.ajax({
 		type : "POST",
@@ -92,7 +94,15 @@ function addReserve() {
 	});
 	function result5(msg) {
 		$("#addList").html(msg);
-		
+		var full =document.getElementById("full").value;
+		if(full=="true"){
+			var total = document.getElementById("total").value;			
+			document.getElementById("total1").value = total;
+		}
+		if(full=="false"){
+			document.getElementById("total1").value ="";
+		}
+	}
 	}
 }
 </script>
@@ -148,35 +158,45 @@ function addReserve() {
 	<br>
 	<h2>주문내역 확인</h2>
 	<div>
-		<table class="rentalOrder" id='addList' name='addList'>
+		<table class="rentalOrder" id='addList' name='addList'
+			style='float: left;'>
 
 		</table>
+		<!-- 	<br> -->
+		<!-- 	<hr> -->
+		<!-- 	<br> -->
+		총 대여금액&nbsp;&nbsp;&nbsp; <input type="text" id='total1' name='total1'
+			value='' disabled /> <br> <br> <input type="button"
+			id="btnPay" class="btn btn-primary btn-block btn-large" value="결제하기"
+			onclick="'" />
 	</div>
-	<br>
-	<hr>
-	<br> 총 대여금액&nbsp;&nbsp;&nbsp; <input type="text" disabled /> <br>
-	<br> <input type="button" id="btnPay"
-		class="btn btn-primary btn-block btn-large" value="결제하기" onclick="'" />
 </div>
 <div id="dialog" class="rentalDisplay1" style="display: none;">
-			대여시간&nbsp; : &nbsp;
-			<select class="cmbRental" id="startTime" name="startTime">
-				<option value="start">시작 시간</option>
-				<c:forEach var="i" begin="0" end="23">
-					<c:if test="${i<10 }"><option value="0${i }">0${i }</option></c:if>
-					<c:if test="${i>=10 }"><option value="${i }">${i }</option></c:if>
-				</c:forEach>
-			</select>&nbsp;
-			<select class="cmbRental" id="endTime" name="endTime">
-				<option value="end">종료 시간</option>
-				<c:forEach var="i" begin="1" end="23">
-					<c:if test="${i<10 }"><option value="0${i }">0${i }</option></c:if>
-					<c:if test="${i>=10 }"><option value="${i }">${i }</option></c:if>
-				</c:forEach>
-					<option value="0">24</option>
-			</select>
-			<input type="button" class="btn btn-primary btn-block btn-large" value="추가하기" onclick="javascript:addReserve();" />
-			
+	대여시간&nbsp; : &nbsp; <select class="cmbRental" id="startTime"
+		name="startTime">
+		<option value="start">시작 시간</option>
+		<c:forEach var="i" begin="0" end="23">
+			<c:if test="${i<10 }">
+				<option value="0${i }">0${i }</option>
+			</c:if>
+			<c:if test="${i>=10 }">
+				<option value="${i }">${i }</option>
+			</c:if>
+		</c:forEach>
+	</select>&nbsp; <select class="cmbRental" id="endTime" name="endTime">
+		<option value="end">종료 시간</option>
+		<c:forEach var="i" begin="1" end="23">
+			<c:if test="${i<10 }">
+				<option value="0${i }">0${i }</option>
+			</c:if>
+			<c:if test="${i>=10 }">
+				<option value="${i }">${i }</option>
+			</c:if>
+		</c:forEach>
+		<option value="00">24</option>
+	</select> <input type="button" class="btn btn-primary btn-block btn-large"
+		value="추가하기" onclick="javascript:addReserve();" />
+
 </div>
 
 <div>
