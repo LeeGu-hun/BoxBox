@@ -100,7 +100,7 @@ public class LoginController {
 			loginCommand.setEmail(rCookie.getValue());
 			loginCommand.setRememberEmail(true);
 		}
-		return "dirMem/login";
+		return "dirMem/join";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)

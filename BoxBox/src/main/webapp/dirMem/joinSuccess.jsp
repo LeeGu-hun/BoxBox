@@ -22,12 +22,12 @@
 					회원님의 계정이 만들어졌습니다.<br> <a
 						href="<c:url value='/member/changeInfo'/>">[회원정보 변경]</a> <a
 						href="<c:url value='/logout'/>">[로그아웃]</a>
-					<form:form action="<%=request.getContextPath()%>/login">
+					<form action="<%=request.getContextPath()%>">
 						<p style="text-align: right">
 							<input type="submit" value="로그인 페이지 가기">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
-					</form:form>
+					</form>
 				</div>
 				<br> <br>
 			</div>
