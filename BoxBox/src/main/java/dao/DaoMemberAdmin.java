@@ -60,18 +60,18 @@ public class DaoMemberAdmin {
 		return results.isEmpty() ? null : results.get(0);
 	}
 
-	public Member selectById(Long memberId) {
+/*	public Member selectById(Long memberId) {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where USER_ID = ?", new RowMapper<Member>() {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getString("USER_EMAIL"), rs.getString("USER_NAME"),
-						rs.getString("PASSWORD"), rs.getString("USER_PHONE"), rs.getInt("USER_TYPE"));
+						rs.getString("PASSWORD"), rs.getString("USER_PHONE"), rowNum);
 				member.setId(rs.getString("USER_ID"));
 				return member;
 			}
 		}, memberId);
 
 		return results.isEmpty() ? null : results.get(0);
-	}
+	}*/
 
 	public Member selectByEmail(String memberEmail) {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER where USER_EMAIL = ?", new RowMapper<Member>() {
