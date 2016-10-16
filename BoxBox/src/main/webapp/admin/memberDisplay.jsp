@@ -11,6 +11,7 @@
 <title>BoxBox</title>
 <script>
 	function memberSearchAdmin() {
+		var index = document.getElementById("userPhone").selectedIndex;
 		var userPhone = document.getElementById("userPhone");
 		$.ajax({
 			type : "POST",
@@ -35,6 +36,7 @@
 			</td>			
 		</tr>
 	</table>
+
 	<hr>
 	<h2>사용자 조회결과</h2>	
 	<table class="profitDisplay">

@@ -1,7 +1,5 @@
 package member;
 
-import java.util.Date;
-
 import exception.IdPasswordNotMatchingException;
 
 public class Member {
