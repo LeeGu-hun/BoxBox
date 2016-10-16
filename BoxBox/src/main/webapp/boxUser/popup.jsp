@@ -21,10 +21,10 @@
 	System.out.println(
 			rentalId + "/" + startTime + "/" + endTime + "/" + orderDate + "/" + orderDate1 + "/" + rentalFull);
 	List timeSearch = new ArrayList();
-	timeSearch = daoAjax.timeSearch(rentalId);
+	timeSearch = daoAjax.timeSearch1(rentalId);
 
 	out.print("<tr>");
-	out.print("<td class='time' colspan='24'>예약된 시간 </td>");
+	out.print("<td class='time' colspan='24'>오늘 예약된 시간 </td>");
 	out.print("</tr>");
 	out.print("<tr>");
 	for (int i = 0; i < 24; i++) {
@@ -41,54 +41,19 @@
 	}
 	out.print("</tr>");
 	System.out.println("for문진입"+timeSearch.size());
+	out.print("<tr>");
 	for (int i = 0; i < timeSearch.size(); i++) {
 		String style = "style='background:white;'";
 		TimeSearch timeSearch1 = (TimeSearch) timeSearch.get(i);
-		System.out.println(timeSearch1.getStartTime());
-		System.out.println(timeSearch1.getEndTime().split(" ")[1].split(":")[0]);
-		int start = Integer.parseInt(timeSearch1.getStartTime().split(" ")[1]);
-		int end = Integer.parseInt(timeSearch1.getEndTime().split(" ")[1].split(":")[0]);
-		if(timeSearch.size()==1 && start==00 && end == 00){
-			out.print("<tr><td class='time' colspan='24'>예약이 비어있습니다.</td></tr>");
+		String full=timeSearch1.getRentalFull();
+		String start = timeSearch1.getStartTime();
+		if(full.equals("1")){
+			out.print("<td class='time' id='time' name='time' "+style+"></td>");
 		}
-		out.print("<tr>");
-		if(start==end){
-			for (int j = 0; j < start; j++) {
-				out.print("<td class='time' id='time" + j + "' name='time" + j + "'>예약가능</td>");
-			}
+		if(full.equals("0")){
+			out.print("<td class='time' id='time' name='time'>예약 가능</td>");
 		}
-		if (start < end) {
-			for (int j = 0; j < start; j++) {
-				out.print("<td class='time' id='time" + j + "' name='time" + j + "'>예약가능</td>");
-			}
-			for (int j = start; j < end; j++) {
-				out.print("<td class='time' id='time" + j + "' name='time" + j + "'" + style + "></td>");
-			}
-			for (int j = end; j < 24; j++) {
-				out.print("<td class='time' id='time" + j + "' name='time" + j + "'>예약가능</td>");
-			}
-		}
-
-		if (start > end) {
-			for (int j = 0; j < end; j++) {
-				out.print("<td class='time' id='time" + j + "' name='time" + j + "'" + style + ">예약가능</td>");
-			}
-			for (int j = end; j < start; j++) {
-				out.print("<td class='time' id='time" + j + "' name='time" + j + "'>예약가능</td>");
-			}
-			for (int j = start; j < 24; j++) {
-				out.print("<td class='time' id='time" + j + "' name='time" + j + "'" + style + ">예약가능</td>");
-			}
-		}
-		out.print("</tr>");
-
 	}
+	out.print("</tr>");
 
-	// 		if (i < 9) {
-	// 			out.print("<td class='time' id='time" + "0" + i + "' name='time" + "0" + i + "'></td>");
-	// 		} else if (i == 9) {
-	// 			out.print("<td class='time' id='time" + "0" + i + "' name='time" + "0" + i + "'></td>");
-	// 		} else {
-	// 			out.print("<td class='time' id='time" + i + "' name='time" + i + "'></td>");
-	// 		}
 %>

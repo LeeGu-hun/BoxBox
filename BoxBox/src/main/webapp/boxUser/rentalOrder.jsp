@@ -53,6 +53,7 @@ function timeLook() {
 		$('#popupDiv').css('display','');
 		$('#popupDiv').show;
 		$('#popupTbl').html(msg);
+		document.getElementById("#popup").focus();
 	}
 }
 function timeSearch() {
@@ -71,6 +72,7 @@ function timeSearch() {
 	});
 	function result3(msg) {
 		$("#rentalSearch").html(msg);
+		
 	}
 }
 

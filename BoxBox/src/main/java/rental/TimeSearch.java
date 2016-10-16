@@ -6,6 +6,12 @@ public class TimeSearch {
 		this.rentalFull = rentalFull;
 	}
 
+	public TimeSearch(String rentalFull, String startTime) {
+		super();
+		this.rentalFull = rentalFull;
+		this.startTime = startTime;
+	}
+
 	private String rentalId,placeName,orderDate,cate,model,info,photo,fee,rentalFull,startTime,endTime,gu;
 
 	public String getGu() {

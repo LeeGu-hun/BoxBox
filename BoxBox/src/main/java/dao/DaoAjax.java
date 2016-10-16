@@ -1,28 +1,33 @@
 package dao;
 
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import memberAdmin.MemberSearchAdmin;
 import place.Place;
 import rental.Rental;
 import rental.RentalSearch;
 import rental.TimeSearch;
 
 public class DaoAjax extends DaoSet {
+	
 	public List fullEmpty(String start, String end, String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
-		String sql = "select rental_full from rental_order where to_char(start_time,'HH24')>=? and to_char(end_time,'HH24')<=? and rental_id = ?";
+		String sql = "select * from count";
 		try {
 			conn = connDB();
-			System.out.println("db연결");
+			System.out.println("프로시저 실행");
+			CallableStatement cstmt = conn.prepareCall("{call ORDER_CNT(?,?,?)}");
+			cstmt.setString(1, rentalId);
+			cstmt.setString(2, start);
+			cstmt.setString(3, end);
+			cstmt.execute();
+			System.out.println("포로시저 종료");
+			System.out.println("sql연결");
 			pstmt = conn.prepareStatement(sql);
 			System.out.println("sql 입력");
-			pstmt.setString(1, start);
-			pstmt.setString(2, end);
-			pstmt.setString(3, rentalId);
 			rs = pstmt.executeQuery();
 			// if (rs.next()) {
 			// place = new Place(rs.getString("PLACE_ID"),
@@ -37,7 +42,99 @@ public class DaoAjax extends DaoSet {
 			// System.out.println("완료");
 			// }
 			while (rs.next()) {
-				timeSearch = new TimeSearch(rs.getString("RENTAL_FULL"));
+				timeSearch = new TimeSearch(rs.getString("CNT"));
+				list.add(timeSearch);
+				System.out.println("sql완료");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
+//	public List fullEmpty(String start, String end, String rentalId) {
+//		List list = new ArrayList();
+//		TimeSearch timeSearch = null;
+//		String sql = "select rental_full from rental_order where to_char(start_time,'HH24')>=? and to_char(end_time,'HH24')<=? and rental_id = ?";
+//		try {
+//			conn = connDB();
+//			System.out.println("db연결");
+//			pstmt = conn.prepareStatement(sql);
+//			System.out.println("sql 입력");
+//			pstmt.setString(1, start);
+//			pstmt.setString(2, end);
+//			pstmt.setString(3, rentalId);
+//			rs = pstmt.executeQuery();
+//			// if (rs.next()) {
+//			// place = new Place(rs.getString("PLACE_ID"),
+//			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
+//			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
+//			// rs.getString("PLACE_NAME"),
+//			// rs.getString("POST_ID"));
+//			// }
+//			// if(!rs.next()){
+//			// timeSearch = new TimeSearch("0");
+//			// list.add(timeSearch);
+//			// System.out.println("완료");
+//			// }
+//			while (rs.next()) {
+//				timeSearch = new TimeSearch(rs.getString("RENTAL_FULL"));
+//				list.add(timeSearch);
+//				System.out.println("완료");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (pstmt != null) {
+//					pstmt.close();
+//				}
+//				if (rs != null) {
+//					rs.close();
+//				}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return list;
+//	}
+	public List timeSearch1(String rentalId) {
+		List list = new ArrayList();
+		TimeSearch timeSearch = null;
+		String sql = "select * from rental_full";
+		try {
+			conn = connDB();
+			System.out.println("프로시저 실행");
+			CallableStatement cstmt = conn.prepareCall("{call HOUR_FULL(?)}");
+			cstmt.setString(1, rentalId);
+			cstmt.execute();
+			System.out.println("포로시저 종료");
+			System.out.println("db연결");
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("sql 입력");
+			rs = pstmt.executeQuery();
+			// if (rs.next()) {
+			// place = new Place(rs.getString("PLACE_ID"),
+			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
+			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
+			// rs.getString("PLACE_NAME"),
+			// rs.getString("POST_ID"));
+			// }
+			while (rs.next()) {
+				timeSearch = new TimeSearch(rs.getString("FULL_HOUR"),rs.getString("START_HOUR"));
 				list.add(timeSearch);
 				System.out.println("완료");
 			}
@@ -57,17 +154,20 @@ public class DaoAjax extends DaoSet {
 		}
 		return list;
 	}
+	
+	
+	
 
 	public List timeSearch(String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
-		String sql = "select r.RENTAL_ID,p.post_gu,pl.PLACE_NAME , to_char(o.order_date, 'YYYY/MM/DD') as order_date, "
+		String sql = "select r.RENTAL_ID,p.post_gu,pl.PLACE_NAME , to_char(o.start_time, 'YYYY/MM/DD') as order_date, "
 				+ "to_char(o.start_time, 'YYYY/MM/DD HH24') as start_time, to_char(o.end_time+1/(24*60*60), 'YYYY/MM/DD HH24:MI') as end_time, "
 				+ "i.rental_category, i.rental_model, i.rental_info, i.model_photo, i.rental_fee,O.RENTAL_FULL "
 				+ "from place pl,post p,rental r, rental_item i, rental_order o	"
 				+ "where pl.PLACE_ID=r.PLACE_ID and p.POST_ID=pl.POST_ID "
 				+ "and r.RENTAL_ID=o.RENTAL_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID "
-				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-10 order by pl.PLACE_ID,r.RENTAL_ID,o.start_time";
+				+ "and r.RENTAL_ID=?  and o.START_TIME>sysdate-50 order by pl.PLACE_ID,r.RENTAL_ID,o.start_time";
 		try {
 			conn = connDB();
 			System.out.println("db연결");

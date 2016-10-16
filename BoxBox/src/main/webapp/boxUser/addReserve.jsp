@@ -25,20 +25,20 @@
 	for (int i = 0; i < timeSearch.size(); i++) {
 
 		TimeSearch timeSearch1 = (TimeSearch) timeSearch.get(i);
-		if (timeSearch1.getRentalFull().equals("1")) {
+		if (!timeSearch1.getRentalFull().equals("0")) {
 			full = false;
 			System.out.println(timeSearch1.getRentalFull() + "//" + full);
 			System.out.println("예약 불가능함");
 		}
-		if (!timeSearch1.getRentalFull().equals("1")) {
+		if (timeSearch1.getRentalFull().equals("0")) {
 			full = true;
 			System.out.println(timeSearch1.getRentalFull() + "//" + full);
 			System.out.println("예약 가능함");
 		}
 	}
-	if(timeSearch.size()==0){
-		full = true;
-	}
+// 	if(timeSearch.size()==0){
+// 		full = true;
+// 	}
 	int time1=0;
 	if (full == true || timeSearch.size()==0) {
 		timeSearch = daoAjax.timeSearch(rentalId);
