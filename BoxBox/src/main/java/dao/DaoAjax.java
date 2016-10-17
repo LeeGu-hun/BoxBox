@@ -5,12 +5,138 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import place.Dong;
+import place.Gu;
 import place.Place;
+import place.Street;
 import rental.Rental;
 import rental.RentalSearch;
 import rental.TimeSearch;
 
 public class DaoAjax extends DaoSet {
+	
+	public List comboStreet(String dong) {
+		List list = new ArrayList();
+		Street street = null;
+		String sql = "select distinct post_id, post_street from post where POST_dong=? ";
+		try {
+			conn = connDB();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dong);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				street = new Street(rs.getString("POST_STREET"), rs.getString("POST_ID"));
+				list.add(street);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public List comboDong(String gu) {
+		List list = new ArrayList();
+		Dong dong = null;
+		String sql = "select distinct post_dong from post where POST_gu=? ";
+		try {
+			conn = connDB();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, gu);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				dong = new Dong(rs.getString("POST_DONG"));
+				list.add(dong);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public List comboGu(String city) {
+		List list = new ArrayList();
+		Gu gu = null;
+		String sql = "select distinct post_gu from post where POST_CITY=? ";
+		try {
+			conn = connDB();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, city);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				gu = new Gu(rs.getString("POST_GU"));
+				list.add(gu);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	public void insertPlace(String placeName,String postId,String userId) {
+		String sql = "insert into place(place_id, place_name, post_id, user_id) values(seq_place.nextval,?,? ,?)";
+		try {
+			conn = connDB();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,placeName);
+			pstmt.setString(2,postId);
+			pstmt.setString(3,userId);
+
+			String result=(pstmt.executeUpdate() == 0) ? "실패" : "성공";
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	
 	
 	public List fullEmpty(String start, String end, String rentalId) {
 		List list = new ArrayList();
@@ -29,18 +155,6 @@ public class DaoAjax extends DaoSet {
 			pstmt = conn.prepareStatement(sql);
 			System.out.println("sql 입력");
 			rs = pstmt.executeQuery();
-			// if (rs.next()) {
-			// place = new Place(rs.getString("PLACE_ID"),
-			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-			// rs.getString("PLACE_NAME"),
-			// rs.getString("POST_ID"));
-			// }
-			// if(!rs.next()){
-			// timeSearch = new TimeSearch("0");
-			// list.add(timeSearch);
-			// System.out.println("완료");
-			// }
 			while (rs.next()) {
 				timeSearch = new TimeSearch(rs.getString("CNT"));
 				list.add(timeSearch);
@@ -64,53 +178,7 @@ public class DaoAjax extends DaoSet {
 		return list;
 	}
 	
-	
-//	public List fullEmpty(String start, String end, String rentalId) {
-//		List list = new ArrayList();
-//		TimeSearch timeSearch = null;
-//		String sql = "select rental_full from rental_order where to_char(start_time,'HH24')>=? and to_char(end_time,'HH24')<=? and rental_id = ?";
-//		try {
-//			conn = connDB();
-//			System.out.println("db연결");
-//			pstmt = conn.prepareStatement(sql);
-//			System.out.println("sql 입력");
-//			pstmt.setString(1, start);
-//			pstmt.setString(2, end);
-//			pstmt.setString(3, rentalId);
-//			rs = pstmt.executeQuery();
-//			// if (rs.next()) {
-//			// place = new Place(rs.getString("PLACE_ID"),
-//			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-//			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-//			// rs.getString("PLACE_NAME"),
-//			// rs.getString("POST_ID"));
-//			// }
-//			// if(!rs.next()){
-//			// timeSearch = new TimeSearch("0");
-//			// list.add(timeSearch);
-//			// System.out.println("완료");
-//			// }
-//			while (rs.next()) {
-//				timeSearch = new TimeSearch(rs.getString("RENTAL_FULL"));
-//				list.add(timeSearch);
-//				System.out.println("완료");
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				if (pstmt != null) {
-//					pstmt.close();
-//				}
-//				if (rs != null) {
-//					rs.close();
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return list;
-//	}
+
 	public List timeSearch1(String rentalId) {
 		List list = new ArrayList();
 		TimeSearch timeSearch = null;
@@ -126,13 +194,6 @@ public class DaoAjax extends DaoSet {
 			pstmt = conn.prepareStatement(sql);
 			System.out.println("sql 입력");
 			rs = pstmt.executeQuery();
-			// if (rs.next()) {
-			// place = new Place(rs.getString("PLACE_ID"),
-			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-			// rs.getString("PLACE_NAME"),
-			// rs.getString("POST_ID"));
-			// }
 			while (rs.next()) {
 				timeSearch = new TimeSearch(rs.getString("FULL_HOUR"),rs.getString("START_HOUR"));
 				list.add(timeSearch);
@@ -175,13 +236,7 @@ public class DaoAjax extends DaoSet {
 			System.out.println("sql 입력");
 			pstmt.setString(1, rentalId);
 			rs = pstmt.executeQuery();
-			// if (rs.next()) {
-			// place = new Place(rs.getString("PLACE_ID"),
-			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-			// rs.getString("PLACE_NAME"),
-			// rs.getString("POST_ID"));
-			// }
+
 			while (rs.next()) {
 				timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),
 						rs.getString("ORDER_DATE"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),
@@ -217,13 +272,7 @@ public class DaoAjax extends DaoSet {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, postId);
 			rs = pstmt.executeQuery();
-			// if (rs.next()) {
-			// place = new Place(rs.getString("PLACE_ID"),
-			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-			// rs.getString("PLACE_NAME"),
-			// rs.getString("POST_ID"));
-			// }
+
 			while (rs.next()) {
 				place = new Place(rs.getString("PLACE_ID"), rs.getString("POST_CITY"), rs.getString("POST_GU"),
 						rs.getString("POST_DONG"), rs.getString("POST_STREET"), rs.getString("PLACE_NAME"),
@@ -257,13 +306,7 @@ public class DaoAjax extends DaoSet {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, postId);
 			rs = pstmt.executeQuery();
-			// if (rs.next()) {
-			// place = new Place(rs.getString("PLACE_ID"),
-			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-			// rs.getString("PLACE_NAME"),
-			// rs.getString("POST_ID"));
-			// }
+
 			while (rs.next()) {
 				rental = new Rental(rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"));
 				list.add(rental);
@@ -294,13 +337,7 @@ public class DaoAjax extends DaoSet {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cate);
 			rs = pstmt.executeQuery();
-			// if (rs.next()) {
-			// place = new Place(rs.getString("PLACE_ID"),
-			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-			// rs.getString("PLACE_NAME"),
-			// rs.getString("POST_ID"));
-			// }
+
 			while (rs.next()) {
 				rental = new Rental(rs.getString("RENTAL_ITEM_ID"), rs.getString("RENTAL_INFO"),
 						rs.getString("RENTAL_FEE"));
@@ -334,13 +371,7 @@ public class DaoAjax extends DaoSet {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, placeName);
 			rs = pstmt.executeQuery();
-			// if (rs.next()) {
-			// place = new Place(rs.getString("PLACE_ID"),
-			// rs.getString("POST_CITY"), rs.getString("POST_GU"),
-			// rs.getString("POST_DONG"), rs.getString("POST_STREET"),
-			// rs.getString("PLACE_NAME"),
-			// rs.getString("POST_ID"));
-			// }
+
 			while (rs.next()) {
 				rentalSearch = new RentalSearch(rs.getString("RENTAL_ID"), rs.getString("POST_GU"),
 						rs.getString("PLACE_NAME"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),

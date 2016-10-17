@@ -13,6 +13,8 @@
 		<property name="authService" ref="authService" />
 		<property name="changePasswordService" ref="changePwdSvc" />
 		<property name="memberRegisterService" ref="memberRegSvc" />
+		<property name="placeAdminService" ref="placeAdminSvc" />
+		<property name="placeService" ref="placeSvc" />
 	</bean>
 	<bean class="controller.MemberController">
 		<property name="authService" ref="authService" />
@@ -28,7 +30,6 @@
 	<bean id="changePwdSvc" class="member.ChangeInfoService">
 		<constructor-arg ref="daoMember" />
 	</bean>
-
 	<bean id="memberRegSvc" class="member.MemberRegisterService">
 		<constructor-arg ref="daoMember" />
 	</bean>
@@ -37,5 +38,8 @@
 	</bean>
 	<bean id="daoMemberAdmin" class="dao.DaoMemberAdmin">
 		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="placeAdminSvc" class="place.PlaceAdminService">
+		<constructor-arg ref="daoMemberAdmin" />
 	</bean>
 </beans>

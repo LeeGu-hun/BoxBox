@@ -181,7 +181,7 @@ body {
 	float: left;		
 }
 
-.menuAdmin li {
+.menuAdmin li #menuAdmin {
 	width: 20%;
 	height: 100px;
 	list-style: none;
@@ -192,7 +192,7 @@ body {
 	color: white;
 }
 
-.menuAdmin li:hover {
+.menuAdmin li:hover #menuAdmin:hover {
 	color: red;
 	font-weight: bold;	
 }

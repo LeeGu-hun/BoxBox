@@ -30,9 +30,9 @@ public class PlaceService {
 		return results;
 	}
 
-	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice, String password) {
-		OrderInsert results = daoMember.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
-		return results;
+	public void orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice, String password) {
+		daoMember.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
+
 	}
 	public void delete(String orderListId) {
 		daoMember.delete(orderListId);
@@ -40,6 +40,10 @@ public class PlaceService {
 	}
 	public List<MyRental> myrental(String userId){
 		List<MyRental> results = daoMember.myRental(userId);
+		return results;
+	}
+	public List<City> selectCity(){
+		List<City> results = daoMember.selectCity();
 		return results;
 	}
 	// public TimeSearch timeSearch(String rentalId, String startTime, String

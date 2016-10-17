@@ -183,17 +183,22 @@ public class LoginController {
 		String password = String.valueOf((Math.round(9999 * Math.random()) + 1000));
 		System.out.println(password);
 		try {
-			OrderInsert orderInsert = placeService.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
+			placeService.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
 			System.out.println("주문완료");
 			return "dirMem/orderRegist";
 		} catch (Exception e) {
 			System.out.println("주문 에러");
 			e.printStackTrace();
 			return "dirMem/orderRegist";
+		} finally{
+			place = placeService.comboPost();
+			model.addAttribute("place", place);
+			return "dirMem/orderRegist";
 		}
 	}
 	@RequestMapping("/main")
 	public String main(HttpSession session,Model model) {
+		System.out.println("main리퀘스트매핑");
 		List<Place> place = placeService.comboPost();
 		model.addAttribute("place", place);
 		return "main";
