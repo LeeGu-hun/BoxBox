@@ -12,6 +12,15 @@ public class Place {
 		this.postId = postId;
 		this.dong = dong;
 	}
+	
+
+	public Place(String id, String name, String postId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.postId = postId;
+	}
+
 
 	public Place(String postId, String city, String gu, String dong) {
 		this.city = city;

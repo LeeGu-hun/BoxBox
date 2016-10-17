@@ -3,8 +3,8 @@ package place;
 import java.util.List;
 
 import dao.DaoMember;
+import memberAdmin.Item;
 import rental.MyRental;
-import rental.OrderInsert;
 import rental.TimeSearch;
 
 public class PlaceService {
@@ -17,6 +17,14 @@ public class PlaceService {
 
 	public List<Place> comboPlace(String postId) {
 		List<Place> results = daoMember.comboPlace(postId);
+		return results;
+	}
+	public List<Place> placeAll() {
+		List<Place> results = daoMember.placeAll();
+		return results;
+	}
+	public List<Item> itemAll() {
+		List<Item> results = daoMember.itemAll();
 		return results;
 	}
 

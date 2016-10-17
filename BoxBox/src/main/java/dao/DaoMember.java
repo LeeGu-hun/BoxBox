@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 
 import member.Member;
+import memberAdmin.Item;
 import place.City;
 import place.Place;
 import rental.MyRental;
@@ -34,22 +35,25 @@ public class DaoMember {
 		List<MyRental> results = jdbcTemplate.query(sql, new RowMapper<MyRental>() {
 			public MyRental mapRow(ResultSet rs, int rowNum) throws SQLException {
 				MyRental MyRental = new MyRental(rs.getString("USER_ID"), rs.getString("RENTAL_ID"),
-						rs.getString("PLACE_NAME"), rs.getString("START_TIME"),rs.getString("END_TIME").split(" ")[1], rs.getString("ORDER_PRICE"), rs.getString("RENTAL_CATEGORY"),
-						rs.getString("MODEL_PHOTO"), rs.getString("PASSWORD"),rs.getString("ORDER_LIST_ID"));
+						rs.getString("PLACE_NAME"), rs.getString("START_TIME"), rs.getString("END_TIME").split(" ")[1],
+						rs.getString("ORDER_PRICE"), rs.getString("RENTAL_CATEGORY"), rs.getString("MODEL_PHOTO"),
+						rs.getString("PASSWORD"), rs.getString("ORDER_LIST_ID"));
 				return MyRental;
 			}
 		}, userId);
 
 		return results;
 	}
-	public void orderInsert(final String rentalId,final String userId,final  String startTime,final  String endTime,final  String orderPrice,final String password) {
+
+	public void orderInsert(final String rentalId, final String userId, final String startTime, final String endTime,
+			final String orderPrice, final String password) {
 		final String sql = "insert into rental_order values(seq_order_list.nextval,?,?,to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS'),"
 				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24, "
 				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24 - 1/(24*60*60), ?, 1,?)";
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement pstmt = con.prepareStatement(sql);
-				pstmt.setString(1,rentalId);
+				pstmt.setString(1, rentalId);
 				pstmt.setString(2, userId);
 				pstmt.setString(3, startTime);
 				pstmt.setString(4, endTime);
@@ -59,20 +63,26 @@ public class DaoMember {
 			}
 		});
 	}
-//	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice,
-//			String password) {
-//		
-//		List<OrderInsert> results = jdbcTemplate.execute(sql)(sql, new RowMapper<OrderInsert>() {
-//			public OrderInsert mapRow(ResultSet rs, int rowNum) throws SQLException {
-//				OrderInsert orderInsert = new OrderInsert(rs.getString("RENTAL_ID"), rs.getString("USER_ID"),
-//						rs.getString("ORDER_DATE"), rs.getString("START_TIME"), rs.getString("END_TIME"),
-//						rs.getString("ORDER_PRICE"), rs.getString("RENTAL_FULL"), rs.getString("PASSWORD"));
-//				return orderInsert;
-//			}
-//		}, rentalId, userId, startTime, endTime, orderPrice, password);
-//
-//		return results.isEmpty() ? null : results.get(0);
-//	}
+
+	// public OrderInsert orderInsert(String rentalId, String userId, String
+	// startTime, String endTime, String orderPrice,
+	// String password) {
+	//
+	// List<OrderInsert> results = jdbcTemplate.execute(sql)(sql, new
+	// RowMapper<OrderInsert>() {
+	// public OrderInsert mapRow(ResultSet rs, int rowNum) throws SQLException {
+	// OrderInsert orderInsert = new OrderInsert(rs.getString("RENTAL_ID"),
+	// rs.getString("USER_ID"),
+	// rs.getString("ORDER_DATE"), rs.getString("START_TIME"),
+	// rs.getString("END_TIME"),
+	// rs.getString("ORDER_PRICE"), rs.getString("RENTAL_FULL"),
+	// rs.getString("PASSWORD"));
+	// return orderInsert;
+	// }
+	// }, rentalId, userId, startTime, endTime, orderPrice, password);
+	//
+	// return results.isEmpty() ? null : results.get(0);
+	// }
 	public List<City> selectCity() {
 		List<City> results = jdbcTemplate.query("select distinct post_city from post", new RowMapper<City>() {
 			public City mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -83,9 +93,7 @@ public class DaoMember {
 
 		return results;
 	}
-	
-	
-	
+
 	public TimeSearch timeSearch(String rentalId) {
 		String sql = "select r.RENTAL_ID,p.post_gu,pl.PLACE_NAME , to_char(o.order_date, 'YYYY/MM/DD') as order_date, "
 				+ "to_char(o.start_time, 'YYYY/MM/DD HH24') as start_time, to_char(o.end_time+1/(24*60*60), 'YYYY/MM/DD HH24:MI') as end_time, "
@@ -162,6 +170,7 @@ public class DaoMember {
 	public void memberDelete(Member member) {
 		jdbcTemplate.update("delete from MEMBER where EMAIL = ?", member.getEmail());
 	}
+
 	public void delete(String orderListId) {
 		jdbcTemplate.update("delete from rental_order where order_list_id = ?", orderListId);
 		System.out.println("반납 완료");
@@ -178,6 +187,32 @@ public class DaoMember {
 						return place;
 					}
 				});
+		return results;
+
+	}
+
+	public List<Place> placeAll() {
+		System.out.println("comboPlace 메서드 작동");
+		List<Place> results = jdbcTemplate.query("select*from place", new RowMapper<Place>() {
+			public Place mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Place place = new Place(rs.getString("PLACE_ID"), rs.getString("PLACE_NAME"), rs.getString("POST_ID"));
+				return place;
+			}
+		});
+		return results;
+
+	}
+
+	public List<Item> itemAll() {
+		System.out.println("comboPlace 메서드 작동");
+		List<Item> results = jdbcTemplate.query("select*from rental_item", new RowMapper<Item>() {
+			public Item mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Item item = new Item(rs.getString("RENTAL_ITEM_ID"), rs.getString("RENTAL_CATEGORY"),
+						rs.getString("RENTAL_MODEL"), rs.getString("RENTAL_INFO"), rs.getString("RENTAL_FEE"),
+						rs.getString("MODEL_PHOTO"));
+				return item;
+			}
+		});
 		return results;
 
 	}

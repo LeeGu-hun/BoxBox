@@ -21,7 +21,9 @@
 			<li
 				onClick="location.href='<%=request.getContextPath()%>/adminPlace'">
 				관리소관리</li>
-			<li onClick="location.href='rentalDisplay.jsp'">대여관리</li>
+			<li
+				onClick="location.href='<%=request.getContextPath()%>/adminRental'">
+				상품관리</li>
 			<li onClick="location.href='rentalItemDisplay.jsp'">물품관리</li>
 			<li onClick="location.href='memberDisplay.jsp'">회원관리</li>
 			<li onClick="location.href='profit.jsp'">매출현황</li>
