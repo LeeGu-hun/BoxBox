@@ -149,15 +149,15 @@ function addReserve() {
 			<td colspan=2>
 				<hr> <br>
 				<h2>조회결과</h2>
+				<table class="rentalDisplay" id="rentalSearch" name="rentalSearch">
+
+				</table> <br>
 				<div id='popupDiv' name='popupDiv' style="display: none;">
 					<table id='popupTbl' name='popupTbl'>
 
 
 					</table>
 				</div>
-				<table class="rentalDisplay" id="rentalSearch" name="rentalSearch">
-
-				</table> <br>
 			</td>
 		</tr>
 

@@ -39,6 +39,7 @@
 			<td id='col5'>카테고리</td>
 			<td id='col6'>상품 사진</td>
 			<td id='col7'>비밀번호</td>
+			<td id='col8'>반납</td>
 		</tr>
 		<c:forEach var="RentalInfo" items="${requestScope.RentalInfo}">
 			<tr id='row'>
@@ -50,6 +51,7 @@
 				<td id='col6'><img
 					src="<%=request.getContextPath() %>/images/${RentalInfo.photo }" /></td>
 				<td id='col7'>${RentalInfo.password }</td>
+				<td id='col8'><form method="post" action="delete"><input type="submit" id='btn' value="반 납" /></form></td>
 			</tr>
 		</c:forEach>
 	</table>

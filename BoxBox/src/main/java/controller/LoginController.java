@@ -77,6 +77,14 @@ public class LoginController {
 		model.addAttribute("RentalInfo",rentalInfo);
 		return "dirMem/rentalInfo";
 	}
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(HttpSession session, HttpServletRequest request,Model model) {
+		System.out.println("/myrental 컨트롤러");
+		String userId = request.getParameter("userId");
+		List<MyRental> rentalInfo = placeService.myrental(userId);
+		model.addAttribute("RentalInfo",rentalInfo);
+		return "dirMem/rentalInfo";
+	}
 	// @RequestMapping(value="/payment1" ,method=RequestMethod.POST)
 	// public String payment1(Model model,HttpServletRequest request,HttpSession
 	// session){
