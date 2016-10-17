@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dao.DaoMember;
 import exception.AlreadyExistingMemberException;
 import exception.IdPasswordNotMatchingException;
 import exception.MemberNotFoundException;
@@ -28,17 +28,12 @@ import member.RegisterRequestValidator;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	private DaoMember daoMember;
 	private MemberRegisterService memberRegisterService;
 	private ChangeInfoService changePasswordService;
 	private AuthService authService;
 
 	public void setChangePasswordService(ChangeInfoService changePasswordService) {
 		this.changePasswordService = changePasswordService;
-	}
-
-	public void setDaoMember(DaoMember daoMember) {
-		this.daoMember = daoMember;
 	}
 
 	public void setMemberRegisterService(MemberRegisterService memberRegisterService) {
@@ -48,7 +43,6 @@ public class MemberController {
 	public void setAuthService(AuthService authService) {
 		this.authService = authService;
 	}
-
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String handleStep3(RegisterRequest rr, Errors errors, Model model, HttpSession session) {
 		System.out.println("리퀘스트 매핑 /regist post");
@@ -64,7 +58,7 @@ public class MemberController {
 			AuthInfo authInfo = authService.authenticate(rr.getEmail(), rr.getPassword());
 			session.setAttribute("authInfo", authInfo);
 			model.addAttribute("memberName", rr.getName());
-			
+
 			return "dirMem/joinSuccess";
 		} catch (AlreadyExistingMemberException ex) {
 			System.out.println("메일 중복");
@@ -83,9 +77,10 @@ public class MemberController {
 	// return "member/memberDetail";
 	// }
 
+
 	@RequestMapping(value = "/changeInfo", method = RequestMethod.GET)
-	public String form(@ModelAttribute("command") ChangeInfoCommand pwdCmd, Errors errors, HttpSession session) {	
-			session.getAttribute("authInfo");
+	public String form(@ModelAttribute("command") ChangeInfoCommand pwdCmd, Errors errors, HttpSession session) {
+		session.getAttribute("authInfo");
 		return "dirMem/changeInfoForm";
 	}
 

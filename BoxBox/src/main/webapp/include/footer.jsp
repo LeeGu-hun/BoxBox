@@ -10,7 +10,7 @@
 			<span>|전화번호|</span>&nbsp;051-833-0000&nbsp;<span>|FAX번호|</span>&nbsp;051-833-0001&nbsp;<span>|e-mail|</span>ceo@boxbox.com
 		</span><br>
 		<span>
-			<span>|공동대표|</span>&nbsp;이찬윤, 장시현, 박정훈, 정구현&nbsp;<span>|사업자등록번호|</span>&nbsp;000-00-00000
+			<span>|공동대표|</span>&nbsp;이찬윤, 장시현, 김창환, 박정훈, 김민, 정구현&nbsp;<span>|사업자등록번호|</span>&nbsp;000-00-00000
 		</span><br>
 		<span>
 			<span>Copyright@2016 BoxBox. All Right Reserved.</span>

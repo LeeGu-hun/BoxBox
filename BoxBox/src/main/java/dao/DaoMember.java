@@ -14,7 +14,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import member.Member;
 import place.Place;
-import rental.RentalSearch;
+import rental.MyRental;
+import rental.OrderInsert;
 import rental.TimeSearch;
 
 public class DaoMember {
@@ -22,6 +23,40 @@ public class DaoMember {
 
 	public DaoMember(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	public List<MyRental> myRental(String userId) {
+		String sql = "select o.USER_ID,o.RENTAL_ID,pl.PLACE_NAME,TO_CHAR(o.start_time, 'MM.DD HH24') as START_TIME , "
+				+ "TO_CHAR(o.END_time+1/(24*60*60),'MM.DD HH24') as END_TIME,o.ORDER_PRICE,i.RENTAL_CATEGORY,"
+				+ "i.MODEL_PHOTO,o.PASSWORD,o.order_list_id from rental_order o,member m,place pl,rental r,RENTAL_ITEM i where o.USER_ID = m.USER_ID "
+				+ "and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID and r.PLACE_ID=pl.PLACE_ID and r.RENTAL_ID=o.RENTAL_ID and o.USER_ID=?";
+		List<MyRental> results = jdbcTemplate.query(sql, new RowMapper<MyRental>() {
+			public MyRental mapRow(ResultSet rs, int rowNum) throws SQLException {
+				MyRental MyRental = new MyRental(rs.getString("USER_ID"), rs.getString("RENTAL_ID"),
+						rs.getString("PLACE_NAME"), rs.getString("START_TIME"),rs.getString("END_TIME").split(" ")[1], rs.getString("ORDER_PRICE"), rs.getString("RENTAL_CATEGORY"),
+						rs.getString("MODEL_PHOTO"), rs.getString("PASSWORD"),rs.getString("ORDER_LIST_ID"));
+				return MyRental;
+			}
+		}, userId);
+
+		return results;
+	}
+
+	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice,
+			String password) {
+		String sql = "insert into rental_order values(seq_order_list.nextval,?,?,to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS'),"
+				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24, "
+				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24 - 1/(24*60*60), ?, 1,?)";
+		List<OrderInsert> results = jdbcTemplate.query(sql, new RowMapper<OrderInsert>() {
+			public OrderInsert mapRow(ResultSet rs, int rowNum) throws SQLException {
+				OrderInsert orderInsert = new OrderInsert(rs.getString("RENTAL_ID"), rs.getString("USER_ID"),
+						rs.getString("ORDER_DATE"), rs.getString("START_TIME"), rs.getString("END_TIME"),
+						rs.getString("ORDER_PRICE"), rs.getString("RENTAL_FULL"), rs.getString("PASSWORD"));
+				return orderInsert;
+			}
+		}, rentalId, userId, startTime, endTime, orderPrice, password);
+
+		return results.isEmpty() ? null : results.get(0);
 	}
 
 	// public TimeSearch timeSearch(String rentalId, String startTime, String
@@ -77,7 +112,8 @@ public class DaoMember {
 				TimeSearch timeSearch = new TimeSearch(rs.getString("RENTAL_ID"), rs.getString("PLACE_NAME"),
 						rs.getString("ORDER_DATE"), rs.getString("RENTAL_CATEGORY"), rs.getString("RENTAL_MODEL"),
 						rs.getString("RENTAL_INFO"), rs.getString("MODEL_PHOTO"), rs.getString("RENTAL_FEE"),
-						rs.getString("RENTAL_FULL"), rs.getString("START_TIME"), rs.getString("END_TIME"),rs.getString("POST_GU"));
+						rs.getString("RENTAL_FULL"), rs.getString("START_TIME"), rs.getString("END_TIME"),
+						rs.getString("POST_GU"));
 				return timeSearch;
 			}
 		}, rentalId);
@@ -138,6 +174,10 @@ public class DaoMember {
 
 	public void memberDelete(Member member) {
 		jdbcTemplate.update("delete from MEMBER where EMAIL = ?", member.getEmail());
+	}
+	public void delete(String orderListId) {
+		jdbcTemplate.update("delete from rental_order where order_list_id = ?", orderListId);
+		System.out.println("반납 완료");
 	}
 
 	public List<Place> comboPost() {

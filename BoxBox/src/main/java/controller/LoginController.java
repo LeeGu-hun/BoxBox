@@ -26,6 +26,8 @@ import member.RegisterRequest;
 import member.RegisterRequestValidator;
 import place.Place;
 import place.PlaceService;
+import rental.MyRental;
+import rental.OrderInsert;
 import rental.TimeSearch;
 
 @Controller
@@ -33,7 +35,7 @@ public class LoginController {
 	private AuthService authService;
 	private MemberRegisterService memberRegisterService;
 	private PlaceService placeService;
-	
+
 	public void setPlaceService(PlaceService placeService) {
 		this.placeService = placeService;
 	}
@@ -67,30 +69,52 @@ public class LoginController {
 			return "main";
 		}
 	}
-//	@RequestMapping(value="/payment1" ,method=RequestMethod.POST)
-//	public String payment1(Model model,HttpServletRequest request,HttpSession session){
-//		String rentalId=request.getParameter("rentalId");
-//		String orderDate = request.getParameter("orderDate");
-//		String orderDate1 = request.getParameter("orderDate1");
-//		String startTime = request.getParameter("startTime");
-//		String endTime = request.getParameter("endTime");
-//		System.out.println(rentalId+"/"+orderDate+"/"+orderDate1+"/"+startTime+"/"+endTime);
-//		TimeSearch timeSearch = placeService.timeSearch(rentalId, startTime, endTime, orderDate, orderDate1);
-//		model.addAttribute("TimeSearch",timeSearch);
-//		return "boxUser/rentalOrder";
-//	}
-	@RequestMapping(value="/payment" ,method=RequestMethod.GET)
-	public String payment(Model model,HttpServletRequest request,HttpSession session){
-		String placeName=request.getParameter("pname");
+	@RequestMapping(value = "/myrental", method = RequestMethod.POST)
+	public String myrental(HttpSession session, HttpServletRequest request,Model model) {
+		System.out.println("/myrental 컨트롤러");
+		String userId = request.getParameter("userId");
+		List<MyRental> rentalInfo = placeService.myrental(userId);
+		model.addAttribute("RentalInfo",rentalInfo);
+		return "dirMem/rentalInfo";
+	}
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(HttpSession session, HttpServletRequest request,Model model) {
+		System.out.println("/delete 컨트롤러");
+		String orderListId = request.getParameter("orderListId");
+		System.out.println(orderListId);
+		placeService.delete(orderListId);
+		String userId = request.getParameter("userId");
+		List<MyRental> rentalInfo = placeService.myrental(userId);
+		model.addAttribute("RentalInfo",rentalInfo);
+		return "dirMem/rentalInfo";
+	}
+	// @RequestMapping(value="/payment1" ,method=RequestMethod.POST)
+	// public String payment1(Model model,HttpServletRequest request,HttpSession
+	// session){
+	// String rentalId=request.getParameter("rentalId");
+	// String orderDate = request.getParameter("orderDate");
+	// String orderDate1 = request.getParameter("orderDate1");
+	// String startTime = request.getParameter("startTime");
+	// String endTime = request.getParameter("endTime");
+	// System.out.println(rentalId+"/"+orderDate+"/"+orderDate1+"/"+startTime+"/"+endTime);
+	// TimeSearch timeSearch = placeService.timeSearch(rentalId, startTime,
+	// endTime, orderDate, orderDate1);
+	// model.addAttribute("TimeSearch",timeSearch);
+	// return "boxUser/rentalOrder";
+	// }
+	@RequestMapping(value = "/payment", method = RequestMethod.GET)
+	public String payment(Model model, HttpServletRequest request, HttpSession session) {
+		String placeName = request.getParameter("pname");
 		System.out.println(placeName);
-		TimeSearch  timeSearch= placeService.timeSearch(placeName);
-		model.addAttribute("TimeSearch",timeSearch);
+		TimeSearch timeSearch = placeService.timeSearch(placeName);
+		model.addAttribute("TimeSearch", timeSearch);
 
 		return "boxUser/rentalOrder";
 	}
+
 	@RequestMapping("/join")
 	public String join(RegisterRequest rr) {
-
+		
 		return "dirMem/join1";
 	}
 
@@ -100,11 +124,12 @@ public class LoginController {
 			loginCommand.setEmail(rCookie.getValue());
 			loginCommand.setRememberEmail(true);
 		}
-		return "dirMem/login";
+		
+		return "dirMem/join";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String form(LoginCommand loginCommand, Errors errors,Model model,
+	public String form(LoginCommand loginCommand, Errors errors, Model model,
 			// BoardCommand boardCmd,
 			HttpSession session, HttpServletResponse response) {
 		System.out.println("login 컨트롤러 접속");
@@ -114,8 +139,8 @@ public class LoginController {
 			return "main";
 		}
 		try {
-//			List<Place> place = placeService.comboPlace();
-//			model.addAttribute("place", place);
+			// List<Place> place = placeService.comboPlace();
+			// model.addAttribute("place", place);
 			System.out.println("콤보박스 세팅");
 			List<Place> place = placeService.comboPost();
 			model.addAttribute("place", place);
@@ -144,6 +169,35 @@ public class LoginController {
 		}
 	}
 
+	@RequestMapping(value = "/orderRegist", method = RequestMethod.POST)
+	public String orderRegist(Model model, HttpSession session, HttpServletResponse response,
+			HttpServletRequest request) {
+		System.out.println("login 컨트롤러  orderRegist접속");
+		List<Place> place = placeService.comboPost();
+		model.addAttribute("place", place);
+		String rentalId = request.getParameter("rentalId1");
+		String userId = request.getParameter("userId1");
+		String startTime = request.getParameter("startTime1");
+		String endTime = request.getParameter("endTime1");
+		String orderPrice = request.getParameter("orderPrice1");
+		String password = String.valueOf((Math.round(9999 * Math.random()) + 1000));
+		System.out.println(password);
+		try {
+			OrderInsert orderInsert = placeService.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
+			System.out.println("주문완료");
+			return "dirMem/orderRegist";
+		} catch (Exception e) {
+			System.out.println("주문 에러");
+			e.printStackTrace();
+			return "dirMem/orderRegist";
+		}
+	}
+	@RequestMapping("/main")
+	public String main(HttpSession session,Model model) {
+		List<Place> place = placeService.comboPost();
+		model.addAttribute("place", place);
+		return "main";
+	}
 	@RequestMapping("/logout")
 	public String form(HttpSession session) {
 		session.invalidate();

@@ -1,11 +1,12 @@
 package member;
 
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.DaoMember;
 import exception.AlreadyExistingMemberException;
+import rental.MyRental;
 
 public class MemberRegisterService {
 	private DaoMember daoMember;
@@ -16,6 +17,7 @@ public class MemberRegisterService {
 
 	public MemberRegisterService() {
 	}
+
 
 	@Transactional
 	public void regist(RegisterRequest registerRequest) {

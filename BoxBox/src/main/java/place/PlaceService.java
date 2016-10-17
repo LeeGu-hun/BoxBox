@@ -3,6 +3,8 @@ package place;
 import java.util.List;
 
 import dao.DaoMember;
+import rental.MyRental;
+import rental.OrderInsert;
 import rental.TimeSearch;
 
 public class PlaceService {
@@ -28,9 +30,23 @@ public class PlaceService {
 		return results;
 	}
 
-//	public TimeSearch timeSearch(String rentalId, String startTime, String endTime, String orderDate,
-//			String orderDate1) {
-//		TimeSearch results = daoMember.timeSearch(rentalId, startTime, endTime, orderDate, orderDate1);
-//		return results;
-//	}
+	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice, String password) {
+		OrderInsert results = daoMember.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
+		return results;
+	}
+	public void delete(String orderListId) {
+		daoMember.delete(orderListId);
+		
+	}
+	public List<MyRental> myrental(String userId){
+		List<MyRental> results = daoMember.myRental(userId);
+		return results;
+	}
+	// public TimeSearch timeSearch(String rentalId, String startTime, String
+	// endTime, String orderDate,
+	// String orderDate1) {
+	// TimeSearch results = daoMember.timeSearch(rentalId, startTime, endTime,
+	// orderDate, orderDate1);
+	// return results;
+	// }
 }
