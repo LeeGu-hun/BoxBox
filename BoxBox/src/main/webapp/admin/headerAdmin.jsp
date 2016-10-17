@@ -24,7 +24,7 @@
 			</li>
 			<li
 				onClick="location.href='<%=request.getContextPath()%>/adminRental'">
-				상품관리
+				대여물품관리
 			</li>
 			<li onClick="location.href='<%=request.getContextPath()%>/adminMember'">
 				회원관리
