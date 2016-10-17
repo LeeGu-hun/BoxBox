@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import member.ChangeInfoService;
 import member.MemberRegisterService;
 import member.RegisterRequest;
 import member.RegisterRequestValidator;
+import rental.MyRental;
 
 @Controller
 @RequestMapping("/member")
@@ -64,7 +66,7 @@ public class MemberController {
 			AuthInfo authInfo = authService.authenticate(rr.getEmail(), rr.getPassword());
 			session.setAttribute("authInfo", authInfo);
 			model.addAttribute("memberName", rr.getName());
-			
+
 			return "dirMem/joinSuccess";
 		} catch (AlreadyExistingMemberException ex) {
 			System.out.println("메일 중복");
@@ -82,10 +84,18 @@ public class MemberController {
 	// model.addAttribute("member", member);
 	// return "member/memberDetail";
 	// }
+	@RequestMapping(value = "/myrental", method = RequestMethod.POST)
+	public String myrental(Errors errors, HttpSession session, HttpServletRequest request,Model model) {
+		System.out.println("/myrental 컨트롤러");
+		String userId = request.getParameter("userId");
+		MyRental rentalInfo = memberRegisterService.myrental(userId);
+		model.addAttribute("RentalInfo",rentalInfo);
+		return "dirMem/rentalInfo";
+	}
 
 	@RequestMapping(value = "/changeInfo", method = RequestMethod.GET)
-	public String form(@ModelAttribute("command") ChangeInfoCommand pwdCmd, Errors errors, HttpSession session) {	
-			session.getAttribute("authInfo");
+	public String form(@ModelAttribute("command") ChangeInfoCommand pwdCmd, Errors errors, HttpSession session) {
+		session.getAttribute("authInfo");
 		return "dirMem/changeInfoForm";
 	}
 

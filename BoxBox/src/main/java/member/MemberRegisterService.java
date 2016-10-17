@@ -1,11 +1,10 @@
 package member;
 
-import java.util.Date;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.DaoMember;
 import exception.AlreadyExistingMemberException;
+import rental.MyRental;
 
 public class MemberRegisterService {
 	private DaoMember daoMember;
@@ -29,5 +28,9 @@ public class MemberRegisterService {
 		System.out.println("Insert 시작");
 		daoMember.insert(newMember);
 		System.out.println("Insert 완료");
+	}
+	public MyRental myrental(String userId){
+		MyRental results = daoMember.myRental(userId);
+		return results;
 	}
 }
