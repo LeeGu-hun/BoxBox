@@ -16,12 +16,12 @@
 <!-- 		</ul> -->
 <!-- 	</div> -->
 	<c:if test="${ !empty authInfo}">
-		<div class="adminName">
-			${authInfo.name }님 환영합니다.<br> 
-<%-- 			<a href="<c:url value='/member/myrental'/>"> --%>
-			<form method="post" action="${pageContext.request.contextPath }/member/myrental" style="display:inline-block;width:300px;">
+		<div class="adminName">			
+			<form method="post" action="myrental">
+				<input type="text" id="nameInfo" style="width: 40%; background: transparent; color: white; border: none; font-size: 17px"
+					 value=" ${authInfo.name }님 환영합니다." disabled/>
 				<input type="hidden" id="userId" name="userId"value="${authInfo.id}">
-				<input type="submit" id="btn" value="My Rental" />
+				<input type="submit" id="btn" value="My Rental" style="width: 20%;" />
 			</form>
 			<a href="<c:url value='/member/changeInfo'/>"><input type="button" id="btn" value="회원정보변경" /></a>
 			<a href="<c:url value='/logout'/>"><input type="button" id="btn" value="로그아웃" /></a>
