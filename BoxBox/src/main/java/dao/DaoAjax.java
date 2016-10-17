@@ -136,6 +136,34 @@ public class DaoAjax extends DaoSet {
 
 	}
 	
+	public void insertRental(String placeId,String itemId) {
+		String sql = "insert into rental(rental_id, place_id, rental_item_id) values (seq_rental.nextval,?,?)";
+		try {
+			conn = connDB();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,placeId);
+			pstmt.setString(2,itemId);
+			
+
+			String result=(pstmt.executeUpdate() == 0) ? "실패" : "성공";
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
 	
 	
 	public List fullEmpty(String start, String end, String rentalId) {

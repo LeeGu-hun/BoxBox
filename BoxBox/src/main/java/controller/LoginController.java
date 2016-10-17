@@ -196,7 +196,7 @@ public class LoginController {
 			return "dirMem/orderRegist";
 		}
 	}
-	@RequestMapping("/main")
+	@RequestMapping("/main.jsp")
 	public String main(HttpSession session,Model model) {
 		System.out.println("main리퀘스트매핑");
 		List<Place> place = placeService.comboPost();

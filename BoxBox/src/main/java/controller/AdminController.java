@@ -13,6 +13,7 @@ import dao.DaoMemberAdmin;
 import login.AuthService;
 import member.ChangeInfoService;
 import member.MemberRegisterService;
+import memberAdmin.Item;
 import place.City;
 import place.Place;
 import place.PlaceAdminService;
@@ -64,5 +65,14 @@ public class AdminController {
 		model.addAttribute("place", place);
 		model.addAttribute("City",city);
 		return "admin/rentalPlaceDisplay";
+	}
+	@RequestMapping(value = "/adminRental")
+	public String adminRental(HttpSession session, HttpServletRequest request,Model model) {
+		System.out.println("/adminRental 컨트롤러");
+		List<Place> place = placeService.placeAll();
+		List<Item> item= placeService.itemAll();
+		model.addAttribute("place", place);
+		model.addAttribute("item", item);
+		return "admin/rentalItemUpdate";
 	}
 }
