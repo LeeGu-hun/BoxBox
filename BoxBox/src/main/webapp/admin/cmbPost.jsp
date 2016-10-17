@@ -19,16 +19,16 @@
 	post = daoAjax.comboPlace(postId);
 	System.out.println("포스트 사이즈 : " + post.size());
 
-	out.print("<table>");
-	out.print("<tr><td>지역번호</td><td>시</td><td>구</td><td>동</td><td>관리소명</td></tr>");
+	out.print("<table class='placeDisplayTable'>");
+	out.print("<tr id='head'><td id='col1'>지역번호</td><td id='col2'>시</td><td id='col3'>구</td><td id='col4'>동</td><td id='col5'>관리소명</td></tr>");
 	for (int i = 0; i < post.size(); i++) {
 		Place place = (Place) post.get(i);
-		out.print("<tr>");
-		out.print("<td>"+place.getPostId()+"</td>");
-		out.print("<td>"+place.getCity()+"</td>");
-		out.print("<td>"+place.getGu()+"</td>");
-		out.print("<td>"+place.getDong()+"</td>");
-		out.print("<td>"+place.getName()+"</td>");
+		out.print("<tr id='row'>");
+		out.print("<td id='col1'>"+place.getPostId()+"</td>");
+		out.print("<td id='col2'>"+place.getCity()+"</td>");
+		out.print("<td id='col3'>"+place.getGu()+"</td>");
+		out.print("<td id='col4'>"+place.getDong()+"</td>");
+		out.print("<td id='col5'>"+place.getName()+"</td>");
 		out.print("</tr>");
 		
 	}

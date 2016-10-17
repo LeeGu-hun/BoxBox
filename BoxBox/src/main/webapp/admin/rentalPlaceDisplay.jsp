@@ -91,7 +91,6 @@
 		<%@include file="/include/header.jsp"%>
 	</c:if>
 </div>
-
 <div class="rentalPlaceDisplay">
 	<h2>관리소 조회</h2>
 	<select class="cmbRental" id="post" name="post">
@@ -107,8 +106,8 @@
 		value="관리소검색" onclick="javascript:postList();" />
 	<hr>
 	<h2>관리소 조회 리스트</h2>
-	<div id="rowDiv" style="height: 200px; overflow-y: auto;"></div>
-	<div class="rentalPlaceInsert">
+	<div id="rowDiv" style="height: 100px; text-align: center; overflow-y: auto;"></div>
+	<div class="rentalPlaceInsert" style="color: white">
 		<h2>관리소 추가</h2>
 		<span id="address">관리소 위치 &nbsp;:&nbsp;</span> <select
 			class="cmbRental" id="city" name="city"

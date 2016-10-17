@@ -10,6 +10,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BoxBox</title>
 </head>
+<div id="header">
+	<c:if test="${ authInfo.type==1}">
+		<%@include file="/admin/headerAdmin.jsp"%>
+	</c:if>
+	<c:if test="${authInfo.type==2 || authInfo.type!=1}">
+		<%@include file="/include/header.jsp"%>
+	</c:if>
+</div>
+
 <div class="profit">
 	<h2>매출현황</h2>
 	<table id="select">
@@ -20,7 +29,7 @@
 					<optgroup label="대여관리소">
 						<option value=""></option>
 					</optgroup>
-				</select>&nbsp;
+				</select>&nbsp;&nbsp;
 				<select class="cmbRental">
 					<optgroup label="카테고리">
 						<option value=""></option>
@@ -47,7 +56,7 @@
 			<td id="col6">대여종료</td>
 			<td id="col7">대여금액</td>			
 		</tr>
-		<tr id="row">
+<!-- 		<tr id="row">
 			<td id="col1">.</td>
 			<td id="col2">.</td>
 			<td id="col3">.</td>
@@ -55,7 +64,7 @@
 			<td id="col5">.</td>
 			<td id="col6">.</td>
 			<td id="col7">.</td>			
-		</tr>		
+		</tr>		 -->
 	</table>
 	<br><hr><br>
 	<span id="total" style="color: white">총 수익</span>&nbsp;&nbsp;&nbsp;<input style="width: 15%;" type="text" disabled />

@@ -20,7 +20,7 @@
 	System.out.println("포스트 사이즈 : " + post.size());
 // 	if (postId.equals("0")) {
 // 	}
-	out.println("<option value = '0'>지역을 선택하세요.</option>");
+	out.println("<option value = '0'>관리소 선택</option>");
 	for (int i = 0; i < post.size(); i++) {
 		Place place = (Place) post.get(i);
 		out.print("<option value = " + place.getPostId());

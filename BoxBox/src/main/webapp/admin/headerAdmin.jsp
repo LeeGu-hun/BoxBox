@@ -20,13 +20,18 @@
 		<ul>
 			<li
 				onClick="location.href='<%=request.getContextPath()%>/adminPlace'">
-				관리소관리</li>
+				관리소관리
+			</li>
 			<li
 				onClick="location.href='<%=request.getContextPath()%>/adminRental'">
-				상품관리</li>
-			<li onClick="location.href='rentalItemDisplay.jsp'">물품관리</li>
-			<li onClick="location.href='memberDisplay.jsp'">회원관리</li>
-			<li onClick="location.href='profit.jsp'">매출현황</li>
+				상품관리
+			</li>
+			<li onClick="location.href='<%=request.getContextPath()%>/adminMember'">
+				회원관리
+			</li>
+			<li onClick="location.href='<%=request.getContextPath()%>/adminProfit'">
+				매출현황
+			</li>
 		</ul>
 	</div>
 	<div class="adminName">

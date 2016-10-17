@@ -25,6 +25,15 @@
 	}
 </script>
 </head>
+<div id="header">
+	<c:if test="${ authInfo.type==1}">
+		<%@include file="/admin/headerAdmin.jsp"%>
+	</c:if>
+	<c:if test="${authInfo.type==2 || authInfo.type!=1}">
+		<%@include file="/include/header.jsp"%>
+	</c:if>
+</div>
+
 <div class="memberDisplay">
 	<h2>사용자 검색</h2>
 	<table id="select">
@@ -46,17 +55,13 @@
 			<td id="col1">e-mail</td>
 			<td id="col4">비밀번호</td>						
 		</tr>
-		<tr id="row">
+<!-- 		<tr id="row">
 			<td id="col2">.</td>
 			<td id="col3">.</td>
 			<td id="col1">.</td>	
 			<td id="col4">.</td>		
-		</tr>		
+		</tr>		 -->
 	</table>
-	<!-- 로그인페이지 가기 --> 
-	<!-- <h3>보관함을 예약하고 싶으시다면 로그인하세요.</h3>
-	<input type="button" class="btn btn-primary btn-block btn-large"
-		value="로그인 페이지 가기" onclick="'"> -->
 </div>
 </body>
 </html>

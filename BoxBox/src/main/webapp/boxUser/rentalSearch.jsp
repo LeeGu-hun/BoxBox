@@ -56,7 +56,15 @@
 	
 		System.out.println(timeSearch1.getRentalId() + "/" + timeSearch1.getPlaceName());
 	}
+	out.print("<tr></tr>");
+	out.print("<tr></tr>");
+	out.print("<tr></tr>");
+	out.print("<tr></tr>");
+	out.print("<tr></tr>");
+	out.print("<tr></tr>");
+	out.print("<tr></tr>");
+	out.print("<tr></tr>");	
 	out.print(
-			"<tr><td colspan='5'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' value='예약' onclick='javascript:reserve();' /></a></td>");	
-	out.print("<td colspan='4'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' value='비어있는 시간 조회'	onclick='javascript:timeLook();' /></td></tr>");
+			"<tr><td colspan='5' style='text-align: right'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' style='width: 25%' value='예약' onclick='javascript:reserve();' /></a></td>");	
+	out.print("<td colspan='4' style='text-align: left'><input type='button' id='btnDisplay' class='btn btn-primary btn-block btn-large' style='width: 25%' value='비어있는 시간 조회'	onclick='javascript:timeLook();' /></td></tr>");
 %>

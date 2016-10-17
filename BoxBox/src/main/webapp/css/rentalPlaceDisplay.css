@@ -259,11 +259,12 @@ body {
 .rentalPlaceDisplay {
 	position: absolute;
 	top: 40%;
-	left: 33%;
+	left: 33%;	
 	margin: -150px 0 0 -150px;
 	width: 1000px;
-	height: 300px;
-	text-align: center;
+	height: 78%;
+	text-align: center; 
+	
 }
 
 .rentalPlaceDisplay h2, .rentalPlaceDisplay h3 {
@@ -282,7 +283,7 @@ body {
 }
 
 .cmbRental {	
-	width:35%;
+	width:20%;
 	margin-bottom: 7px;
 	background: rgba(0, 0, 0, 0.3);
 	border: none;
@@ -307,6 +308,14 @@ body {
 		rgba(255, 255, 255, 0.2);
 }
 
+.profitDisplay {
+	text-align: center;
+	font-size: 15px;
+	border-color: white;
+	border: thin;
+	width: 100%;  
+}
+
 #head {
 	background-color: #333333;
 	color: white;
@@ -318,18 +327,85 @@ body {
 	color: black;
 }
 
-#col1 {
-	width: 12%;
+#col1, #col2, #col3, #col4 {
+	width: 18%;
 }
 
-#col2, #col4 {
-	width: 19%;
+#col5 {
+	width: 28%;
 }
 
-#col3 {
-	width: 40%;
+li {
+	width: 25%;
+	height: 100px;
+	list-style: none;
+	float: left;
+	line-height: 70px;
+	display: inline-block;
+	font-size: 20px;
+	color: white;
 }
 
-#colId {
-	width: 10%;
+ li:hover {
+	color: red;
+	font-weight: bold;	
+}
+
+.adminName {
+	position: relative;
+	width: 20%;
+	height: 100px;
+	text-align: center;
+	float: left;
+	display: block;
+	line-height: 45px;
+	color: white;
+}
+
+#btn {	
+	width:40%;
+	margin-bottom: 7px;
+	background: #4a77d4;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px
+		rgba(255, 255, 255, 0.2);
+	-webkit-transition: box-shadow .5s ease;
+	-moz-transition: box-shadow .5s ease;
+	-o-transition: box-shadow .5s ease;
+	-ms-transition: box-shadow .5s ease;
+	transition: box-shadow .5s ease;
+}
+
+.placeDisplayTable {
+	width: 100%;
+}
+
+#header {
+	display: inline-block;
+	float: left;
+	width: 100%;
+	height: 100px;
+}
+
+#footer {
+	/* background:rgba(255,255,255,0.6); */
+	width: 100%;
+	height: 100px;
+	text-align: center;
+	font-size: 15px;
+}
+
+#footerDiv span {
+	color: threeddarkshadow;
+}
+
+#footerDiv span span{
+	color: white;
 }

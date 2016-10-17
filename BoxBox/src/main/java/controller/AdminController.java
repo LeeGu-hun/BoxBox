@@ -66,6 +66,7 @@ public class AdminController {
 		model.addAttribute("City",city);
 		return "admin/rentalPlaceDisplay";
 	}
+	
 	@RequestMapping(value = "/adminRental")
 	public String adminRental(HttpSession session, HttpServletRequest request,Model model) {
 		System.out.println("/adminRental 컨트롤러");
@@ -74,5 +75,15 @@ public class AdminController {
 		model.addAttribute("place", place);
 		model.addAttribute("item", item);
 		return "admin/rentalItemUpdate";
+	}
+	
+	@RequestMapping(value = "/adminMember")
+	public String adminMember(HttpSession session, HttpServletRequest request,Model model) {
+		return "admin/memberDisplay";
+	}
+	
+	@RequestMapping(value = "/adminProfit")
+	public String adminProfit(HttpSession session, HttpServletRequest request,Model model) {
+		return "admin/profit";
 	}
 }

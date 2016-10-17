@@ -41,7 +41,7 @@
 		</c:if>
 	</div>
 	<div class="rentalItemUpdate">
-		<h2>관리소에 상품 추가</h2>
+		<h2>관리소에 대여물품 추가</h2>
 		<select class="cmbRental" id="place" name="place">
 			<option value="0" />관리소 선택
 			</option>
@@ -59,8 +59,8 @@
 				</option>
 			</c:forEach>
 		</select>&nbsp; <input type="button" id="btnPlaceDisplay"
-			class="btnDisplay btnDisplay-primary btnDisplay-block btnDisplay-large"
-			value="상품 추가" onclick="javascript:rentalAdd();" />
+			class="btn btn-primary btn-block btn-large"
+			value="대여물품 추가" onclick="javascript:rentalAdd();" />
 
 <!-- 		<h2>물품정보 변경</h2> -->
 <!-- 		<input type="text" id="itemCate" name="itemCate" disabled /><br> -->

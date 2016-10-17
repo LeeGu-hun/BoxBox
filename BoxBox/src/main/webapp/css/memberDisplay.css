@@ -317,3 +317,51 @@ input:focus {
 #col4 {
 	width: 20%;	
 }
+
+li {
+	width: 25%;
+	height: 100px;
+	list-style: none;
+	float: left;
+	line-height: 70px;
+	display: inline-block;
+	font-size: 20px;
+	color: white;
+}
+
+ li:hover {
+	color: red;
+	font-weight: bold;	
+}
+
+.adminName {
+	position: relative;
+	width: 20%;
+	height: 100px;
+	text-align: center;
+	float: left;
+	display: block;
+	line-height: 45px;
+	color: white;
+}
+
+#btn {	
+	width:40%;
+	margin-bottom: 7px;
+	background: #4a77d4;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px
+		rgba(255, 255, 255, 0.2);
+	-webkit-transition: box-shadow .5s ease;
+	-moz-transition: box-shadow .5s ease;
+	-o-transition: box-shadow .5s ease;
+	-ms-transition: box-shadow .5s ease;
+	transition: box-shadow .5s ease;
+}

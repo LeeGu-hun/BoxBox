@@ -121,9 +121,48 @@ where user_email = 'cyrichard@naver.com';
 
 /* 사용자 메인 페이지 */
 
--- 
+-- 지역 선택(콤보상자)
+select distinct po.post_city || '-' || po.post_gu || '-' || po.post_dong as "지역"
+from place pl, post po
+where pl.post_id = po.post_id
+order by "지역";
 
+-- 지역에 따른 관리소 선택(콤보상자)
+select distinct place_name
+from place pl, post po
+where pl.post_id = po.post_id
+	and po.post_city = '부산광역시'  
+	and po.post_gu = '동구'
+	and po.post_dong = '초량동';
+
+-- 대여가능 물품 검색 버튼
+select r.rental_id,p.post_gu,pl.place_name,i.rental_category,i.rental_model,i.rental_info,i.rental_fee,i.model_photo
+from rental_item i,place pl, post p ,rental r
+where  p.POST_ID = pl.POST_ID
+	and pl.PLACE_ID=r.PLACE_ID
+	and r.RENTAL_ITEM_ID = i.RENTAL_ITEM_ID
+	and pl.PLACE_NAME = '부산역관리소';
+
+	
 /* 대여가능물품 조회 페이지 */
+	
+-- 예약시간 조회 버튼
+select r.RENTAL_ID, p.post_gu, pl.PLACE_NAME,
+	to_char(o.start_time, 'YYYY/MM/DD') as order_date, 
+	to_char(o.start_time, 'YYYY/MM/DD HH24') as start_time,
+	to_char(o.end_time+1/(24*60*60), 'YYYY/MM/DD HH24:MI') as end_time,
+	i.rental_category, i.rental_model, i.rental_info, i.model_photo,
+	i.rental_fee,O.RENTAL_FULL
+from place pl,post p,rental r, rental_item i, rental_order o
+where pl.PLACE_ID = r.PLACE_ID
+	and p.POST_ID = pl.POST_ID
+	and r.RENTAL_ID = o.RENTAL_ID
+	and i.RENTAL_ITEM_ID = r.RENTAL_ITEM_ID
+	and r.RENTAL_ID = 1
+	and o.rental_full = 1
+	and o.START_TIME > sysdate - 50
+order by pl.PLACE_ID, r.RENTAL_ID, o.start_time;
+
 -- 예약 -> 추가하기 버튼 : 프로시저 ORDER_CNT(사용자가 선택한 시간에 예약이 가능한지 아닌지 판별해 주는 프로시저 )
 create or replace procedure order_cnt (  
   v_rental_id in number,
@@ -180,9 +219,6 @@ exec hour_full(1);
 
 select full_hour from rental_full;
 
-
-/* 예약하기 페이지 */
-
 -- 결제 버튼
 insert into rental_order
 values(seq_order_list.nextval,
@@ -195,3 +231,53 @@ values(seq_order_list.nextval,
         where rental_id = 3),
         1,
         '1234');
+
+
+/* My Rental 페이지 */
+
+-- 자신의 예약 내역 조회 
+select r.rental_id, pl.place_name, ro.order_price,
+	to_char(ro.order_date, 'MM.DD') || ' ' || to_char(ro.start_time, 'HH24') || '시-' || to_char(ro.end_time, 'HH24') || '시' as "예약시간",
+	ri.RENTAL_CATEGORY, ri.MODEL_PHOTO, ro.PASSWORD
+from place pl, rental r, rental_item ri, rental_order ro, member m
+where pl.place_id = r.place_id
+	and r.rental_item_id = ri.rental_item_id
+	and r.rental_id = ro.rental_id
+	and m.user_id = ro.user_id
+	and m.user_id = 11
+	and ro.rental_full = 1
+order by "예약시간";
+
+-- 반납 버튼
+update rental_order
+set rental_full = 0
+where order_list_id = 3;
+
+
+/* 관리자 페이지 : 관리소 조회 */
+-- 관리소 조회 버튼
+
+
+
+/* 관리자 페이지 : 관리소 및 대여 추가 */
+
+-- 관리소추가 버튼
+insert into place(place_id, place_name, post_id, user_id)
+values(
+  seq_place.nextval,
+  '중앙공원관리소', 
+  (select post_id from post
+   where post_city = '부산광역시' and post_gu = '중구'
+     and post_dong = '영주동' and post_street = '중앙공원로'),
+  2
+);
+
+-- 대여추가 버튼
+insert into rental(rental_id, place_id, rental_item_id)
+values
+  (seq_rental.nextval,
+   (select place_id from place
+    where place_name = '부산역관리소'),
+   (select rental_item_id from rental_item
+    where rental_info = '강민호 실사 포수미트')
+);

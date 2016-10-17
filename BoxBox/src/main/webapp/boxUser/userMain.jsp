@@ -12,14 +12,14 @@
 			</option>
 		</c:forEach>
 	</select>&nbsp; <select class="cmbRental" id="place" name="place">
-		<option value="0" />지역을 선택하세요.
+		<option value="0" />관리소 선택
 		</option>
 	</select>&nbsp; <input type="button" class="btn btn-primary btn-block btn-large"
 		value="대여가능 물품 검색" onclick="javascript:rentalList();"> <br>
 	<br>
 	<hr>
 	<h2>대여가능 물품 리스트</h2>
-	<div id="rowDiv" style="height: 400px; overflow-y: auto;">
+	<div id="rowDiv" style="height: 480px; overflow-y: auto;">
 		<form:form >
 			<table class="rentalDisplay" id="row">
 			</table>

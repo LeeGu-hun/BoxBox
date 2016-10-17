@@ -61,4 +61,6 @@
 		<%@include file="/boxUser/userMain.jsp"%>
 	</c:if>
 </div>
-<%@include file="/include/footer.jsp"%>
+<div id="footer">
+	<%@include file="/include/footer.jsp"%>
+</div>
