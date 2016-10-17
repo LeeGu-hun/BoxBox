@@ -1,10 +1,10 @@
 package rental;
 
 public class MyRental {
-	private String userId,rentalId,placeName,startTime,endTime,price,cate,photo,password;
+	private String userId,rentalId,placeName,startTime,endTime,price,cate,photo,password,orderListId;
 
 	public MyRental(String userId, String rentalId, String placeName, String startTime, String endTime, String price,
-			String cate, String photo, String password) {
+			String cate, String photo, String password,String orderListId) {
 		super();
 		this.userId = userId;
 		this.rentalId = rentalId;
@@ -15,6 +15,15 @@ public class MyRental {
 		this.cate = cate;
 		this.photo = photo;
 		this.password = password;
+		this.orderListId=orderListId;
+	}
+
+	public String getOrderListId() {
+		return orderListId;
+	}
+
+	public void setOrderListId(String orderListId) {
+		this.orderListId = orderListId;
 	}
 
 	public String getUserId() {

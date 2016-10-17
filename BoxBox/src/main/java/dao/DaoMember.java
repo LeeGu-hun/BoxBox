@@ -28,13 +28,13 @@ public class DaoMember {
 	public List<MyRental> myRental(String userId) {
 		String sql = "select o.USER_ID,o.RENTAL_ID,pl.PLACE_NAME,TO_CHAR(o.start_time, 'MM.DD HH24') as START_TIME , "
 				+ "TO_CHAR(o.END_time+1/(24*60*60),'MM.DD HH24') as END_TIME,o.ORDER_PRICE,i.RENTAL_CATEGORY,"
-				+ "i.MODEL_PHOTO,o.PASSWORD from rental_order o,member m,place pl,rental r,RENTAL_ITEM i where o.USER_ID = m.USER_ID "
+				+ "i.MODEL_PHOTO,o.PASSWORD,o.order_list_id from rental_order o,member m,place pl,rental r,RENTAL_ITEM i where o.USER_ID = m.USER_ID "
 				+ "and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID and r.PLACE_ID=pl.PLACE_ID and r.RENTAL_ID=o.RENTAL_ID and o.USER_ID=?";
 		List<MyRental> results = jdbcTemplate.query(sql, new RowMapper<MyRental>() {
 			public MyRental mapRow(ResultSet rs, int rowNum) throws SQLException {
 				MyRental MyRental = new MyRental(rs.getString("USER_ID"), rs.getString("RENTAL_ID"),
 						rs.getString("PLACE_NAME"), rs.getString("START_TIME"),rs.getString("END_TIME").split(" ")[1], rs.getString("ORDER_PRICE"), rs.getString("RENTAL_CATEGORY"),
-						rs.getString("MODEL_PHOTO"), rs.getString("PASSWORD"));
+						rs.getString("MODEL_PHOTO"), rs.getString("PASSWORD"),rs.getString("ORDER_LIST_ID"));
 				return MyRental;
 			}
 		}, userId);
@@ -174,6 +174,10 @@ public class DaoMember {
 
 	public void memberDelete(Member member) {
 		jdbcTemplate.update("delete from MEMBER where EMAIL = ?", member.getEmail());
+	}
+	public void delete(String orderListId) {
+		jdbcTemplate.update("delete from rental_order where order_list_id = ?", orderListId);
+		System.out.println("반납 완료");
 	}
 
 	public List<Place> comboPost() {

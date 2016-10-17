@@ -34,6 +34,10 @@ public class PlaceService {
 		OrderInsert results = daoMember.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
 		return results;
 	}
+	public void delete(String orderListId) {
+		daoMember.delete(orderListId);
+		
+	}
 	public List<MyRental> myrental(String userId){
 		List<MyRental> results = daoMember.myRental(userId);
 		return results;

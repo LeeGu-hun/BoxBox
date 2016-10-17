@@ -79,7 +79,10 @@ public class LoginController {
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String delete(HttpSession session, HttpServletRequest request,Model model) {
-		System.out.println("/myrental 컨트롤러");
+		System.out.println("/delete 컨트롤러");
+		String orderListId = request.getParameter("orderListId");
+		System.out.println(orderListId);
+		placeService.delete(orderListId);
 		String userId = request.getParameter("userId");
 		List<MyRental> rentalInfo = placeService.myrental(userId);
 		model.addAttribute("RentalInfo",rentalInfo);
@@ -111,7 +114,7 @@ public class LoginController {
 
 	@RequestMapping("/join")
 	public String join(RegisterRequest rr) {
-
+		
 		return "dirMem/join1";
 	}
 
@@ -121,6 +124,7 @@ public class LoginController {
 			loginCommand.setEmail(rCookie.getValue());
 			loginCommand.setRememberEmail(true);
 		}
+		
 		return "dirMem/join";
 	}
 
@@ -188,7 +192,12 @@ public class LoginController {
 			return "main";
 		}
 	}
-
+	@RequestMapping("/main")
+	public String main(HttpSession session,Model model) {
+		List<Place> place = placeService.comboPost();
+		model.addAttribute("place", place);
+		return "main";
+	}
 	@RequestMapping("/logout")
 	public String form(HttpSession session) {
 		session.invalidate();

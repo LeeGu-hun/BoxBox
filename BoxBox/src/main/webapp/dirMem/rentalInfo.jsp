@@ -46,12 +46,18 @@
 				<td id='col1'>${RentalInfo.rentalId }</td>
 				<td id='col2'>${RentalInfo.placeName }</td>
 				<td id='col3'>${RentalInfo.price }</td>
-				<td id='col4'>${RentalInfo.startTime }시 ~ ${RentalInfo.endTime }시</td>
+				<td id='col4'>${RentalInfo.startTime }시~${RentalInfo.endTime }시</td>
 				<td id='col5'>${RentalInfo.cate }</td>
 				<td id='col6'><img
 					src="<%=request.getContextPath() %>/images/${RentalInfo.photo }" /></td>
 				<td id='col7'>${RentalInfo.password }</td>
-				<td id='col8'><form method="post" action="delete"><input type="submit" id='btn' value="반 납" /></form></td>
+				<td id='col8'><form method="post" action="delete">
+						<input type="hidden" id="userId" name="userId"
+							value="${RentalInfo.userId }"> <input type="hidden"
+							id="orderListId" name="orderListId"
+							value="${RentalInfo.orderListId }"> <input type="submit"
+							id='btn' value="반 납" />
+					</form></td>
 			</tr>
 		</c:forEach>
 	</table>
