@@ -101,6 +101,7 @@ start with 1 increment by 1;
 
 
 /* 로그인 페이지 */
+
 -- 로그인 버튼
 select * from member
 where user_email = 'cylee@boxbox.com' and password = '2';
@@ -111,6 +112,7 @@ values(seq_member.nextval, 'cyrichard@naver.com', '이찬윤', '1', '2', '010779
 
 
 /* header 부분 */
+
 -- 회원정보 변경 버튼
 update member
 set user_name = '이찬윤', password = '2'
@@ -119,6 +121,7 @@ where user_email = 'cyrichard@naver.com';
 
 /* 사용자 메인 페이지 */
 
+-- 
 
 /* 대여가능물품 조회 페이지 */
 -- 예약 -> 추가하기 버튼 : 프로시저 ORDER_CNT(사용자가 선택한 시간에 예약이 가능한지 아닌지 판별해 주는 프로시저 )
@@ -176,3 +179,19 @@ end;
 exec hour_full(1);
 
 select full_hour from rental_full;
+
+
+/* 예약하기 페이지 */
+
+-- 결제 버튼
+insert into rental_order
+values(seq_order_list.nextval,
+	   3, 11,
+       to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS'),
+       to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + 12/24,
+       to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + 14/24 - 1/(24*60*60),
+       (select (14-12) * rental_fee
+        from rental_item natural join rental
+        where rental_id = 3),
+        1,
+        '1234');
