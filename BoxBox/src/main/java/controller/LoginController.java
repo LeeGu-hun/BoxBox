@@ -185,11 +185,11 @@ public class LoginController {
 		try {
 			OrderInsert orderInsert = placeService.orderInsert(rentalId, userId, startTime, endTime, orderPrice, password);
 			System.out.println("주문완료");
-			return "main";
+			return "dirMem/orderRegist";
 		} catch (Exception e) {
 			System.out.println("주문 에러");
 			e.printStackTrace();
-			return "main";
+			return "dirMem/orderRegist";
 		}
 	}
 	@RequestMapping("/main")
