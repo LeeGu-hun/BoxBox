@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dao.DaoMember;
 import exception.AlreadyExistingMemberException;
 import exception.IdPasswordNotMatchingException;
 import exception.MemberNotFoundException;
@@ -25,22 +24,16 @@ import member.ChangeInfoService;
 import member.MemberRegisterService;
 import member.RegisterRequest;
 import member.RegisterRequestValidator;
-import rental.MyRental;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	private DaoMember daoMember;
 	private MemberRegisterService memberRegisterService;
 	private ChangeInfoService changePasswordService;
 	private AuthService authService;
 
 	public void setChangePasswordService(ChangeInfoService changePasswordService) {
 		this.changePasswordService = changePasswordService;
-	}
-
-	public void setDaoMember(DaoMember daoMember) {
-		this.daoMember = daoMember;
 	}
 
 	public void setMemberRegisterService(MemberRegisterService memberRegisterService) {
@@ -50,7 +43,6 @@ public class MemberController {
 	public void setAuthService(AuthService authService) {
 		this.authService = authService;
 	}
-
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String handleStep3(RegisterRequest rr, Errors errors, Model model, HttpSession session) {
 		System.out.println("리퀘스트 매핑 /regist post");
@@ -84,14 +76,7 @@ public class MemberController {
 	// model.addAttribute("member", member);
 	// return "member/memberDetail";
 	// }
-	@RequestMapping(value = "/myrental", method = RequestMethod.POST)
-	public String myrental(Errors errors, HttpSession session, HttpServletRequest request,Model model) {
-		System.out.println("/myrental 컨트롤러");
-		String userId = request.getParameter("userId");
-		MyRental rentalInfo = memberRegisterService.myrental(userId);
-		model.addAttribute("RentalInfo",rentalInfo);
-		return "dirMem/rentalInfo";
-	}
+
 
 	@RequestMapping(value = "/changeInfo", method = RequestMethod.GET)
 	public String form(@ModelAttribute("command") ChangeInfoCommand pwdCmd, Errors errors, HttpSession session) {

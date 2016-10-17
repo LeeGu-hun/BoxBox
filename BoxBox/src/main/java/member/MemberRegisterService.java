@@ -1,5 +1,7 @@
 package member;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.DaoMember;
@@ -16,6 +18,7 @@ public class MemberRegisterService {
 	public MemberRegisterService() {
 	}
 
+
 	@Transactional
 	public void regist(RegisterRequest registerRequest) {
 		System.out.println("멤버 레지스터 서비스");
@@ -28,9 +31,5 @@ public class MemberRegisterService {
 		System.out.println("Insert 시작");
 		daoMember.insert(newMember);
 		System.out.println("Insert 완료");
-	}
-	public MyRental myrental(String userId){
-		MyRental results = daoMember.myRental(userId);
-		return results;
 	}
 }

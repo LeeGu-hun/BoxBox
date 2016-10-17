@@ -25,21 +25,21 @@ public class DaoMember {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public MyRental myRental(String userId) {
-		String sql = "select o.USER_ID,o.RENTAL_ID,pl.PLACE_NAME,to_DATE(o.start_time, 'YY/MM/DD HH24:MI') as START_TIME , "
-				+ "to_DATE(o.END_time, 'YY/MM/DD HH24:MI:SS')+1/(24*60) as END_TIME,o.ORDER_PRICE,i.RENTAL_CATEGORY,"
+	public List<MyRental> myRental(String userId) {
+		String sql = "select o.USER_ID,o.RENTAL_ID,pl.PLACE_NAME,TO_CHAR(o.start_time, 'MM.DD HH24') as START_TIME , "
+				+ "TO_CHAR(o.END_time+1/(24*60*60),'MM.DD HH24') as END_TIME,o.ORDER_PRICE,i.RENTAL_CATEGORY,"
 				+ "i.MODEL_PHOTO,o.PASSWORD from rental_order o,member m,place pl,rental r,RENTAL_ITEM i where o.USER_ID = m.USER_ID "
 				+ "and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID and r.PLACE_ID=pl.PLACE_ID and r.RENTAL_ID=o.RENTAL_ID and o.USER_ID=?";
 		List<MyRental> results = jdbcTemplate.query(sql, new RowMapper<MyRental>() {
 			public MyRental mapRow(ResultSet rs, int rowNum) throws SQLException {
 				MyRental MyRental = new MyRental(rs.getString("USER_ID"), rs.getString("RENTAL_ID"),
-						rs.getString("PLACE_NAME"), rs.getString("START_TIME"),rs.getString("END_TIME"), rs.getString("ORDER_PRICE"), rs.getString("RENTAL_CATEGORY"),
+						rs.getString("PLACE_NAME"), rs.getString("START_TIME"),rs.getString("END_TIME").split(" ")[1], rs.getString("ORDER_PRICE"), rs.getString("RENTAL_CATEGORY"),
 						rs.getString("MODEL_PHOTO"), rs.getString("PASSWORD"));
 				return MyRental;
 			}
 		}, userId);
 
-		return results.isEmpty() ? null : results.get(0);
+		return results;
 	}
 
 	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice,

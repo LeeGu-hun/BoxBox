@@ -26,6 +26,7 @@ import member.RegisterRequest;
 import member.RegisterRequestValidator;
 import place.Place;
 import place.PlaceService;
+import rental.MyRental;
 import rental.OrderInsert;
 import rental.TimeSearch;
 
@@ -68,7 +69,14 @@ public class LoginController {
 			return "main";
 		}
 	}
-
+	@RequestMapping(value = "/myrental", method = RequestMethod.POST)
+	public String myrental(HttpSession session, HttpServletRequest request,Model model) {
+		System.out.println("/myrental 컨트롤러");
+		String userId = request.getParameter("userId");
+		List<MyRental> rentalInfo = placeService.myrental(userId);
+		model.addAttribute("RentalInfo",rentalInfo);
+		return "dirMem/rentalInfo";
+	}
 	// @RequestMapping(value="/payment1" ,method=RequestMethod.POST)
 	// public String payment1(Model model,HttpServletRequest request,HttpSession
 	// session){

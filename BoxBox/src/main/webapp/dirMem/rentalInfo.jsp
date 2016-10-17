@@ -27,28 +27,31 @@
 </div>
 <div class="rentalOrder" id="rentalOrder"
 	style="height: 78%; overflow-y: auto;">
-
+	<H1>나의 대여 목록</H1>
 	<table>
 
 		<tr id='head'>
 
 			<td id='col1'>렌탈아이디</td>
 			<td id='col2'>대여관리소</td>
-			<td id='col3'>예약 시간</td>
-			<td id='col4'>가격</td>
+			<td id='col3'>가격</td>
+			<td id='col4'>예약 시간</td>
 			<td id='col5'>카테고리</td>
 			<td id='col6'>상품 사진</td>
 			<td id='col7'>비밀번호</td>
 		</tr>
-		<tr id='row'>
-			<td id='col1'>렌탈아이디</td>
-			<td id='col2'>대여관리소</td>
-			<td id='col3'>예약 시간</td>
-			<td id='col4'>가격</td>
-			<td id='col5'>카테고리</td>
-			<td id='col6'>상품 사진</td>
-			<td id='col7'>비밀번호</td>
-		</tr>
+		<c:forEach var="RentalInfo" items="${requestScope.RentalInfo}">
+			<tr id='row'>
+				<td id='col1'>${RentalInfo.rentalId }</td>
+				<td id='col2'>${RentalInfo.placeName }</td>
+				<td id='col3'>${RentalInfo.price }</td>
+				<td id='col4'>${RentalInfo.startTime }시 ~ ${RentalInfo.endTime }시</td>
+				<td id='col5'>${RentalInfo.cate }</td>
+				<td id='col6'><img
+					src="<%=request.getContextPath() %>/images/${RentalInfo.photo }" /></td>
+				<td id='col7'>${RentalInfo.password }</td>
+			</tr>
+		</c:forEach>
 	</table>
 
 </div>
