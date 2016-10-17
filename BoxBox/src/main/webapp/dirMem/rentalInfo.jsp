@@ -29,16 +29,26 @@
 	style="height: 78%; overflow-y: auto;">
 
 	<table>
-		
+
 		<tr id='head'>
 
-			<td id='sub1'>렌탈아이디</td>
-			<td id='sub2'>대여관리소</td>
-			<td id='sub3'>예약 시간</td>
-			<td id='sub4'>가격</td>
-			<td id='sub5'>카테고리</td>
-			<td id='sub6'>상품 사진</td>
-			<td id='sub7'>비밀번호</td>
+			<td id='col1'>렌탈아이디</td>
+			<td id='col2'>대여관리소</td>
+			<td id='col3'>예약 시간</td>
+			<td id='col4'>가격</td>
+			<td id='col5'>카테고리</td>
+			<td id='col6'>상품 사진</td>
+			<td id='col7'>비밀번호</td>
+		</tr>
+		<tr id='row'>
+			<td id='col1'>렌탈아이디</td>
+			<td id='col2'>대여관리소</td>
+			<td id='col3'>예약 시간</td>
+			<td id='col4'>가격</td>
+			<td id='col5'>카테고리</td>
+			<td id='col6'>상품 사진</td>
+			<td id='col7'>비밀번호</td>
+		</tr>
 	</table>
 
 </div>
