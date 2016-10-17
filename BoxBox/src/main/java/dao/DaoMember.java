@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import member.Member;
 import place.Place;
-import rental.RentalSearch;
+import rental.OrderInsert;
 import rental.TimeSearch;
 
 public class DaoMember {
@@ -23,7 +23,23 @@ public class DaoMember {
 	public DaoMember(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+	
+	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime,
+			String orderPrice, String password) {
+		String sql="insert into rental_order values(seq_order_list.nextval,?,?,to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS'),"
+				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24, "
+				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24 - 1/(24*60*60), ?, 1,?)";
+		List<OrderInsert> results = jdbcTemplate.query(sql, new RowMapper<OrderInsert>() {
+			public OrderInsert mapRow(ResultSet rs, int rowNum) throws SQLException {
+				OrderInsert orderInsert = new OrderInsert(rs.getString("RENTAL_ID"), rs.getString("USER_ID"), rs.getString("ORDER_DATE"), rs.getString("START_TIME"),
+						rs.getString("END_TIME"), rs.getString("ORDER_PRICE"), rs.getString("RENTAL_FULL"), rs.getString("PASSWORD"));
+				return orderInsert;
+			}
+		}, rentalId,userId,startTime,endTime,orderPrice,password);
 
+		return results.isEmpty() ? null : results.get(0);
+	}
+	
 	// public TimeSearch timeSearch(String rentalId, String startTime, String
 	// endTime, String orderDate,
 	// String orderDate1) {

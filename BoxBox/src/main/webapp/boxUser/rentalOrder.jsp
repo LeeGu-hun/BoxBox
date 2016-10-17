@@ -100,10 +100,17 @@ function addReserve() {
 		if(full=="true"){
 			var total = document.getElementById("total").value;			
 			document.getElementById("total1").value = total;
+			document.getElementById("orderPrice1").value = total;
+			document.getElementById("rentalId1").value = rentalId;
+			document.getElementById("startTime1").value = startTime;
+			document.getElementById("endTime1").value = endTime;
+			alert(total+rentalId+startTime+endTime);
 		}
 		if(full=="false"){
 			document.getElementById("total1").value ="";
 		}
+
+		
 	}
 	}
 }
@@ -167,10 +174,17 @@ function addReserve() {
 		<!-- 	<br> -->
 		<!-- 	<hr> -->
 		<!-- 	<br> -->
+		
 		총 대여금액&nbsp;&nbsp;&nbsp; <input type="text" id='total1' name='total1'
-			value='' disabled /> <br> <br> <input type="button"
-			id="btnPay" class="btn btn-primary btn-block btn-large" value="결제하기"
-			onclick="'" />
+			value='' disabled /> <br> <br> 
+			<form method="post" action="${pageContext.request.contextPath }/orderRegist">
+				<input type="hidden" id="rentalId1" name="rentalId1" value="">
+				<input type="hidden" id="userId1" name="userId1" value="${ authInfo.id }">
+				<input type="hidden" id="startTime1" name="startTime1" value="">
+				<input type="hidden" id="endTime1" name="endTime1" value="">
+				<input type="hidden" id="orderPrice1" name="orderPrice1" value="">
+				<input type="submit" id="btnPay" class="btn btn-primary btn-block btn-large" value="결제하기"/>
+			</form>
 	</div>
 </div>
 <div id="dialog" class="rentalDisplay1" style="display: none;">
