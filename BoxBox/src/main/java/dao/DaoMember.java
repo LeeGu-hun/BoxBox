@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 
 import member.Member;
+import place.City;
 import place.Place;
 import rental.MyRental;
 import rental.OrderInsert;
@@ -41,64 +42,50 @@ public class DaoMember {
 
 		return results;
 	}
-
-	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice,
-			String password) {
-		String sql = "insert into rental_order values(seq_order_list.nextval,?,?,to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS'),"
+	public void orderInsert(final String rentalId,final String userId,final  String startTime,final  String endTime,final  String orderPrice,final String password) {
+		final String sql = "insert into rental_order values(seq_order_list.nextval,?,?,to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS'),"
 				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24, "
 				+ "to_date(to_char(sysdate, 'YY/MM/DD'), 'YY/MM/DD HH24:MI:SS') + ?/24 - 1/(24*60*60), ?, 1,?)";
-		List<OrderInsert> results = jdbcTemplate.query(sql, new RowMapper<OrderInsert>() {
-			public OrderInsert mapRow(ResultSet rs, int rowNum) throws SQLException {
-				OrderInsert orderInsert = new OrderInsert(rs.getString("RENTAL_ID"), rs.getString("USER_ID"),
-						rs.getString("ORDER_DATE"), rs.getString("START_TIME"), rs.getString("END_TIME"),
-						rs.getString("ORDER_PRICE"), rs.getString("RENTAL_FULL"), rs.getString("PASSWORD"));
-				return orderInsert;
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				pstmt.setString(1,rentalId);
+				pstmt.setString(2, userId);
+				pstmt.setString(3, startTime);
+				pstmt.setString(4, endTime);
+				pstmt.setString(5, orderPrice);
+				pstmt.setString(6, password);
+				return pstmt;
 			}
-		}, rentalId, userId, startTime, endTime, orderPrice, password);
-
-		return results.isEmpty() ? null : results.get(0);
+		});
 	}
+//	public OrderInsert orderInsert(String rentalId, String userId, String startTime, String endTime, String orderPrice,
+//			String password) {
+//		
+//		List<OrderInsert> results = jdbcTemplate.execute(sql)(sql, new RowMapper<OrderInsert>() {
+//			public OrderInsert mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				OrderInsert orderInsert = new OrderInsert(rs.getString("RENTAL_ID"), rs.getString("USER_ID"),
+//						rs.getString("ORDER_DATE"), rs.getString("START_TIME"), rs.getString("END_TIME"),
+//						rs.getString("ORDER_PRICE"), rs.getString("RENTAL_FULL"), rs.getString("PASSWORD"));
+//				return orderInsert;
+//			}
+//		}, rentalId, userId, startTime, endTime, orderPrice, password);
+//
+//		return results.isEmpty() ? null : results.get(0);
+//	}
+	public List<City> selectCity() {
+		List<City> results = jdbcTemplate.query("select distinct post_city from post", new RowMapper<City>() {
+			public City mapRow(ResultSet rs, int rowNum) throws SQLException {
+				City City = new City(rs.getString("POST_CITY"));
+				return City;
+			}
+		});
 
-	// public TimeSearch timeSearch(String rentalId, String startTime, String
-	// endTime, String orderDate,
-	// String orderDate1) {
-	// System.out.println("TimeSearch 접속");
-	// String sql = "select r.RENTAL_ID,pl.PLACE_NAME,o.ORDER_DATE,
-	// to_char(o.start_time, 'YYYY/MM/DD HH24')||' ~ '||to_char(o.end_time,
-	// 'YYYY/MM/DD HH24') AS
-	// ORDER_TIME,i.RENTAL_CATEGORY,i.RENTAL_MODEL,i.RENTAL_INFO,i.MODEL_PHOTO,i.RENTAL_FEE
-	// "
-	// + "from RENTAL_ORDER o ,RENTAL_ITEM i,RENTAL r,PLACE pl,POST p "
-	// + "where o.RENTAL_ID=r.RENTAL_ID and r.PLACE_ID=pl.PLACE_ID and
-	// pl.POST_ID=p.POST_ID and i.RENTAL_ITEM_ID=r.RENTAL_ITEM_ID and
-	// to_char(o.start_time, 'HH24')>?"
-	// + " and to_char(o.end_time, 'HH24')<=? and o.START_TIME> TO_DATE('" +
-	// orderDate
-	// + "') and o.end_TIME<= TO_DATE('" + orderDate1 + "') and r.RENTAL_ID=?";
-	// List<TimeSearch> results = jdbcTemplate.query(sql, new
-	// RowMapper<TimeSearch>() {
-	// public TimeSearch mapRow(ResultSet rs, int rowNum) throws SQLException {
-	// TimeSearch timeSearch = new TimeSearch(rs.getString("RENTAL_ID"),
-	// rs.getString("PLACE_NAME"),
-	// rs.getString("ORDER_DATE"), rs.getString("ORDER_TIME"),
-	// rs.getString("RENTAL_CATEGORY"),
-	// rs.getString("RENTAL_MODEL"), rs.getString("RENTAL_INFO"),
-	// rs.getString("MODEL_PHOTO"),
-	// rs.getString("RENTAL_FEE"));
-	// System.out.println("쿼리저장 완료");
-	// System.out.println(rs.getString("RENTAL_ID") + rs.getString("PLACE_NAME")
-	// + rs.getString("ORDER_DATE")
-	// + rs.getString("ORDER_TIME") + rs.getString("RENTAL_CATEGORY") +
-	// rs.getString("RENTAL_MODEL")
-	// + rs.getString("RENTAL_INFO") + rs.getString("MODEL_PHOTO") +
-	// rs.getString("RENTAL_FEE") + "흠");
-	// return timeSearch;
-	// }
-	// }, startTime, endTime, rentalId);
-	//
-	// return results.isEmpty() ? null : results.get(0);
-	// }
-
+		return results;
+	}
+	
+	
+	
 	public TimeSearch timeSearch(String rentalId) {
 		String sql = "select r.RENTAL_ID,p.post_gu,pl.PLACE_NAME , to_char(o.order_date, 'YYYY/MM/DD') as order_date, "
 				+ "to_char(o.start_time, 'YYYY/MM/DD HH24') as start_time, to_char(o.end_time+1/(24*60*60), 'YYYY/MM/DD HH24:MI') as end_time, "
