@@ -53,7 +53,7 @@ function timeLook() {
 		$('#popupDiv').css('display','');
 		$('#popupDiv').show;
 		$('#popupTbl').html(msg);
-		document.getElementById("#popup").focus();
+
 	}
 }
 function timeSearch() {
@@ -104,7 +104,6 @@ function addReserve() {
 			document.getElementById("rentalId1").value = rentalId;
 			document.getElementById("startTime1").value = startTime;
 			document.getElementById("endTime1").value = endTime;
-			alert(total+rentalId+startTime+endTime);
 		}
 		if(full=="false"){
 			document.getElementById("total1").value ="";
