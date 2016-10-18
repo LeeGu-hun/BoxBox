@@ -203,6 +203,13 @@ public class LoginController {
 		model.addAttribute("place", place);
 		return "main";
 	}
+	@RequestMapping("/main.jsp")
+	public String main1(HttpSession session,Model model) {
+		System.out.println("main.jsp리퀘스트매핑");
+		List<Place> place = placeService.comboPost();
+		model.addAttribute("place", place);
+		return "main";
+	}
 	@RequestMapping("/logout")
 	public String form(HttpSession session) {
 		session.invalidate();

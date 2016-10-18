@@ -13,7 +13,7 @@
 
 </head>
 <div class="headerAdmin">
-	<div class="logo">
+	<div class="logo" onclick="location.href='<%=request.getContextPath() %>/main'" style="cursor: hand;">
 		BOX<br> BOX
 	</div>
 	<div class="menuAdmin">

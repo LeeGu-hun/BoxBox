@@ -12,7 +12,7 @@
 	</h2>
 	<br>
 	<p>
-		<a href="<c:url value='/main'/>" style="text-decoration: none"> <spring:message code="go.main" />
+		<a href="<c:url value='/logout'/>" style="text-decoration: none"> <spring:message code="go.main" />
 		</a>
 	</p>
 </div>
